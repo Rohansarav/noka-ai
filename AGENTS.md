@@ -1,0 +1,3 @@
+# Noka implementation rules
+
+Read docs/PRODUCT_SPEC.md before changes. Implement only the requested phase; current scope is Phase 0. Keep a running application between phases. Use light themes, accessible controls and honest empty/error states. Never invent data, metrics, sources or deployment success. Keep secrets server-side, exclude PII from logs, and never send resumes to search providers. Comment important functions. Add meaningful tests for changed behavior and report files, commands, tests, deployment, blockers and commit at each phase boundary. All GPU work must use RunPod. Replit is the required production host.
