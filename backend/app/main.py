@@ -8,14 +8,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from pydantic import BaseModel
 from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 from starlette.exceptions import HTTPException
 
 from backend.app.config import get_settings
 from backend.app.database import engine
+from backend.app.evidence_api import router as evidence_router
 
 DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 app = FastAPI(title="Noka API", version="0.1.0")
 logger = logging.getLogger("noka")
+app.include_router(evidence_router)
 if get_settings().environment == "development":
     app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], allow_methods=["GET"], allow_headers=["Content-Type"])
 
@@ -34,6 +37,12 @@ class ReadyResponse(BaseModel):
 
 def error(status: int, code: str, message: str):
     return JSONResponse(status_code=status, content={"error": {"code": code, "message": message}})
+
+
+@app.exception_handler(SQLAlchemyError)
+async def database_error(request: Request, exc: SQLAlchemyError):
+    logger.error("Database unavailable (%s)", type(exc).__name__)
+    return error(503, "database_unavailable", "Evidence database unavailable; last-successful imports have not been replaced.")
 
 
 @app.exception_handler(HTTPException)
@@ -65,7 +74,7 @@ def ready():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-            if revision != "0001":
+            if revision != "0002":
                 return error(503, "schema_unavailable", "Database migrations are required.")
     except Exception:
         return error(503, "database_unavailable", "Database or migrations unavailable.")

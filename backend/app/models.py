@@ -1,0 +1,132 @@
+"""Phase 2 public evidence graph; contains no user or resume records."""
+from datetime import date, datetime, timezone
+from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy.types import TypeDecorator
+
+
+class UTCDateTime(TypeDecorator):
+    impl = DateTime(timezone=True)
+    cache_ok = True
+
+    def process_result_value(self, value, dialect):
+        return value.replace(tzinfo=timezone.utc) if value and value.tzinfo is None else value
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+class Source(Base):
+    __tablename__ = "sources"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    dataset: Mapped[str] = mapped_column(String(80), index=True)
+    title: Mapped[str] = mapped_column(Text)
+    canonical_url: Mapped[str] = mapped_column(Text)
+    file_url: Mapped[str] = mapped_column(Text)
+    publisher: Mapped[str] = mapped_column(String(160))
+    publication_date: Mapped[date | None] = mapped_column(Date)
+    retrieved_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    version: Mapped[str] = mapped_column(String(120))
+    sha256: Mapped[str] = mapped_column(String(64))
+    license: Mapped[str] = mapped_column(Text)
+    license_url: Mapped[str] = mapped_column(Text)
+    geography: Mapped[str] = mapped_column(String(80))
+    granularity: Mapped[str] = mapped_column(String(80))
+    notes: Mapped[str] = mapped_column(Text)
+    __table_args__ = (UniqueConstraint("dataset", "sha256"),)
+
+
+class Role(Base):
+    __tablename__ = "roles"
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    title: Mapped[str] = mapped_column(String(200))
+    description: Mapped[str] = mapped_column(Text)
+    occupation_code: Mapped[str] = mapped_column(String(20), unique=True)
+    country: Mapped[str] = mapped_column(String(2))
+    sector: Mapped[str | None] = mapped_column(String(120), index=True)
+    evidence_status: Mapped[str] = mapped_column(String(50))
+    crosswalk_rationale: Mapped[str] = mapped_column(Text)
+    curation_status: Mapped[str] = mapped_column(String(50))
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+
+
+class Skill(Base):
+    __tablename__ = "skills"
+    id: Mapped[str] = mapped_column(String(40), primary_key=True)
+    canonical_name: Mapped[str] = mapped_column(String(160), unique=True)
+    aliases: Mapped[list] = mapped_column(JSON)
+    category: Mapped[str] = mapped_column(String(80))
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+
+
+class RoleSkill(Base):
+    __tablename__ = "role_skills"
+    role_id: Mapped[str] = mapped_column(ForeignKey("roles.id"), primary_key=True)
+    skill_id: Mapped[str] = mapped_column(ForeignKey("skills.id"), primary_key=True)
+    required_importance: Mapped[float] = mapped_column(Float)
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+    __table_args__ = (CheckConstraint("required_importance >= 1 AND required_importance <= 5"),)
+
+
+class DemandObservation(Base):
+    __tablename__ = "job_demand_observations"
+    country: Mapped[str] = mapped_column(String(2), primary_key=True)
+    sector: Mapped[str] = mapped_column(String(120), primary_key=True)
+    date: Mapped[date] = mapped_column(Date, primary_key=True)
+    adjusted_flag: Mapped[bool] = mapped_column(Boolean, primary_key=True)
+    indexed_value: Mapped[float] = mapped_column(Float)
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+    __table_args__ = (CheckConstraint("indexed_value >= 0"), Index("ix_demand_sector_date", "sector", "date"))
+
+
+class SDG(Base):
+    __tablename__ = "sdgs"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(Text)
+    description: Mapped[str] = mapped_column(Text)
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+
+
+class SDGTarget(Base):
+    __tablename__ = "sdg_targets"
+    id: Mapped[str] = mapped_column(String(12), primary_key=True)
+    goal_id: Mapped[int] = mapped_column(ForeignKey("sdgs.id"))
+    description: Mapped[str] = mapped_column(Text)
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+
+
+class SDGLink(Base):
+    __tablename__ = "sdg_links"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    target_id: Mapped[str] = mapped_column(ForeignKey("sdg_targets.id"))
+    role_id: Mapped[str | None] = mapped_column(ForeignKey("roles.id"))
+    skill_id: Mapped[str | None] = mapped_column(ForeignKey("skills.id"))
+    rationale: Mapped[str] = mapped_column(Text)
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+    curation_status: Mapped[str] = mapped_column(String(50))
+    reviewed_by: Mapped[str | None] = mapped_column(String(100))
+    reviewed_at: Mapped[datetime | None] = mapped_column(UTCDateTime)
+    __table_args__ = (CheckConstraint("(role_id IS NOT NULL AND skill_id IS NULL) OR (role_id IS NULL AND skill_id IS NOT NULL)"),)
+
+
+class StructuralDirection(Base):
+    __tablename__ = "structural_directions"
+    id: Mapped[str] = mapped_column(String(80), primary_key=True)
+    subject: Mapped[str] = mapped_column(String(160))
+    direction: Mapped[str] = mapped_column(String(40))
+    rationale: Mapped[str] = mapped_column(Text)
+    horizon: Mapped[str] = mapped_column(String(40))
+    source_id: Mapped[str] = mapped_column(ForeignKey("sources.id"))
+    curation_status: Mapped[str] = mapped_column(String(50))
+
+
+class IngestionRun(Base):
+    __tablename__ = "ingestion_runs"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    dataset: Mapped[str] = mapped_column(String(80), index=True)
+    started_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    completed_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    status: Mapped[str] = mapped_column(String(20))
+    row_count: Mapped[int] = mapped_column(Integer)
+    message: Mapped[str] = mapped_column(Text)

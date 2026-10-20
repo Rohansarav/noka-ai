@@ -1,0 +1,4 @@
+# Public evidence fixture checksums refer to exact bytes on every platform.
+data/fixtures/* -text whitespace=cr-at-eol
+# Preserve upstream licence text, including its original trailing whitespace.
+data/fixtures/onet-license.html -whitespace

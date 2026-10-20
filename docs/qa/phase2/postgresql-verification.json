@@ -1,0 +1,65 @@
+{
+  "database": "postgresql",
+  "postgresql_acceptance": true,
+  "counts": {
+    "job_demand_observations": 114821,
+    "roles": 25,
+    "skills": 35,
+    "role_skills": 875,
+    "sdgs": 17,
+    "sdg_targets": 169,
+    "sdg_links": 7,
+    "sources": 6
+  },
+  "first_observation": "2020-02-01",
+  "last_observation": "2026-10-09",
+  "status": "verified",
+  "successful_full_indeed_imports": 2,
+  "migration": "0002",
+  "source_attribution": [
+    {
+      "dataset": "indeed-us-sectors",
+      "sha256": "11501409680563c03e6d321e42283cbb894d74d5a58c5de8c2a1a94b7989096a",
+      "version": "554e4673d0b9a9fd64d4b0da354e5bb5e112beda",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:49:27.332115+00:00"
+    },
+    {
+      "dataset": "onet-essential",
+      "sha256": "68c4d31d8c55077238395dca40cc4e6d32e6a608b5474bb8264b1f98ae415bd7",
+      "version": "31.0",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:50:18.420124+00:00"
+    },
+    {
+      "dataset": "onet-occupations",
+      "sha256": "a09eae1d6609686e44e05b7290993a1c8b523d8ca224bc0eedc194c855c3ee02",
+      "version": "31.0",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:50:00.204013+00:00"
+    },
+    {
+      "dataset": "onet-transferable",
+      "sha256": "f17d0419e818a3bf2f55076510c76c4aef01cc8f5aee2670d2f44f6f44ac60f7",
+      "version": "31.0",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:52:00.222889+00:00"
+    },
+    {
+      "dataset": "un-sdgs",
+      "sha256": "aa66ad325ce809cb8e1df3afa698579b7d9d3611000842b6bf4a45ca0a4aeda8",
+      "version": "API snapshot aa66ad325ce8",
+      "publication_date": "2015-09-25",
+      "retrieved_at": "2026-10-20T03:49:55.530892+00:00"
+    },
+    {
+      "dataset": "wef-context",
+      "sha256": "f25987c0dee6eba2d832f80924b0e926a4705605cbd6a5c5f10323897da31271",
+      "version": "2025 report",
+      "publication_date": "2025-01-07",
+      "retrieved_at": "2026-10-20T03:38:51.639131+00:00"
+    }
+  ],
+  "checked_at": "2026-10-20T04:01:08.757826+00:00",
+  "idempotence_verified": true
+}

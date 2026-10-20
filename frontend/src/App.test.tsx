@@ -6,14 +6,14 @@ import App from './App';
 
 vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
 function visit(path: string) { return render(<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}><MemoryRouter initialEntries={[path]}><App/></MemoryRouter></QueryClientProvider>); }
-afterEach(() => { vi.useRealTimers(); });
+afterEach(() => { vi.useRealTimers(); vi.mocked(fetch).mockReset().mockRejectedValue(new Error('offline')); });
 describe('Noka navigation', () => {
   it('offers the complete module navigation and the branded hero', () => { visit('/'); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Noka.Navigate tomorrow’swork, today.'); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(8); expect(screen.getByRole('link', { name: 'Build My Future' })).toHaveAttribute('href', '/profile/intake'); });
-  it.each([['/profile', 'Your next chapter starts with you.'], ['/forecast', 'Look ahead, with perspective.'], ['/signals', 'See what’s shaping work.'], ['/matches', 'Find where your strengths fit.'], ['/roadmap', 'Small steps. New possibilities.'], ['/sdgs', 'Build skills with a bigger purpose.'], ['/model-lab', 'Understand the evidence behind it.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.getByText('Not connected yet')).toBeInTheDocument(); });
+  it.each([['/profile', 'Your next chapter starts with you.'], ['/forecast', 'Look ahead, with perspective.'], ['/roadmap', 'Small steps. New possibilities.'], ['/model-lab', 'Understand the evidence behind it.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.getByText('Not connected yet')).toBeInTheDocument(); });
   it('handles missing routes', () => { visit('/missing'); expect(screen.getByText('This path doesn’t exist yet.')).toBeInTheDocument(); });
   it('shows API failure honestly', async () => { visit('/'); expect(await screen.findByRole('alert')).toHaveTextContent('API unavailable'); });
   it('does not equate API connectivity with source ingestion', async () => {
-    vi.mocked(fetch).mockResolvedValueOnce({ ok: true, json: async () => ({ status: 'ok', service: 'noka-api' }) } as Response);
+    vi.mocked(fetch).mockImplementation(async path => ({ ok: true, json: async () => String(path) === '/api/health' ? { status: 'ok', service: 'noka-api' } : { sources: [], counts: { job_demand_observations: 0 }, last_successful_imports: [], end_date: null } }) as Response);
     visit('/');
     expect(await screen.findByText('API connected')).toBeInTheDocument();
     expect(screen.getByText('No data yet')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('Noka navigation', () => {
     visit('/');
     for (const name of ['How Noka works', 'Scout', 'Oracle', 'Guide']) expect(screen.getByRole('heading', { name })).toBeInTheDocument();
   });
-  it.each(['/profile', '/matches', '/roadmap'])('offers honest intake from %s', path => {
+  it.each(['/profile', '/roadmap'])('offers honest intake from %s', path => {
     visit(path);
     expect(screen.getByRole('heading', { name: 'No profile yet' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Explore profile intake' })).toHaveAttribute('href', '/profile/intake');

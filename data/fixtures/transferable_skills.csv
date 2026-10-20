@@ -1,0 +1,626 @@
+O*NET-SOC Code,Title,Element ID,Element Name,Scale ID,Scale Name,Data Value,N,Standard Error,Lower CI Bound,Upper CI Bound,Recommend Suppress,Not Relevant,Date,Domain Source
+13-1071.00,Human Resources Specialists,2.B.1.a,Social Perceptiveness,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.1.c,Persuasion,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.1.e,Instructing,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.1.f,Service Orientation,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.2.i,Complex Problem Solving,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.a,Operations Analysis,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.e,Programming,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.g,Operations Monitoring,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.h,Operation and Control,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.k,Troubleshooting,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.3.m,Quality Control Analysis,IM,Importance,1.75,8,0.2500,1.2600,2.2400,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.4.e,Judgment and Decision Making,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.4.g,Systems Analysis,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.4.h,Systems Evaluation,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.5.b,Management of Financial Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.5.c,Management of Material Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2019,Analyst
+13-1071.00,Human Resources Specialists,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2019,Analyst
+13-1081.00,Logisticians,2.B.1.a,Social Perceptiveness,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.1.b,Coordination,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.1.c,Persuasion,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.1.d,Negotiation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.1.e,Instructing,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.1.f,Service Orientation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.2.i,Complex Problem Solving,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.a,Operations Analysis,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.e,Programming,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.g,Operations Monitoring,IM,Importance,2.00,8,0.1890,1.6296,2.3704,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.h,Operation and Control,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.k,Troubleshooting,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.3.m,Quality Control Analysis,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.4.e,Judgment and Decision Making,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.4.g,Systems Analysis,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.5.a,Time Management,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.5.b,Management of Financial Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.5.c,Management of Material Resources,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,07/2016,Analyst
+13-1081.00,Logisticians,2.B.5.d,Management of Personnel Resources,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,07/2016,Analyst
+13-1111.00,Management Analysts,2.B.1.a,Social Perceptiveness,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.1.b,Coordination,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.1.c,Persuasion,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.1.d,Negotiation,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.1.e,Instructing,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.1.f,Service Orientation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.2.i,Complex Problem Solving,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.a,Operations Analysis,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.b,Technology Design,IM,Importance,2.12,8,0.2266,1.6809,2.5691,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.c,Equipment Selection,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.e,Programming,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.g,Operations Monitoring,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.h,Operation and Control,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.k,Troubleshooting,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.3.m,Quality Control Analysis,IM,Importance,1.75,8,0.2500,1.2600,2.2400,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.4.e,Judgment and Decision Making,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.4.g,Systems Analysis,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.4.h,Systems Evaluation,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.5.a,Time Management,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.5.b,Management of Financial Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.5.c,Management of Material Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2022,Analyst
+13-1111.00,Management Analysts,2.B.5.d,Management of Personnel Resources,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2022,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.a,Social Perceptiveness,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.c,Persuasion,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.d,Negotiation,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.e,Instructing,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.1.f,Service Orientation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.2.i,Complex Problem Solving,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.a,Operations Analysis,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.e,Programming,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.g,Operations Monitoring,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.h,Operation and Control,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.k,Troubleshooting,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.3.m,Quality Control Analysis,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.4.g,Systems Analysis,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.4.h,Systems Evaluation,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.5.b,Management of Financial Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.5.c,Management of Material Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2026,Analyst
+13-1161.00,Market Research Analysts and Marketing Specialists,2.B.5.d,Management of Personnel Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.a,Social Perceptiveness,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.b,Coordination,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.c,Persuasion,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.2.i,Complex Problem Solving,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.a,Operations Analysis,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.2500,1.2600,2.2400,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.c,Equipment Selection,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.d,Installation,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.e,Programming,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.g,Operations Monitoring,IM,Importance,2.12,8,0.2266,1.6809,2.5691,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.h,Operation and Control,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.k,Troubleshooting,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.3.m,Quality Control Analysis,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.4.e,Judgment and Decision Making,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.4.g,Systems Analysis,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.5.b,Management of Financial Resources,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.5.c,Management of Material Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2020,Analyst
+13-1199.05,Sustainability Specialists,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2020,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.a,Social Perceptiveness,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.c,Persuasion,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.d,Negotiation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.e,Instructing,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.1.f,Service Orientation,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.2.i,Complex Problem Solving,IM,Importance,3.50,8,0.2673,2.9762,4.0238,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.a,Operations Analysis,IM,Importance,1.50,8,0.2673,1.0000,2.0238,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.b,Technology Design,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.e,Programming,IM,Importance,2.00,8,0.3780,1.2592,2.7408,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.g,Operations Monitoring,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.h,Operation and Control,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.k,Troubleshooting,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.3.m,Quality Control Analysis,IM,Importance,1.38,8,0.2631,1.0000,1.8906,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.4.e,Judgment and Decision Making,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.4.g,Systems Analysis,IM,Importance,2.62,8,0.2631,2.1094,3.1406,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.4.h,Systems Evaluation,IM,Importance,2.75,8,0.2500,2.2600,3.2400,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.5.b,Management of Financial Resources,IM,Importance,2.88,8,0.2950,2.2967,3.4533,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.5.c,Management of Material Resources,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2026,Analyst
+13-2011.00,Accountants and Auditors,2.B.5.d,Management of Personnel Resources,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.a,Social Perceptiveness,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.b,Coordination,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.c,Persuasion,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.d,Negotiation,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.e,Instructing,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.1.f,Service Orientation,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.2.i,Complex Problem Solving,IM,Importance,3.38,8,0.2631,2.8594,3.8906,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.a,Operations Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.b,Technology Design,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.c,Equipment Selection,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.d,Installation,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.e,Programming,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.g,Operations Monitoring,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.h,Operation and Control,IM,Importance,2.50,8,0.2673,1.9762,3.0238,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.j,Equipment Maintenance,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.k,Troubleshooting,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.l,Repairing,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.3.m,Quality Control Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.4.e,Judgment and Decision Making,IM,Importance,3.62,8,0.2631,3.1094,4.1406,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.4.g,Systems Analysis,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.4.h,Systems Evaluation,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.5.b,Management of Financial Resources,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.5.c,Management of Material Resources,IM,Importance,2.00,8,0.1890,1.6296,2.3704,N,,08/2023,Analyst
+15-1211.00,Computer Systems Analysts,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1212.00,Information Security Analysts,2.B.1.a,Social Perceptiveness,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.1.c,Persuasion,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.1.d,Negotiation,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.1.e,Instructing,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.2.i,Complex Problem Solving,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.a,Operations Analysis,IM,Importance,2.50,8,0.2673,1.9762,3.0238,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.b,Technology Design,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.c,Equipment Selection,IM,Importance,1.75,8,0.2500,1.2600,2.2400,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.d,Installation,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.e,Programming,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.g,Operations Monitoring,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.h,Operation and Control,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.j,Equipment Maintenance,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.k,Troubleshooting,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.l,Repairing,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.3.m,Quality Control Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.4.e,Judgment and Decision Making,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.4.g,Systems Analysis,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.4.h,Systems Evaluation,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.5.b,Management of Financial Resources,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.5.c,Management of Material Resources,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2018,Analyst
+15-1212.00,Information Security Analysts,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2018,Analyst
+15-1241.00,Computer Network Architects,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.1.b,Coordination,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.1.f,Service Orientation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.a,Operations Analysis,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.b,Technology Design,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.c,Equipment Selection,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.d,Installation,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.e,Programming,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.g,Operations Monitoring,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.h,Operation and Control,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.j,Equipment Maintenance,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.k,Troubleshooting,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.l,Repairing,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.3.m,Quality Control Analysis,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.4.g,Systems Analysis,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.4.h,Systems Evaluation,IM,Importance,3.88,8,0.2266,3.4309,4.3191,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.5.b,Management of Financial Resources,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.5.c,Management of Material Resources,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2024,Analyst
+15-1241.00,Computer Network Architects,2.B.5.d,Management of Personnel Resources,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2024,Analyst
+15-1242.00,Database Administrators,2.B.1.a,Social Perceptiveness,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.1.c,Persuasion,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.1.d,Negotiation,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.a,Operations Analysis,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.b,Technology Design,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.c,Equipment Selection,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.d,Installation,IM,Importance,1.38,8,0.2631,1.0000,1.8906,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.e,Programming,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.g,Operations Monitoring,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.h,Operation and Control,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.k,Troubleshooting,IM,Importance,2.50,8,0.2673,1.9762,3.0238,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.l,Repairing,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.3.m,Quality Control Analysis,IM,Importance,2.50,8,0.2673,1.9762,3.0238,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.4.g,Systems Analysis,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.4.h,Systems Evaluation,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.5.a,Time Management,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.5.b,Management of Financial Resources,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.5.c,Management of Material Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2023,Analyst
+15-1242.00,Database Administrators,2.B.5.d,Management of Personnel Resources,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.a,Social Perceptiveness,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.c,Persuasion,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.d,Negotiation,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.1.f,Service Orientation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.a,Operations Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.b,Technology Design,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.c,Equipment Selection,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.d,Installation,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.e,Programming,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.g,Operations Monitoring,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.h,Operation and Control,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.j,Equipment Maintenance,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.k,Troubleshooting,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.l,Repairing,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.3.m,Quality Control Analysis,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.4.e,Judgment and Decision Making,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.4.g,Systems Analysis,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.4.h,Systems Evaluation,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.5.a,Time Management,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.5.b,Management of Financial Resources,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.5.c,Management of Material Resources,IM,Importance,2.25,8,0.2500,1.7600,2.7400,N,,08/2026,Analyst
+15-1244.00,Network and Computer Systems Administrators,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+15-1252.00,Software Developers,2.B.1.a,Social Perceptiveness,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.1.b,Coordination,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.1.c,Persuasion,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.1.d,Negotiation,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.1.e,Instructing,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.2.i,Complex Problem Solving,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.a,Operations Analysis,IM,Importance,3.25,8,0.4532,2.3618,4.1382,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.b,Technology Design,IM,Importance,3.38,8,0.3239,2.7402,4.0098,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.c,Equipment Selection,IM,Importance,2.12,8,0.4795,1.1852,3.0648,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.d,Installation,IM,Importance,1.88,8,0.3504,1.1883,2.5617,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.e,Programming,IM,Importance,4.00,8,0.3780,3.2592,4.7408,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.g,Operations Monitoring,IM,Importance,2.75,8,0.2500,2.2600,3.2400,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.h,Operation and Control,IM,Importance,2.00,8,0.3273,1.3584,2.6416,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.j,Equipment Maintenance,IM,Importance,1.25,8,0.2500,1.0000,1.7400,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.k,Troubleshooting,IM,Importance,2.62,8,0.2631,2.1094,3.1406,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.l,Repairing,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.3.m,Quality Control Analysis,IM,Importance,2.75,8,0.4910,1.7877,3.7123,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.4.g,Systems Analysis,IM,Importance,3.50,8,0.3273,2.8584,4.1416,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.4.h,Systems Evaluation,IM,Importance,3.38,8,0.3750,2.6400,4.1100,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.5.b,Management of Financial Resources,IM,Importance,1.75,8,0.2500,1.2600,2.2400,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.5.c,Management of Material Resources,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2025,Analyst
+15-1252.00,Software Developers,2.B.5.d,Management of Personnel Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2025,Analyst
+15-2051.00,Data Scientists,2.B.1.a,Social Perceptiveness,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.1.b,Coordination,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.1.c,Persuasion,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.1.d,Negotiation,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.1.e,Instructing,IM,Importance,2.75,8,0.2500,2.2600,3.2400,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.1.f,Service Orientation,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.2.i,Complex Problem Solving,IM,Importance,3.75,8,0.2500,3.2600,4.2400,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.a,Operations Analysis,IM,Importance,1.50,8,0.3273,1.0000,2.1416,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.b,Technology Design,IM,Importance,1.62,8,0.2631,1.1094,2.1406,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.c,Equipment Selection,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.e,Programming,IM,Importance,3.75,8,0.4532,2.8618,4.6382,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.g,Operations Monitoring,IM,Importance,1.88,8,0.2950,1.2967,2.4533,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.h,Operation and Control,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.k,Troubleshooting,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.3.m,Quality Control Analysis,IM,Importance,1.88,8,0.2950,1.2967,2.4533,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.4.e,Judgment and Decision Making,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.4.g,Systems Analysis,IM,Importance,2.75,8,0.3660,2.0327,3.4673,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.4.h,Systems Evaluation,IM,Importance,2.75,8,0.3660,2.0327,3.4673,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.5.b,Management of Financial Resources,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.5.c,Management of Material Resources,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2026,Analyst
+15-2051.00,Data Scientists,2.B.5.d,Management of Personnel Resources,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2026,Analyst
+17-2051.00,Civil Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.1.b,Coordination,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.1.f,Service Orientation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.a,Operations Analysis,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.b,Technology Design,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.c,Equipment Selection,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.e,Programming,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.g,Operations Monitoring,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.h,Operation and Control,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.k,Troubleshooting,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.l,Repairing,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.4.g,Systems Analysis,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.5.a,Time Management,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2021,Analyst
+17-2051.00,Civil Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+17-2071.00,Electrical Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.1.b,Coordination,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.1.c,Persuasion,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.1.d,Negotiation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.1.f,Service Orientation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.2266,3.4309,4.3191,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.a,Operations Analysis,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.b,Technology Design,IM,Importance,2.25,8,0.2500,1.7600,2.7400,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.c,Equipment Selection,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.e,Programming,IM,Importance,2.12,8,0.2950,1.5467,2.7033,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.g,Operations Monitoring,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.h,Operation and Control,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,2.00,8,0.1890,1.6296,2.3704,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.k,Troubleshooting,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.l,Repairing,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.4.g,Systems Analysis,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2023,Analyst
+17-2071.00,Electrical Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2081.00,Environmental Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.1.b,Coordination,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.a,Operations Analysis,IM,Importance,2.50,8,0.2673,1.9762,3.0238,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.b,Technology Design,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.e,Programming,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.g,Operations Monitoring,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.h,Operation and Control,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.k,Troubleshooting,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.4.g,Systems Analysis,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.5.a,Time Management,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2024,Analyst
+17-2081.00,Environmental Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2024,Analyst
+17-2112.00,Industrial Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.1.b,Coordination,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.1.c,Persuasion,IM,Importance,2.62,8,0.2631,2.1094,3.1406,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.1.d,Negotiation,IM,Importance,2.38,8,0.2631,1.8594,2.8906,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.1.f,Service Orientation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.a,Operations Analysis,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.b,Technology Design,IM,Importance,2.12,8,0.2266,1.6809,2.5691,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.c,Equipment Selection,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.e,Programming,IM,Importance,1.88,8,0.2950,1.2967,2.4533,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.g,Operations Monitoring,IM,Importance,2.38,8,0.2631,1.8594,2.8906,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.h,Operation and Control,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.k,Troubleshooting,IM,Importance,2.00,8,0.1890,1.6296,2.3704,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.4.g,Systems Analysis,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.12,8,0.2266,1.6809,2.5691,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2020,Analyst
+17-2112.00,Industrial Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2020,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.c,Persuasion,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.d,Negotiation,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.e,Instructing,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.1.f,Service Orientation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.a,Operations Analysis,IM,Importance,3.50,8,0.2673,2.9762,4.0238,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.b,Technology Design,IM,Importance,3.12,8,0.3504,2.4383,3.8117,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.c,Equipment Selection,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.d,Installation,IM,Importance,2.00,8,0.1890,1.6296,2.3704,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.e,Programming,IM,Importance,2.38,8,0.2631,1.8594,2.8906,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.g,Operations Monitoring,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.h,Operation and Control,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.k,Troubleshooting,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.l,Repairing,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.4.g,Systems Analysis,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2024,Analyst
+17-2141.00,Mechanical Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2024,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.d,Negotiation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.e,Instructing,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.1.f,Service Orientation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.a,Operations Analysis,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.b,Technology Design,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.c,Equipment Selection,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.e,Programming,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.g,Operations Monitoring,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.h,Operation and Control,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.j,Equipment Maintenance,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.k,Troubleshooting,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.l,Repairing,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.3.m,Quality Control Analysis,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.4.e,Judgment and Decision Making,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.4.g,Systems Analysis,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.4.h,Systems Evaluation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.5.b,Management of Financial Resources,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.5.c,Management of Material Resources,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2023,Analyst
+17-2199.11,Solar Energy Systems Engineers,2.B.5.d,Management of Personnel Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2023,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.a,Social Perceptiveness,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.b,Coordination,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.e,Instructing,IM,Importance,4.12,8,0.1250,3.8800,4.3700,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.1.f,Service Orientation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.2.i,Complex Problem Solving,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.a,Operations Analysis,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.b,Technology Design,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.e,Programming,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.g,Operations Monitoring,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.h,Operation and Control,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.k,Troubleshooting,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.3.m,Quality Control Analysis,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.4.g,Systems Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.4.h,Systems Evaluation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.5.a,Time Management,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.5.b,Management of Financial Resources,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.5.c,Management of Material Resources,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2025,Analyst
+25-2031.00,"Secondary School Teachers, Except Special and Career/Technical Education",2.B.5.d,Management of Personnel Resources,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2025,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.a,Social Perceptiveness,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.b,Coordination,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.c,Persuasion,IM,Importance,3.25,8,0.2500,2.7600,3.7400,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.d,Negotiation,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.e,Instructing,IM,Importance,4.12,8,0.1250,3.8800,4.3700,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.1.f,Service Orientation,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.a,Operations Analysis,IM,Importance,2.00,8,0.2673,1.4762,2.5238,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.c,Equipment Selection,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.e,Programming,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.g,Operations Monitoring,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.h,Operation and Control,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.k,Troubleshooting,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.3.m,Quality Control Analysis,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.4.e,Judgment and Decision Making,IM,Importance,3.75,8,0.1637,3.4292,4.0708,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.4.g,Systems Analysis,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.4.h,Systems Evaluation,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.5.a,Time Management,IM,Importance,3.62,8,0.1830,3.2664,3.9836,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.5.b,Management of Financial Resources,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.5.c,Management of Material Resources,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2018,Analyst
+25-9031.00,Instructional Coordinators,2.B.5.d,Management of Personnel Resources,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2018,Analyst
+29-1051.00,Pharmacists,2.B.1.a,Social Perceptiveness,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.1.b,Coordination,IM,Importance,3.38,8,0.1830,3.0164,3.7336,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.1.c,Persuasion,IM,Importance,2.88,8,0.2266,2.4309,3.3191,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.1.d,Negotiation,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.1.e,Instructing,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.1.f,Service Orientation,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.2.i,Complex Problem Solving,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.a,Operations Analysis,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.c,Equipment Selection,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.e,Programming,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.g,Operations Monitoring,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.h,Operation and Control,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.k,Troubleshooting,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.3.m,Quality Control Analysis,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.4.e,Judgment and Decision Making,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.4.g,Systems Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.4.h,Systems Evaluation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.5.a,Time Management,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.5.b,Management of Financial Resources,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.5.c,Management of Material Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+29-1051.00,Pharmacists,2.B.5.d,Management of Personnel Resources,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+29-1141.00,Registered Nurses,2.B.1.a,Social Perceptiveness,IM,Importance,4.12,8,0.1250,3.8800,4.3700,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.1.b,Coordination,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.1.c,Persuasion,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.1.d,Negotiation,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.1.e,Instructing,IM,Importance,3.25,8,0.1637,2.9292,3.5708,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.1.f,Service Orientation,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.2.i,Complex Problem Solving,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.a,Operations Analysis,IM,Importance,2.00,8,0.2673,1.4762,2.5238,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.b,Technology Design,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.c,Equipment Selection,IM,Importance,1.88,8,0.2266,1.4309,2.3191,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.e,Programming,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.g,Operations Monitoring,IM,Importance,3.00,8,0.1890,2.6296,3.3704,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.h,Operation and Control,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.k,Troubleshooting,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.l,Repairing,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.3.m,Quality Control Analysis,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.4.e,Judgment and Decision Making,IM,Importance,3.88,8,0.1250,3.6300,4.1200,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.4.g,Systems Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.4.h,Systems Evaluation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.5.b,Management of Financial Resources,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.5.c,Management of Material Resources,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2021,Analyst
+29-1141.00,Registered Nurses,2.B.5.d,Management of Personnel Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2021,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.a,Social Perceptiveness,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.b,Coordination,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.c,Persuasion,IM,Importance,2.12,8,0.1250,1.8800,2.3700,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.d,Negotiation,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.e,Instructing,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.1.f,Service Orientation,IM,Importance,3.50,8,0.1890,3.1296,3.8704,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.2.i,Complex Problem Solving,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.a,Operations Analysis,IM,Importance,1.25,8,0.1637,1.0000,1.5708,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.b,Technology Design,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.c,Equipment Selection,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.e,Programming,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.g,Operations Monitoring,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.h,Operation and Control,IM,Importance,3.12,8,0.2266,2.6809,3.5691,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.j,Equipment Maintenance,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.k,Troubleshooting,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.l,Repairing,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.3.m,Quality Control Analysis,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.4.e,Judgment and Decision Making,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.4.g,Systems Analysis,IM,Importance,2.50,8,0.1890,2.1296,2.8704,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.4.h,Systems Evaluation,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.5.a,Time Management,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.5.b,Management of Financial Resources,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.5.c,Management of Material Resources,IM,Importance,2.00,8,0.0000,2.0000,2.0000,N,,08/2026,Analyst
+29-2034.00,Radiologic Technologists and Technicians,2.B.5.d,Management of Personnel Resources,IM,Importance,2.62,8,0.1830,2.2664,2.9836,N,,08/2026,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.a,Social Perceptiveness,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.b,Coordination,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.c,Persuasion,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.d,Negotiation,IM,Importance,3.00,8,0.0000,3.0000,3.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.e,Instructing,IM,Importance,2.75,8,0.1637,2.4292,3.0708,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.1.f,Service Orientation,IM,Importance,4.00,8,0.0000,4.0000,4.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.2.i,Complex Problem Solving,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.a,Operations Analysis,IM,Importance,1.62,8,0.1830,1.2664,1.9836,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.b,Technology Design,IM,Importance,1.88,8,0.1250,1.6300,2.1200,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.c,Equipment Selection,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.d,Installation,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.e,Programming,IM,Importance,1.50,8,0.1890,1.1296,1.8704,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.g,Operations Monitoring,IM,Importance,1.75,8,0.1637,1.4292,2.0708,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.h,Operation and Control,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.j,Equipment Maintenance,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.k,Troubleshooting,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.l,Repairing,IM,Importance,1.00,8,0.0000,1.0000,1.0000,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.3.m,Quality Control Analysis,IM,Importance,1.12,8,0.1250,1.0000,1.3700,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.4.e,Judgment and Decision Making,IM,Importance,2.88,8,0.1250,2.6300,3.1200,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.4.g,Systems Analysis,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.4.h,Systems Evaluation,IM,Importance,2.25,8,0.1637,1.9292,2.5708,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.5.a,Time Management,IM,Importance,3.12,8,0.1250,2.8800,3.3700,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.5.b,Management of Financial Resources,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.5.c,Management of Material Resources,IM,Importance,1.38,8,0.1830,1.0164,1.7336,N,,08/2022,Analyst
+43-4051.00,Customer Service Representatives,2.B.5.d,Management of Personnel Resources,IM,Importance,2.38,8,0.1830,2.0164,2.7336,N,,08/2022,Analyst

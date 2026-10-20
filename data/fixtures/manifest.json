@@ -1,0 +1,57 @@
+{
+  "indeed.csv": {
+    "url": "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/554e4673d0b9a9fd64d4b0da354e5bb5e112beda/US/job_postings_by_sector_US.csv",
+    "sha256": "887c1b3bab87fabc25c47ee54143d07bfcae40cf3d4c3ab9f6828340af7e45fd",
+    "retrieved_at": "2026-10-20T03:35:32.488432+00:00",
+    "is_subset": true,
+    "parent_sha256": "11501409680563c03e6d321e42283cbb894d74d5a58c5de8c2a1a94b7989096a",
+    "transformation": "Real source rows selected for repeatable tests; UN indicator/series descendants removed. No values invented."
+  },
+  "indeed-readme.md": {
+    "url": "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/554e4673d0b9a9fd64d4b0da354e5bb5e112beda/README.md",
+    "sha256": "bf296db63e6a9a97766c87ccf46f881fea2556dcf36ffcaec8290a2298ebb794",
+    "retrieved_at": "2026-10-20T03:35:32.828757+00:00"
+  },
+  "indeed-license.txt": {
+    "url": "https://raw.githubusercontent.com/hiring-lab/job_postings_tracker/554e4673d0b9a9fd64d4b0da354e5bb5e112beda/LICENSE",
+    "sha256": "f5b745ef98087f531e719ee8ca6a96809444573ecc7173c6fa68eaad39b3cc3f",
+    "retrieved_at": "2026-10-20T03:35:33.111261+00:00"
+  },
+  "un-goals.json": {
+    "url": "https://unstats.un.org/SDGAPI/v1/sdg/Goal/List?includechildren=true",
+    "sha256": "b0560a71469d8cc6695072c12c4d294496b6c8e9fcbe1282ab89fd87f2e9f28d",
+    "retrieved_at": "2026-10-20T03:36:03.151930+00:00",
+    "is_subset": true,
+    "parent_sha256": "aa66ad325ce809cb8e1df3afa698579b7d9d3611000842b6bf4a45ca0a4aeda8",
+    "transformation": "Real source rows selected for repeatable tests; UN indicator/series descendants removed. No values invented."
+  },
+  "occupation_data.csv": {
+    "url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/occupation_data.csv",
+    "sha256": "42bad7bbf3d37cfbb9e9acd8afff20489b99b3d6e15bbcabbe16d54ab68b5481",
+    "retrieved_at": "2026-10-20T03:36:04.870147+00:00",
+    "is_subset": true,
+    "parent_sha256": "a09eae1d6609686e44e05b7290993a1c8b523d8ca224bc0eedc194c855c3ee02",
+    "transformation": "Real source rows selected for repeatable tests; UN indicator/series descendants removed. No values invented."
+  },
+  "essential_skills.csv": {
+    "url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/essential_skills.csv",
+    "sha256": "5eecbe4baca6255538e1472bd9fcd932144cb3591440b031b82370cdc63b8988",
+    "retrieved_at": "2026-10-20T03:36:31.554561+00:00",
+    "is_subset": true,
+    "parent_sha256": "68c4d31d8c55077238395dca40cc4e6d32e6a608b5474bb8264b1f98ae415bd7",
+    "transformation": "Real source rows selected for repeatable tests; UN indicator/series descendants removed. No values invented."
+  },
+  "transferable_skills.csv": {
+    "url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/transferable_skills.csv",
+    "sha256": "9e0f7df02b75a8975e101590102672e859cbe570eae8bb5430eeaf6cf25074aa",
+    "retrieved_at": "2026-10-20T03:37:20.868014+00:00",
+    "is_subset": true,
+    "parent_sha256": "f17d0419e818a3bf2f55076510c76c4aef01cc8f5aee2670d2f44f6f44ac60f7",
+    "transformation": "Real source rows selected for repeatable tests; UN indicator/series descendants removed. No values invented."
+  },
+  "onet-license.html": {
+    "url": "https://www.onetcenter.org/license_db.html",
+    "sha256": "150c03de18adde4b0748be2d7e6401d55ff4ecbd673513d36c83ee537bca2e72",
+    "retrieved_at": "2026-10-20T03:37:21.744922+00:00"
+  }
+}

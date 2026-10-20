@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from backend.app.config import get_settings
 
 
@@ -8,7 +8,12 @@ def make_engine():
     if url.startswith(("postgres://", "postgresql://")):
         url = "postgresql+psycopg://" + url.split("://", 1)[1]
     kwargs = {"check_same_thread": False} if url.startswith("sqlite") else {"connect_timeout": 5}
-    return create_engine(url, connect_args=kwargs, pool_pre_ping=True, hide_parameters=True)
+    result = create_engine(url, connect_args=kwargs, pool_pre_ping=True, hide_parameters=True)
+    if url.startswith("sqlite"):
+        @event.listens_for(result, "connect")
+        def enforce_foreign_keys(connection, record):
+            connection.execute("PRAGMA foreign_keys=ON")
+    return result
 
 
 engine = make_engine()

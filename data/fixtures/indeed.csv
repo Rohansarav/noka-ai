@@ -1,0 +1,283 @@
+date,jobcountry,indeed_job_postings_index,variable,display_name
+2020-02-01,US,100,total postings,Accounting
+2020-02-01,US,100,new postings,Accounting
+2020-02-02,US,100.3,total postings,Accounting
+2020-02-02,US,100.6,new postings,Accounting
+2020-02-03,US,100.56,total postings,Accounting
+2020-02-03,US,100.78,new postings,Accounting
+2020-02-01,US,100,total postings,Administrative Assistance
+2020-02-01,US,100,new postings,Administrative Assistance
+2020-02-02,US,99.94,total postings,Administrative Assistance
+2020-02-02,US,100.44,new postings,Administrative Assistance
+2020-02-03,US,100.03,total postings,Administrative Assistance
+2020-02-03,US,100.75,new postings,Administrative Assistance
+2020-02-01,US,100,total postings,Architecture
+2020-02-01,US,100,new postings,Architecture
+2020-02-02,US,100.02,total postings,Architecture
+2020-02-02,US,101.44,new postings,Architecture
+2020-02-03,US,100.11,total postings,Architecture
+2020-02-03,US,102.52,new postings,Architecture
+2020-02-01,US,100,total postings,Arts & Entertainment
+2020-02-01,US,100,new postings,Arts & Entertainment
+2020-02-02,US,99.86,total postings,Arts & Entertainment
+2020-02-02,US,99.95,new postings,Arts & Entertainment
+2020-02-03,US,99.74,total postings,Arts & Entertainment
+2020-02-03,US,99.91,new postings,Arts & Entertainment
+2020-02-01,US,100,total postings,Aviation
+2020-02-01,US,100,new postings,Aviation
+2020-02-02,US,99.2,total postings,Aviation
+2020-02-02,US,103.61,new postings,Aviation
+2020-02-03,US,99.69,total postings,Aviation
+2020-02-03,US,107.25,new postings,Aviation
+2020-02-01,US,100,total postings,Personal Care & Home Health
+2020-02-01,US,100,new postings,Personal Care & Home Health
+2020-02-02,US,100.07,total postings,Personal Care & Home Health
+2020-02-02,US,100.74,new postings,Personal Care & Home Health
+2020-02-03,US,100.19,total postings,Personal Care & Home Health
+2020-02-03,US,101.19,new postings,Personal Care & Home Health
+2020-02-01,US,100,total postings,Childcare
+2020-02-01,US,100,new postings,Childcare
+2020-02-02,US,99.57,total postings,Childcare
+2020-02-02,US,100.58,new postings,Childcare
+2020-02-03,US,99.11,total postings,Childcare
+2020-02-03,US,100.98,new postings,Childcare
+2020-02-01,US,100,total postings,Construction
+2020-02-01,US,100,new postings,Construction
+2020-02-02,US,99.74,total postings,Construction
+2020-02-02,US,99.28,new postings,Construction
+2020-02-03,US,99.57,total postings,Construction
+2020-02-03,US,98.16,new postings,Construction
+2020-02-01,US,100,total postings,Customer Service
+2020-02-01,US,100,new postings,Customer Service
+2020-02-02,US,100.06,total postings,Customer Service
+2020-02-02,US,100.18,new postings,Customer Service
+2020-02-03,US,100.2,total postings,Customer Service
+2020-02-03,US,100.46,new postings,Customer Service
+2020-02-01,US,100,total postings,Driving
+2020-02-01,US,100,new postings,Driving
+2020-02-02,US,99.52,total postings,Driving
+2020-02-02,US,95.4,new postings,Driving
+2020-02-03,US,99.22,total postings,Driving
+2020-02-03,US,90.83,new postings,Driving
+2020-02-01,US,100,total postings,Education & Instruction
+2020-02-01,US,100,new postings,Education & Instruction
+2020-02-02,US,100.14,total postings,Education & Instruction
+2020-02-02,US,100.58,new postings,Education & Instruction
+2020-02-03,US,100.19,total postings,Education & Instruction
+2020-02-03,US,100.88,new postings,Education & Instruction
+2020-02-01,US,100,total postings,Civil Engineering
+2020-02-01,US,100,new postings,Civil Engineering
+2020-02-02,US,99.91,total postings,Civil Engineering
+2020-02-02,US,100.47,new postings,Civil Engineering
+2020-02-03,US,99.97,total postings,Civil Engineering
+2020-02-03,US,100.55,new postings,Civil Engineering
+2020-02-01,US,100,total postings,Electrical Engineering
+2020-02-01,US,100,new postings,Electrical Engineering
+2020-02-02,US,99.92,total postings,Electrical Engineering
+2020-02-02,US,101.76,new postings,Electrical Engineering
+2020-02-03,US,99.88,total postings,Electrical Engineering
+2020-02-03,US,103.13,new postings,Electrical Engineering
+2020-02-01,US,100,total postings,Industrial Engineering
+2020-02-01,US,100,new postings,Industrial Engineering
+2020-02-02,US,100,total postings,Industrial Engineering
+2020-02-02,US,100.42,new postings,Industrial Engineering
+2020-02-03,US,99.95,total postings,Industrial Engineering
+2020-02-03,US,100.59,new postings,Industrial Engineering
+2020-02-01,US,100,total postings,Mechanical Engineering
+2020-02-01,US,100,new postings,Mechanical Engineering
+2020-02-02,US,100.09,total postings,Mechanical Engineering
+2020-02-02,US,101.8,new postings,Mechanical Engineering
+2020-02-03,US,100.19,total postings,Mechanical Engineering
+2020-02-03,US,103.54,new postings,Mechanical Engineering
+2020-02-01,US,100,total postings,Banking & Finance
+2020-02-01,US,100,new postings,Banking & Finance
+2020-02-02,US,99.92,total postings,Banking & Finance
+2020-02-02,US,101.38,new postings,Banking & Finance
+2020-02-03,US,99.86,total postings,Banking & Finance
+2020-02-03,US,101.99,new postings,Banking & Finance
+2020-02-01,US,100,total postings,Food Preparation & Service
+2020-02-01,US,100,new postings,Food Preparation & Service
+2020-02-02,US,99.96,total postings,Food Preparation & Service
+2020-02-02,US,99.13,new postings,Food Preparation & Service
+2020-02-03,US,99.92,total postings,Food Preparation & Service
+2020-02-03,US,98.23,new postings,Food Preparation & Service
+2020-02-01,US,100,total postings,Hospitality & Tourism
+2020-02-01,US,100,new postings,Hospitality & Tourism
+2020-02-02,US,99.98,total postings,Hospitality & Tourism
+2020-02-02,US,104.04,new postings,Hospitality & Tourism
+2020-02-03,US,99.91,total postings,Hospitality & Tourism
+2020-02-03,US,107.88,new postings,Hospitality & Tourism
+2020-02-01,US,100,total postings,Human Resources
+2020-02-01,US,100,new postings,Human Resources
+2020-02-02,US,99.72,total postings,Human Resources
+2020-02-02,US,100.48,new postings,Human Resources
+2020-02-03,US,99.69,total postings,Human Resources
+2020-02-03,US,100.99,new postings,Human Resources
+2020-02-01,US,100,total postings,Installation & Maintenance
+2020-02-01,US,100,new postings,Installation & Maintenance
+2020-02-02,US,100.06,total postings,Installation & Maintenance
+2020-02-02,US,99.5,new postings,Installation & Maintenance
+2020-02-03,US,100.19,total postings,Installation & Maintenance
+2020-02-03,US,99.3,new postings,Installation & Maintenance
+2020-02-01,US,100,total postings,Insurance
+2020-02-01,US,100,new postings,Insurance
+2020-02-02,US,100.21,total postings,Insurance
+2020-02-02,US,99.29,new postings,Insurance
+2020-02-03,US,100.46,total postings,Insurance
+2020-02-03,US,98.89,new postings,Insurance
+2020-02-01,US,100,total postings,Legal
+2020-02-01,US,100,new postings,Legal
+2020-02-02,US,99.98,total postings,Legal
+2020-02-02,US,101.76,new postings,Legal
+2020-02-03,US,99.98,total postings,Legal
+2020-02-03,US,103.13,new postings,Legal
+2020-02-01,US,100,total postings,Management
+2020-02-01,US,100,new postings,Management
+2020-02-02,US,100.25,total postings,Management
+2020-02-02,US,100.43,new postings,Management
+2020-02-03,US,100.46,total postings,Management
+2020-02-03,US,100.76,new postings,Management
+2020-02-01,US,100,total postings,Production & Manufacturing
+2020-02-01,US,100,new postings,Production & Manufacturing
+2020-02-02,US,99.92,total postings,Production & Manufacturing
+2020-02-02,US,100.85,new postings,Production & Manufacturing
+2020-02-03,US,99.87,total postings,Production & Manufacturing
+2020-02-03,US,101.66,new postings,Production & Manufacturing
+2020-02-01,US,100,total postings,Marketing
+2020-02-01,US,100,new postings,Marketing
+2020-02-02,US,99.97,total postings,Marketing
+2020-02-02,US,101.43,new postings,Marketing
+2020-02-03,US,99.99,total postings,Marketing
+2020-02-03,US,102.57,new postings,Marketing
+2020-02-01,US,100,total postings,Data & Analytics
+2020-02-01,US,100,new postings,Data & Analytics
+2020-02-02,US,99.97,total postings,Data & Analytics
+2020-02-02,US,99.94,new postings,Data & Analytics
+2020-02-03,US,99.84,total postings,Data & Analytics
+2020-02-03,US,99.69,new postings,Data & Analytics
+2020-02-01,US,100,total postings,Dental
+2020-02-01,US,100,new postings,Dental
+2020-02-02,US,100.17,total postings,Dental
+2020-02-02,US,100.44,new postings,Dental
+2020-02-03,US,100.41,total postings,Dental
+2020-02-03,US,100.95,new postings,Dental
+2020-02-01,US,100,total postings,Physicians & Surgeons
+2020-02-01,US,100,new postings,Physicians & Surgeons
+2020-02-02,US,100.13,total postings,Physicians & Surgeons
+2020-02-02,US,103.38,new postings,Physicians & Surgeons
+2020-02-03,US,100.23,total postings,Physicians & Surgeons
+2020-02-03,US,106.1,new postings,Physicians & Surgeons
+2020-02-01,US,100,total postings,Media & Communications
+2020-02-01,US,100,new postings,Media & Communications
+2020-02-02,US,99.95,total postings,Media & Communications
+2020-02-02,US,99.87,new postings,Media & Communications
+2020-02-03,US,99.98,total postings,Media & Communications
+2020-02-03,US,99.49,new postings,Media & Communications
+2020-02-01,US,100,total postings,Medical Information
+2020-02-01,US,100,new postings,Medical Information
+2020-02-02,US,100.05,total postings,Medical Information
+2020-02-02,US,100.07,new postings,Medical Information
+2020-02-03,US,100.11,total postings,Medical Information
+2020-02-03,US,100.26,new postings,Medical Information
+2020-02-01,US,100,total postings,Nursing
+2020-02-01,US,100,new postings,Nursing
+2020-02-02,US,99.82,total postings,Nursing
+2020-02-02,US,99.55,new postings,Nursing
+2020-02-03,US,99.72,total postings,Nursing
+2020-02-03,US,98.97,new postings,Nursing
+2020-02-01,US,100,total postings,Medical Technician
+2020-02-01,US,100,new postings,Medical Technician
+2020-02-02,US,100.09,total postings,Medical Technician
+2020-02-02,US,100.6,new postings,Medical Technician
+2020-02-03,US,100.24,total postings,Medical Technician
+2020-02-03,US,100.98,new postings,Medical Technician
+2020-02-01,US,100,total postings,Pharmacy
+2020-02-01,US,100,new postings,Pharmacy
+2020-02-02,US,99.96,total postings,Pharmacy
+2020-02-02,US,104.11,new postings,Pharmacy
+2020-02-03,US,96.48,total postings,Pharmacy
+2020-02-03,US,107.43,new postings,Pharmacy
+2020-02-01,US,100,total postings,Project Management
+2020-02-01,US,100,new postings,Project Management
+2020-02-02,US,100.01,total postings,Project Management
+2020-02-02,US,100.56,new postings,Project Management
+2020-02-03,US,100.03,total postings,Project Management
+2020-02-03,US,101.4,new postings,Project Management
+2020-02-01,US,100,total postings,Security & Public Safety
+2020-02-01,US,100,new postings,Security & Public Safety
+2020-02-02,US,100.04,total postings,Security & Public Safety
+2020-02-02,US,100.54,new postings,Security & Public Safety
+2020-02-03,US,100.05,total postings,Security & Public Safety
+2020-02-03,US,100.84,new postings,Security & Public Safety
+2020-02-01,US,100,total postings,Retail
+2020-02-01,US,100,new postings,Retail
+2020-02-02,US,99.67,total postings,Retail
+2020-02-02,US,99.9,new postings,Retail
+2020-02-03,US,99.12,total postings,Retail
+2020-02-03,US,100.61,new postings,Retail
+2020-02-01,US,100,total postings,Sales
+2020-02-01,US,100,new postings,Sales
+2020-02-02,US,99.84,total postings,Sales
+2020-02-02,US,100.59,new postings,Sales
+2020-02-03,US,99.71,total postings,Sales
+2020-02-03,US,101.1,new postings,Sales
+2020-02-01,US,100,total postings,Cleaning & Sanitation
+2020-02-01,US,100,new postings,Cleaning & Sanitation
+2020-02-02,US,99.97,total postings,Cleaning & Sanitation
+2020-02-02,US,100.47,new postings,Cleaning & Sanitation
+2020-02-03,US,99.97,total postings,Cleaning & Sanitation
+2020-02-03,US,100.84,new postings,Cleaning & Sanitation
+2020-02-01,US,100,total postings,Scientific Research & Development
+2020-02-01,US,100,new postings,Scientific Research & Development
+2020-02-02,US,100,total postings,Scientific Research & Development
+2020-02-02,US,100.77,new postings,Scientific Research & Development
+2020-02-03,US,99.95,total postings,Scientific Research & Development
+2020-02-03,US,101.36,new postings,Scientific Research & Development
+2020-02-01,US,100,total postings,Community & Social Service
+2020-02-01,US,100,new postings,Community & Social Service
+2020-02-02,US,100.15,total postings,Community & Social Service
+2020-02-02,US,101.36,new postings,Community & Social Service
+2020-02-03,US,100.28,total postings,Community & Social Service
+2020-02-03,US,102.54,new postings,Community & Social Service
+2020-02-01,US,100,total postings,Social Science
+2020-02-01,US,100,new postings,Social Science
+2020-02-02,US,100.12,total postings,Social Science
+2020-02-02,US,101.53,new postings,Social Science
+2020-02-03,US,100.37,total postings,Social Science
+2020-02-03,US,103.23,new postings,Social Science
+2020-02-01,US,100,total postings,"IT Infrastructure, Operations & Support"
+2020-02-01,US,100,new postings,"IT Infrastructure, Operations & Support"
+2020-02-02,US,99.91,total postings,"IT Infrastructure, Operations & Support"
+2020-02-02,US,100.36,new postings,"IT Infrastructure, Operations & Support"
+2020-02-03,US,99.84,total postings,"IT Infrastructure, Operations & Support"
+2020-02-03,US,100.78,new postings,"IT Infrastructure, Operations & Support"
+2020-02-01,US,100,total postings,IT Systems & Solutions
+2020-02-01,US,100,new postings,IT Systems & Solutions
+2020-02-02,US,99.61,total postings,IT Systems & Solutions
+2020-02-02,US,99.43,new postings,IT Systems & Solutions
+2020-02-03,US,99.43,total postings,IT Systems & Solutions
+2020-02-03,US,99.37,new postings,IT Systems & Solutions
+2020-02-01,US,100,total postings,Software Development
+2020-02-01,US,100,new postings,Software Development
+2020-02-02,US,99.84,total postings,Software Development
+2020-02-02,US,100.5,new postings,Software Development
+2020-02-03,US,99.73,total postings,Software Development
+2020-02-03,US,101.1,new postings,Software Development
+2020-02-01,US,100,total postings,Therapy
+2020-02-01,US,100,new postings,Therapy
+2020-02-02,US,100.03,total postings,Therapy
+2020-02-02,US,100.42,new postings,Therapy
+2020-02-03,US,99.96,total postings,Therapy
+2020-02-03,US,100.62,new postings,Therapy
+2020-02-01,US,100,total postings,Logistic Support
+2020-02-01,US,100,new postings,Logistic Support
+2020-02-02,US,99.89,total postings,Logistic Support
+2020-02-02,US,99.15,new postings,Logistic Support
+2020-02-03,US,99.78,total postings,Logistic Support
+2020-02-03,US,97.51,new postings,Logistic Support
+2020-02-01,US,100,total postings,Loading & Stocking
+2020-02-01,US,100,new postings,Loading & Stocking
+2020-02-02,US,99.91,total postings,Loading & Stocking
+2020-02-02,US,98.86,new postings,Loading & Stocking
+2020-02-03,US,99.83,total postings,Loading & Stocking
+2020-02-03,US,97.85,new postings,Loading & Stocking

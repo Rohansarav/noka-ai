@@ -1,0 +1,221 @@
+{
+  "version": "noka-curation-1",
+  "reviewed_by": "Project owner (explicit approval in Codex chat)",
+  "reviewed_at": "2026-10-20T03:36:49.322136+00:00",
+  "roles": [
+    {
+      "occupation_code": "15-1252.00",
+      "sector": "Software Development",
+      "rationale": "Software construction aligns with the named Indeed occupational sector.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-2051.00",
+      "sector": "Data & Analytics",
+      "rationale": "Data science tasks are closest to the Data & Analytics title grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-1212.00",
+      "sector": "IT Systems & Solutions",
+      "rationale": "Security analysis supports IT systems; this is a broad judgement proxy, not a dedicated cybersecurity series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-1241.00",
+      "sector": "IT Infrastructure, Operations & Support",
+      "rationale": "Network architecture supports IT infrastructure; broad proxy only.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-1244.00",
+      "sector": "IT Infrastructure, Operations & Support",
+      "rationale": "Network and systems administration aligns with infrastructure support.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-1242.00",
+      "sector": "IT Infrastructure, Operations & Support",
+      "rationale": "Database administration supports IT operations; not a database-only series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "15-1211.00",
+      "sector": "IT Systems & Solutions",
+      "rationale": "Systems analysis aligns with the systems and solutions grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2141.00",
+      "sector": "Mechanical Engineering",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2071.00",
+      "sector": "Electrical Engineering",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2051.00",
+      "sector": "Civil Engineering",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2081.00",
+      "sector": null,
+      "rationale": "No dedicated environmental-engineering series; avoid substituting scientific research for the occupation.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2112.00",
+      "sector": "Industrial Engineering",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "17-2199.11",
+      "sector": "Electrical Engineering",
+      "rationale": "Solar system design can involve electrical engineering; provisional broad planning proxy, not a renewable-energy series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "29-1141.00",
+      "sector": "Nursing",
+      "rationale": "Registered nursing aligns with the Nursing grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "29-2034.00",
+      "sector": "Medical Technician",
+      "rationale": "Radiologic technical practice is mapped to the broader medical technician grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "29-1051.00",
+      "sector": "Pharmacy",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "25-2031.00",
+      "sector": "Education & Instruction",
+      "rationale": "Secondary teaching is part of education and instruction; no school-level series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "25-9031.00",
+      "sector": "Education & Instruction",
+      "rationale": "Instructional coordination supports education; not a coordinator-only series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-1071.00",
+      "sector": "Human Resources",
+      "rationale": "Occupation and named occupational sector closely align.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-2011.00",
+      "sector": "Accounting",
+      "rationale": "Accounting and audit tasks align with the Accounting title grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-1081.00",
+      "sector": "Logistic Support",
+      "rationale": "Logistics analysis aligns with the broader Logistic Support grouping.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-1111.00",
+      "sector": "Management",
+      "rationale": "Management analysis supports organizational management; judgement proxy only.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-1161.00",
+      "sector": "Marketing",
+      "rationale": "Market research and marketing analysis align with Marketing; not an analyst-only series.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "13-1199.05",
+      "sector": null,
+      "rationale": "Sustainability specialists span industries; no defensible dedicated series in this source.",
+      "curation_status": "human_reviewed"
+    },
+    {
+      "occupation_code": "43-4051.00",
+      "sector": "Customer Service",
+      "rationale": "Customer service representative tasks align with the named grouping.",
+      "curation_status": "human_reviewed"
+    }
+  ],
+  "sdg_links": [
+    {
+      "role_id": "29-1141.00",
+      "target_id": "3.c",
+      "rationale": "Nursing practice is relevant to strengthening the health workforce described in target 3.c; this is a contextual link, not measured impact."
+    },
+    {
+      "role_id": "17-2199.11",
+      "target_id": "7.2",
+      "rationale": "Solar energy system design can support renewable-energy deployment, relevant to target 7.2. Employment alone does not prove a contribution."
+    },
+    {
+      "role_id": "17-2051.00",
+      "target_id": "9.1",
+      "rationale": "Civil engineering includes infrastructure design, relevant to target 9.1 on sustainable and resilient infrastructure."
+    },
+    {
+      "role_id": "25-2031.00",
+      "target_id": "4.1",
+      "rationale": "Secondary teaching supports learning provision relevant to target 4.1. This does not establish education outcomes."
+    },
+    {
+      "role_id": "17-2081.00",
+      "target_id": "6.3",
+      "rationale": "Environmental engineering can include water pollution and wastewater solutions relevant to target 6.3; actual projects determine applicability."
+    },
+    {
+      "skill_id": "2.B.1.e",
+      "target_id": "4.4",
+      "rationale": "Instructing can enable technical and vocational skills development described in target 4.4 when used in relevant training."
+    },
+    {
+      "skill_id": "2.A.1.f",
+      "target_id": "9.5",
+      "rationale": "Scientific methods can support research capability relevant to target 9.5 when applied in research and innovation contexts."
+    }
+  ],
+  "wef_directions": [
+    {
+      "id": "wef-software",
+      "subject": "Software and applications developers",
+      "direction": "growth_context",
+      "rationale": "WEF identifies software and application developers among fast-growing technology roles."
+    },
+    {
+      "id": "wef-data",
+      "subject": "Big data specialists",
+      "direction": "growth_context",
+      "rationale": "WEF identifies big data specialists among fast-growing technology roles."
+    },
+    {
+      "id": "wef-ai-skills",
+      "subject": "AI and big data; networks and cybersecurity",
+      "direction": "increasing_importance",
+      "rationale": "WEF highlights these technology skill groups as increasing in importance."
+    },
+    {
+      "id": "wef-thinking",
+      "subject": "Analytical thinking",
+      "direction": "core_skill_context",
+      "rationale": "WEF describes analytical thinking as a highly sought-after core skill."
+    }
+  ],
+  "reviewed_content_sha256": "af64808ad7abb007d8bb9fa4ac9be93fb0b950d49de6da83499bd0eb7039cb6f"
+}

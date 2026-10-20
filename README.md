@@ -1,6 +1,6 @@
 # Noka
 
-Navigate tomorrow’s work, today. Phase 1: a light-themed visual system, dashboard shell and FastAPI service, with no fabricated product data. See [product specification](docs/PRODUCT_SPEC.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
+Navigate tomorrow’s work, today. Phase 2 adds a real, attributed role/skill knowledge graph, US sector history, official UN goals/targets and provenance APIs to the light-themed React/FastAPI shell. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
 ## Requirements
 
@@ -28,7 +28,7 @@ pnpm test
 uv run pytest
 ```
 
-Build first: API integration tests verify that the actual bundle exists and is served at `/`, `/profile`, and `/forecast`. `/api/health` is liveness; `/api/ready` checks database connectivity, migration revision and (in production) the frontend bundle. Missing dependencies return 503 with a consistent error envelope. Health checks do not require AI/search keys. No API routes in this phase use those services.
+Build first: API integration tests verify that the actual bundle exists and is served at `/`, `/profile`, `/forecast`, `/design-preview` and `/profile/intake`. `/api/health` is liveness; `/api/ready` checks database connectivity, migration revision `0002` and (in production) the frontend bundle. Missing dependencies return 503 with a consistent error envelope. Health checks do not require AI/search keys. No API routes in this phase use those services.
 
 ## Single-service production
 
@@ -54,7 +54,38 @@ This repository has not been publicly deployed unless the phase report supplies 
 
 ## Scope and privacy
 
-All eight module routes exist; feature screens explain what is pending. `/design-preview` shows the visual system, explicitly labelled sample progress/states and a dismissible sample toast. `/profile/intake` is a non-collecting preview; its upload/manual-entry actions are disabled until a later phase. The homepage's intelligence tile shows no data and no successful refresh, separately from API health. No upload, session/profile persistence, feed ingestion, trained forecast, scenario simulator or learning progress exists yet. A working seeded journey belongs to subsequent phases. No resume data is collected. Access logs are disabled; unhandled API errors log only an exception class. No server secrets are exposed through an API. Source attribution and planned data restrictions are in `docs/DATA_SOURCES.md`.
+All eight module routes exist. `/datasets` and `/signals` show data provenance and dated historical rows; `/matches` is a public role catalogue, explicitly distinct from personalized matching; `/sdgs` shows all imported goals and targets. `/design-preview` remains the labelled component gallery. `/profile/intake` is a non-collecting preview with disabled upload/manual-entry controls. The homepage separates successful historical imports from disconnected live AI feeds and API health. No resume upload, profile persistence, live search-feed ingestion, trained forecast, scenario simulator or learning progress exists yet. No resume data is collected. Access logs are disabled; API errors log only error classes. Source attribution and restrictions are in `docs/DATA_SOURCES.md`.
+
+## Phase 2: import verified public evidence
+
+Set `DATABASE_URL` in `.env` to your PostgreSQL connection string (never paste it into chat or commit it). SQLite remains a local fallback; it does **not** meet the PostgreSQL acceptance requirement. `uv sync --frozen` installs the PostgreSQL driver. No new AI/search key is required.
+
+```sh
+uv run alembic upgrade head
+uv run python scripts/import_data.py --dry-run
+uv run python scripts/import_data.py --offline
+uv run python scripts/start.py
+```
+
+The first import command downloads to ignored `data/raw/` and validates without any database writes. The second verifies those cached files' manifest and performs an atomic, idempotent upsert into the database configured at process startup. To download and import in one step, omit `--dry-run` and `--offline`. Source download retries are bounded. WEF is imported as manually reviewed source-controlled reference records with separately verified PDF provenance; its copyrighted full PDF is not redistributed or downloaded on every import. Imports are explicit CLI actions; no public API starts a refresh.
+
+For a clearly labelled offline real-row test subset:
+
+```sh
+uv run python scripts/import_data.py --directory data/fixtures --offline --dry-run
+```
+
+Never use the three-day fixture subset as full production history. Its manifest and API notes identify the original files and the subset transformation. Full source schema, licensing/terms, checksums, original-date availability, crosswalk judgement and revision limitations: [DATA_SOURCES.md](docs/DATA_SOURCES.md). Project-owner human review of the curation is recorded in [CURATION_REVIEW.md](docs/CURATION_REVIEW.md) and `data/curation/catalogue.json`.
+
+Public read-only endpoints:
+
+- `GET /api/roles`, `GET /api/roles/{id}` (O*NET-SOC codes, e.g. `15-1252.00`)
+- `GET /api/skills`
+- `GET /api/datasets/summary`
+- `GET /api/demand/history?sector=Software%20Development` (optional ISO `start`/`end` dates)
+- `GET /api/sdgs`
+
+Verify `/api/datasets/summary` reports `database: postgresql`, `job_demand_observations: 114821`, `sdgs: 17`, `sdg_targets: 169`, and `2020-02-01`..`2026-10-09` for the pinned source version. Run `uv run python scripts/verify_evidence.py --require-postgres` for a read-only acceptance probe (it fails explicitly on SQLite or incomplete data). Run the import twice to verify counts remain unchanged; import audit rows intentionally accumulate. `/api/roles` never labels an individual role statistically forecastable. See `/docs` for the generated strict response schemas. Replit still needs a verified public deployment; local success is not public publishing.
 
 ## Visual system and QA
 

@@ -1,0 +1,65 @@
+[
+  {
+    "path": "/datasets",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "h1s": 1,
+    "width": 375
+  },
+  {
+    "path": "/matches",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "h1s": 1,
+    "width": 375
+  },
+  {
+    "path": "/sdgs",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "h1s": 1,
+    "width": 375
+  },
+  {
+    "path": "/datasets",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "h1s": 1,
+    "width": 768
+  },
+  {
+    "path": "/matches",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "h1s": 1,
+    "width": 768
+  },
+  {
+    "path": "/sdgs",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "h1s": 1,
+    "width": 768
+  },
+  {
+    "path": "/datasets",
+    "availableWidth": 1425,
+    "documentWidth": 1425,
+    "h1s": 1,
+    "width": 1440
+  },
+  {
+    "path": "/matches",
+    "availableWidth": 1425,
+    "documentWidth": 1425,
+    "h1s": 1,
+    "width": 1440
+  },
+  {
+    "path": "/sdgs",
+    "availableWidth": 1425,
+    "documentWidth": 1425,
+    "h1s": 1,
+    "width": 1440
+  }
+]
