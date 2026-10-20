@@ -1,0 +1,67 @@
+{
+  "verified_at": "2026-10-20T11:09:32.650915+00:00",
+  "kind": "Real application Matchmaker attempt plus authenticated OpenAI model-metadata request; no mocks. Responses workflow did not succeed.",
+  "model": "gpt-4.1-mini",
+  "key_configured": true,
+  "live_provider_success": false,
+  "application_ready": {
+    "status": "ready",
+    "database": "connected",
+    "migration": "current",
+    "frontend": "built"
+  },
+  "demo": "Disposable explicitly labelled manual demo; no real resume or personal details.",
+  "acceptance_latency_seconds": 12.462,
+  "sse_content_type": "text/event-stream; charset=utf-8",
+  "observed_end_to_end_seconds": 37.586,
+  "sse_done_received": true,
+  "terminal_status": "failed",
+  "error_code": "provider_or_validation_error",
+  "tool_count": 0,
+  "recorded_token_usage": 0,
+  "tools_called": [],
+  "event_sequence": [
+    {
+      "sequence": 1,
+      "type": "queued",
+      "status": "queued",
+      "at": "2026-10-20T11:10:10.784130+00:00",
+      "tool": null
+    },
+    {
+      "sequence": 2,
+      "type": "running",
+      "status": "running",
+      "at": "2026-10-20T11:10:17.119149+00:00",
+      "tool": null
+    },
+    {
+      "sequence": 3,
+      "type": "failed",
+      "status": "failed",
+      "at": "2026-10-20T11:10:36.940567+00:00",
+      "tool": null
+    }
+  ],
+  "sse_matches_snapshot": true,
+  "database": "postgresql",
+  "persisted_matches_api": true,
+  "persisted_sequences_match": true,
+  "execution_created_to_terminal_seconds": 26.49,
+  "authoritative_checks": {},
+  "foreign_snapshot_status": 404,
+  "foreign_sse_status": 404,
+  "universe_still_ready": true,
+  "universe_nodes_unchanged": true,
+  "universe_edges_unchanged": true,
+  "latency_note": "End-to-end and persisted execution durations include database work and SSE observation; individual provider HTTP latency is not instrumented by the existing application.",
+  "disposable_profile_deleted": true,
+  "execution_cascade_deleted": true,
+  "model_metadata_check": {
+    "succeeded": true,
+    "configured_model_accessible": true,
+    "credentials_exposed": false
+  },
+  "provider_only_latency_seconds": null,
+  "root_cause": "Not available: application stores a sanitized combined provider/validation error code, not the underlying exception or HTTP status."
+}
