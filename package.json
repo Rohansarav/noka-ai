@@ -1,7 +1,7 @@
 {
   "name": "noka", "private": true, "version": "0.1.0",
   "packageManager": "pnpm@11.25.0",
-  "scripts": {"dev": "vite --config frontend/vite.config.ts", "build": "tsc -p frontend/tsconfig.json && vite build --config frontend/vite.config.ts", "test": "vitest run --config frontend/vite.config.ts"},
+  "scripts": {"dev": "vite --config frontend/vite.config.ts", "typecheck": "tsc -p frontend/tsconfig.json", "build": "tsc -p frontend/tsconfig.json && vite build --config frontend/vite.config.ts", "test": "vitest run --config frontend/vite.config.ts"},
   "dependencies": {"@radix-ui/react-slot": "^1.2.3", "@tanstack/react-query": "^5.80.0", "class-variance-authority": "^0.7.1", "clsx": "^2.1.1", "lucide-react": "^0.468.0", "react": "^19.0.0", "react-dom": "^19.0.0", "react-router-dom": "^7.6.0", "tailwind-merge": "^3.3.0"},
   "devDependencies": {"@tailwindcss/vite": "^4.1.0", "@testing-library/jest-dom": "6.9.1", "@testing-library/react": "^16.3.0", "@types/node": "^22.15.0", "@types/react": "^19.0.0", "@types/react-dom": "^19.0.0", "@vitejs/plugin-react": "^4.5.0", "jsdom": "^26.1.0", "tailwindcss": "^4.1.0", "typescript": "~5.8.3", "vite": "^6.3.5", "vitest": "^3.2.0"}
 }

@@ -1,6 +1,6 @@
 # Noka
 
-Navigate tomorrow’s work, today. Phase 0: a light-themed React shell and a FastAPI service, with no fabricated product data. See [product specification](docs/PRODUCT_SPEC.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
+Navigate tomorrow’s work, today. Phase 1: a light-themed visual system, dashboard shell and FastAPI service, with no fabricated product data. See [product specification](docs/PRODUCT_SPEC.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
 ## Requirements
 
@@ -22,6 +22,7 @@ In a second terminal: `uv run python scripts/start.py`. Open http://localhost:51
 ## Verification
 
 ```sh
+pnpm typecheck
 pnpm build
 pnpm test
 uv run pytest
@@ -43,7 +44,7 @@ Set `ENVIRONMENT=production` and a PostgreSQL `DATABASE_URL` in the host environ
 
 ## GitHub and Replit Core publishing
 
-1. Create one GitHub repository and push this local repository (`git remote add origin <your-repository-url>`, `git push -u origin main`). No GitHub remote is preconfigured.
+1. The local repository has `origin` configured at `https://github.com/Rohansarav/noka-ai.git`. Push the desired reviewed commit to that repository (`git push -u origin main`) before importing into Replit. Verify `git remote -v` first if working in a copy of this project.
 2. In Replit, import that GitHub repository and use the checked-in `.replit` configuration and `replit.nix` (uv). Ensure Node 22, Python 3.11+ and Corepack/pnpm are available in the Replit environment. The build installs locked dependencies and builds the frontend; startup migrates the database and runs FastAPI. Configuration follows the [official Replit configuration reference](https://docs.replit.com/features/project-setup/configuration), including `cloudrun` as the Autoscale deployment target. Hosting execution still requires verification on Replit.
 3. Create a Replit PostgreSQL database and set `DATABASE_URL` in **deployment secrets**, along with `ENVIRONMENT=production`. `PORT=8000` is configured; the app respects a host override. Optional future secrets: `OPENAI_API_KEY`, `OPENAI_MODEL`, `TAVILY_API_KEY`, `INGESTION_SECRET`. Never prefix secrets with `VITE_`, paste them into source, or commit `.env`. AI/search keys are not needed for Phase 0.
 4. Use Replit **Publish** / Autoscale web deployment. Review build logs, migration success and port mapping (8000 → 80). Workspace preview is not a published deployment.
@@ -53,4 +54,10 @@ This repository has not been publicly deployed unless the phase report supplies 
 
 ## Scope and privacy
 
-All eight routes exist; feature screens explain what is pending. No upload, session/profile persistence, feed ingestion, trained forecast, scenario simulator or learning progress exists yet. A working seeded journey belongs to subsequent phases. No resume data is collected. Access logs are disabled; unhandled API errors log only an exception class. No server secrets are exposed through an API. Source attribution and planned data restrictions are in `docs/DATA_SOURCES.md`.
+All eight module routes exist; feature screens explain what is pending. `/design-preview` shows the visual system, explicitly labelled sample progress/states and a dismissible sample toast. `/profile/intake` is a non-collecting preview; its upload/manual-entry actions are disabled until a later phase. The homepage's intelligence tile shows no data and no successful refresh, separately from API health. No upload, session/profile persistence, feed ingestion, trained forecast, scenario simulator or learning progress exists yet. A working seeded journey belongs to subsequent phases. No resume data is collected. Access logs are disabled; unhandled API errors log only an exception class. No server secrets are exposed through an API. Source attribution and planned data restrictions are in `docs/DATA_SOURCES.md`.
+
+## Visual system and QA
+
+The light-only colour, gradient, radius, motion and chart tokens live in `frontend/src/style.css`. Primary blue is retained as a brand token; action backgrounds use a darker blue so white button labels meet contrast requirements. Chart samples include names and distinct line patterns. Subtle motion is disabled under `prefers-reduced-motion: reduce`.
+
+At 375px, 768px and 1440px viewport widths, inspect `/`, `/design-preview`, `/profile`, and `/profile/intake`: check horizontal overflow, card stacking, navigation, focus rings, toast dismissal and legibility. Mobile navigation should focus its first link when opened, close on Escape, and restore toggle focus. Route changes focus main content. Component samples must never appear as real profile or market results. See `docs/PHASE_1_REPORT.md` for completed checks and any outstanding visual verification.

@@ -1,0 +1,86 @@
+[
+  {
+    "path": "/",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "headings": 1,
+    "width": 375
+  },
+  {
+    "path": "/design-preview",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "headings": 1,
+    "width": 375
+  },
+  {
+    "path": "/profile",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "headings": 1,
+    "width": 375
+  },
+  {
+    "path": "/profile/intake",
+    "availableWidth": 360,
+    "documentWidth": 360,
+    "headings": 1,
+    "width": 375
+  },
+  {
+    "path": "/",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "headings": 1,
+    "width": 768
+  },
+  {
+    "path": "/design-preview",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "headings": 1,
+    "width": 768
+  },
+  {
+    "path": "/profile",
+    "availableWidth": 768,
+    "documentWidth": 768,
+    "headings": 1,
+    "width": 768
+  },
+  {
+    "path": "/profile/intake",
+    "availableWidth": 753,
+    "documentWidth": 753,
+    "headings": 1,
+    "width": 768
+  },
+  {
+    "path": "/",
+    "availableWidth": 1425,
+    "documentWidth": 1425,
+    "headings": 1,
+    "width": 1440
+  },
+  {
+    "path": "/design-preview",
+    "availableWidth": 1425,
+    "documentWidth": 1425,
+    "headings": 1,
+    "width": 1440
+  },
+  {
+    "path": "/profile",
+    "availableWidth": 1440,
+    "documentWidth": 1440,
+    "headings": 1,
+    "width": 1440
+  },
+  {
+    "path": "/profile/intake",
+    "availableWidth": 1440,
+    "documentWidth": 1440,
+    "headings": 1,
+    "width": 1440
+  }
+]

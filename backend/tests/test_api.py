@@ -40,7 +40,7 @@ def test_unknown_api_is_not_spa(client):
     assert response.json()['error']['code'] == 'not_found'
 
 
-@pytest.mark.parametrize('path', ['/', '/profile', '/forecast'])
+@pytest.mark.parametrize('path', ['/', '/profile', '/forecast', '/design-preview', '/profile/intake'])
 def test_production_routes(client, path):
     assert (main.DIST / 'index.html').is_file(), 'Run pnpm build before API tests'
     response = client.get(path)
