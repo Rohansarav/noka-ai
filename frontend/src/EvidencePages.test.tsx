@@ -35,13 +35,13 @@ describe('public evidence journey', () => {
     expect(screen.getByText('2 Feb 2020')).toBeInTheDocument();
   });
   it('lists real occupations and canonical skill importance without match percentages', async () => {
-    visit('/matches');
+    visit('/roles');
     expect(await screen.findByRole('heading',{name:'Software Developers'})).toBeInTheDocument();
     fireEvent.change(screen.getByRole('textbox',{name:'Search roles or sectors'}),{target:{value:'Software Developers'}});
     fireEvent.click(screen.getByRole('button',{name:'View skills & evidence'}));
     expect(await screen.findByText('Critical Thinking')).toBeInTheDocument();
     expect(screen.getByText(/Never an individual statistical forecast/)).toBeInTheDocument();
-    expect(screen.getByText('No profile yet')).toBeInTheDocument();
+    expect(screen.getByText('Public role catalogue')).toBeInTheDocument();
   });
   it('retries history after a transient request failure', async () => {
     let attempts = 0;

@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     openai_model: str = "gpt-4.1-mini"
     tavily_api_key: SecretStr | None = None
     ingestion_secret: SecretStr | None = None
+    public_origin: str | None = None
 
 
 @lru_cache

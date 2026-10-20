@@ -92,3 +92,11 @@ Verify `/api/datasets/summary` reports `database: postgresql`, `job_demand_obser
 The light-only colour, gradient, radius, motion and chart tokens live in `frontend/src/style.css`. Primary blue is retained as a brand token; action backgrounds use a darker blue so white button labels meet contrast requirements. Chart samples include names and distinct line patterns. Subtle motion is disabled under `prefers-reduced-motion: reduce`.
 
 At 375px, 768px and 1440px viewport widths, inspect `/`, `/design-preview`, `/profile`, and `/profile/intake`: check horizontal overflow, card stacking, navigation, focus rings, toast dismissal and legibility. Mobile navigation should focus its first link when opened, close on Escape, and restore toggle focus. Route changes focus main content. Component samples must never appear as real profile or market results. See `docs/PHASE_1_REPORT.md` for completed checks and any outstanding visual verification.
+
+## Phase 3 private profiles
+
+`/profile/intake` now supports PDF/DOCX up to 5 MiB, pasted experience and manual-only entry. Review suggested canonical skills, set levels, choose location/interests, then confirm. `/matches` shows five explainable heuristic matches and gaps after at least three skills are confirmed. The public catalogue is now `/roles`. Scores are independent of forecasts and are not probabilities.
+
+Run `uv sync --frozen`, `uv run alembic upgrade head`, `pnpm build`, then `uv run python scripts/start.py`. Use `data/demo/demo_cv.docx` with the **Demo profile** checkbox for a labelled sample, or enter manual skills. Originals and excerpts are not retained; session-owned confirmed skills/preferences are stored. An optional OpenAI key enables opt-in structured extraction; local/manual fallback works without it. Never place credentials in `.env.example`. Set `PUBLIC_ORIGIN` to the exact HTTPS production origin when publishing. Replit remains on hold pending credits.
+
+See [Phase 3 report](docs/PHASE_3_REPORT.md) for endpoint contracts, privacy/retention details, formula and weights, tests, screenshots, commands and limitations.

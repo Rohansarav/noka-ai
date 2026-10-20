@@ -1,0 +1,107 @@
+"""Private profile endpoints. Only confirmed canonical skills/preferences are persisted."""
+import secrets
+from datetime import datetime, timedelta, timezone
+from typing import Annotated
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, Response, UploadFile
+from sqlalchemy import delete, select
+from sqlalchemy.orm import Session
+from backend.app.evidence_api import get_session
+from backend.app.models import PrivateSession, Profile, ProfileSkill, Role, Skill
+from backend.app.profile_schemas import CreateProfile, CurrentProfile, ExtractionResponse, MatchesResponse, ProfileView, SaveSkills
+from backend.app.profile_security import COOKIE, active_session, owned_profile, same_origin, token_hash
+from backend.app.skill_extraction import extract, parse_upload
+from backend.app.matching import match_profile
+
+router = APIRouter(prefix="/api/profiles", tags=["Private profiles"])
+
+
+def view(profile, db):
+    return ProfileView(id=profile.id, country=profile.country, interests=profile.interests, is_demo=profile.is_demo,
+        confirmed=profile.confirmed, updated_at=profile.updated_at.isoformat(),
+        skills=[{"skill_id": s.skill_id, "level": s.level, "years": s.years} for s in db.scalars(select(ProfileSkill).where(ProfileSkill.profile_id == profile.id).order_by(ProfileSkill.skill_id))])
+
+
+@router.get("/current", response_model=CurrentProfile)
+def current(request: Request, response: Response, db: Session = Depends(get_session)):
+    response.headers["Cache-Control"] = "no-store"
+    owner = active_session(request, db)
+    profile = db.scalar(select(Profile).where(Profile.session_hash == owner.token_hash)) if owner else None
+    return {"profile": view(profile, db) if profile else None}
+
+
+@router.post("", response_model=ProfileView, dependencies=[Depends(same_origin)])
+def create(body: CreateProfile, request: Request, response: Response, db: Session = Depends(get_session)):
+    owner = active_session(request, db)
+    if not owner:
+        token = secrets.token_urlsafe(32)
+        owner = PrivateSession(token_hash=token_hash(token), expires_at=datetime.now(timezone.utc) + timedelta(days=30))
+        db.add(owner)
+        db.flush()
+        response.set_cookie(COOKIE, token, httponly=True, secure=request.url.scheme == "https" or request.url.hostname not in {"localhost", "127.0.0.1", "testserver"}, samesite="strict", max_age=2592000, path="/")
+    profile = db.scalar(select(Profile).where(Profile.session_hash == owner.token_hash))
+    if not profile:
+        profile = Profile(id=secrets.token_urlsafe(24), session_hash=owner.token_hash, is_demo=body.is_demo, updated_at=datetime.now(timezone.utc))
+        db.add(profile)
+        db.commit()
+    response.headers["Cache-Control"] = "no-store"
+    return view(profile, db)
+
+
+@router.get("/{profile_id}", response_model=ProfileView)
+def get_profile(profile_id: str, request: Request, response: Response, db: Session = Depends(get_session)):
+    response.headers["Cache-Control"] = "no-store"
+    return view(owned_profile(profile_id, request, db), db)
+
+
+@router.post("/{profile_id}/resume", response_model=ExtractionResponse, dependencies=[Depends(same_origin)])
+def resume(profile_id: str, request: Request, response: Response,
+           file: Annotated[UploadFile | None, File()] = None,
+           text: Annotated[str, Form(max_length=20000)] = "",
+           use_ai: Annotated[bool, Form()] = False, db: Session = Depends(get_session)):
+    owned_profile(profile_id, request, db)
+    response.headers["Cache-Control"] = "no-store"
+    if file and text or not file and not text.strip():
+        raise HTTPException(422)
+    if file:
+        try:
+            data = file.file.read(5 * 1024 * 1024 + 1)
+            text = parse_upload(data, file.filename, file.content_type)
+        except ValueError as exc:
+            raise HTTPException(413 if str(exc) == "size" else 422) from None
+        finally:
+            file.file.close()
+    return extract(text, list(db.scalars(select(Skill).order_by(Skill.id))), use_ai)
+
+
+@router.put("/{profile_id}/skills", response_model=ProfileView, dependencies=[Depends(same_origin)])
+def save(profile_id: str, body: SaveSkills, request: Request, response: Response, db: Session = Depends(get_session)):
+    profile = owned_profile(profile_id, request, db)
+    ids = [s.skill_id for s in body.skills]
+    if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
+        raise HTTPException(422)
+    db.execute(delete(ProfileSkill).where(ProfileSkill.profile_id == profile_id))
+    for skill in body.skills:
+        db.add(ProfileSkill(profile_id=profile_id, **skill.model_dump()))
+    profile.country, profile.interests, profile.confirmed = body.country, sorted(set(body.interests)), True
+    profile.updated_at = datetime.now(timezone.utc)
+    db.commit()
+    response.headers["Cache-Control"] = "no-store"
+    return view(profile, db)
+
+
+@router.get("/{profile_id}/matches", response_model=MatchesResponse)
+def matches(profile_id: str, request: Request, response: Response, db: Session = Depends(get_session)):
+    response.headers["Cache-Control"] = "no-store"
+    return match_profile(owned_profile(profile_id, request, db), db)
+
+
+@router.delete("/{profile_id}", status_code=204, dependencies=[Depends(same_origin)])
+def remove(profile_id: str, request: Request, response: Response, db: Session = Depends(get_session)):
+    profile = owned_profile(profile_id, request, db)
+    db.execute(delete(ProfileSkill).where(ProfileSkill.profile_id == profile_id))
+    owner_hash = profile.session_hash
+    db.delete(profile)
+    db.flush()
+    db.execute(delete(PrivateSession).where(PrivateSession.token_hash == owner_hash))
+    db.commit()
+    response.delete_cookie(COOKIE, path="/")

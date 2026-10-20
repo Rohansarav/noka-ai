@@ -1,0 +1,48 @@
+{
+  "phase": 3,
+  "date": "2026-10-20",
+  "database": "postgresql",
+  "migration": "0003",
+  "demo": {
+    "origin": "Noka illustrative DOCX; no real person",
+    "canonical_skills_confirmed": 9,
+    "ranked_roles": 5,
+    "gap_counts_api_test": [
+      12,
+      17,
+      15,
+      16,
+      16
+    ],
+    "api_extraction_mode": "manual_fallback",
+    "browser_extraction_mode": "local",
+    "disposable_api_profile_deleted": true,
+    "browser_profile_label": "Demo profile"
+  },
+  "public_evidence_preserved": {
+    "demand_observations": 114821,
+    "sdgs": 17
+  },
+  "qa": {
+    "widths": [
+      375,
+      768,
+      1440
+    ],
+    "horizontal_overflow": false,
+    "pages": [
+      "review skills",
+      "matches"
+    ]
+  },
+  "checks": {
+    "backend_tests_passed": 49,
+    "frontend_tests_passed": 43,
+    "typecheck": "passed",
+    "production_build": "passed"
+  },
+  "external_checks": {
+    "openai_live_call": "not tested; key absent",
+    "replit": "on hold pending credits"
+  }
+}

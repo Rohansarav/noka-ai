@@ -1,4 +1,4 @@
-"""Phase 2 public evidence graph; contains no user or resume records."""
+"""Public evidence graph and isolated private profiles; original resumes are never stored."""
 from datetime import date, datetime, timezone
 from sqlalchemy import JSON, Boolean, CheckConstraint, Date, DateTime, Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -15,6 +15,12 @@ class UTCDateTime(TypeDecorator):
 
 class Base(DeclarativeBase):
     pass
+
+
+class SchemaSmoke(Base):
+    """Retain the Phase 0 migration table in metadata so autogeneration never drops it."""
+    __tablename__ = "schema_smoke"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
 
 
 class Source(Base):
@@ -130,3 +136,28 @@ class IngestionRun(Base):
     status: Mapped[str] = mapped_column(String(20))
     row_count: Mapped[int] = mapped_column(Integer)
     message: Mapped[str] = mapped_column(Text)
+
+
+class PrivateSession(Base):
+    __tablename__ = "private_sessions"
+    token_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    expires_at: Mapped[datetime] = mapped_column(UTCDateTime)
+
+
+class Profile(Base):
+    __tablename__ = "profiles"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    session_hash: Mapped[str] = mapped_column(ForeignKey("private_sessions.token_hash"), unique=True)
+    country: Mapped[str] = mapped_column(String(2), default="MY")
+    interests: Mapped[list] = mapped_column(JSON, default=list)
+    is_demo: Mapped[bool] = mapped_column(Boolean, default=False)
+    confirmed: Mapped[bool] = mapped_column(Boolean, default=False)
+    updated_at: Mapped[datetime] = mapped_column(UTCDateTime)
+
+
+class ProfileSkill(Base):
+    __tablename__ = "profile_skills"
+    profile_id: Mapped[str] = mapped_column(ForeignKey("profiles.id"), primary_key=True)
+    skill_id: Mapped[str] = mapped_column(ForeignKey("skills.id"), primary_key=True)
+    level: Mapped[str] = mapped_column(String(16))
+    years: Mapped[float | None] = mapped_column(Float)

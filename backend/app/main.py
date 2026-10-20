@@ -14,11 +14,15 @@ from starlette.exceptions import HTTPException
 from backend.app.config import get_settings
 from backend.app.database import engine
 from backend.app.evidence_api import router as evidence_router
+from backend.app.profile_api import router as profile_router
+from backend.app.profile_security import ProfileBodyLimit
 
 DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 app = FastAPI(title="Noka API", version="0.1.0")
 logger = logging.getLogger("noka")
 app.include_router(evidence_router)
+app.include_router(profile_router)
+app.add_middleware(ProfileBodyLimit)
 if get_settings().environment == "development":
     app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], allow_methods=["GET"], allow_headers=["Content-Type"])
 
@@ -74,7 +78,7 @@ def ready():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-            if revision != "0002":
+            if revision != "0003":
                 return error(503, "schema_unavailable", "Database migrations are required.")
     except Exception:
         return error(503, "database_unavailable", "Database or migrations unavailable.")
