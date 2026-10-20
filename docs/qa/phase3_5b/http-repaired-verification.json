@@ -1,0 +1,45 @@
+{
+  "kind": "Real HTTP localhost application and live SSE with real OpenAI, no mocks",
+  "verified_at": "2026-10-20T14:30:23.839494+00:00",
+  "success": true,
+  "ready": {
+    "status": "ready",
+    "database": "connected",
+    "migration": "current",
+    "frontend": "built"
+  },
+  "acceptance_seconds": 11.507,
+  "seconds_to_sse_done": 41.78,
+  "status": "completed",
+  "error_code": null,
+  "tool_count": 1,
+  "tokens": 4366,
+  "sse_done": true,
+  "sse_matches_snapshot": true,
+  "events": [
+    {
+      "type": "queued",
+      "payload": {}
+    },
+    {
+      "type": "running",
+      "payload": {}
+    },
+    {
+      "type": "tool_completed",
+      "payload": {
+        "tool": "get_role_requirements"
+      }
+    },
+    {
+      "type": "completed",
+      "payload": {}
+    }
+  ],
+  "authoritative_checks": {
+    "requirements": true
+  },
+  "postgres_matches_api": true,
+  "universe_unchanged": true,
+  "demo_deleted": true
+}

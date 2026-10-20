@@ -19,11 +19,14 @@ AGENTS = {
 ANALYTICAL_SERVICES = {"oracle": {"executable_agent": False, "purpose": "Analytical service only"}}
 
 
-def definitions():
+def definitions(role_ids=None):
     tools = []
     for name, schema in TOOLS.items():
         parameters = schema.model_json_schema()
         parameters.setdefault("required", list(parameters["properties"]))
+        if schema is RoleArgs and role_ids is not None:
+            parameters["properties"]["role_id"]["enum"] = sorted(role_ids)
+            parameters["properties"]["role_id"]["description"] = "Bare occupation ID from this enum, without the graph's role: prefix."
         tools.append({"type": "function", "name": name, "description": name.replace("_", " ") + ". Read-only, current session only.",
                       "strict": True, "parameters": parameters})
     return tools

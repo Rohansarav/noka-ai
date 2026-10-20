@@ -31,3 +31,8 @@ class Selection(Contract):
 class EventPayload(Contract):
     tool: Literal["get_current_profile", "get_confirmed_skills", "get_ranked_matches", "get_role_requirements", "get_skill_gaps", "get_role_evidence", "get_reviewed_sdg_connections"] | None = None
     related_entity: str | None = Field(default=None, max_length=64)
+    stage: Literal["preparing", "provider_request", "provider_response", "tool_execution", "result_validation"] | None = None
+    http_status: int | None = Field(default=None, ge=100, le=599)
+    provider_code: Literal["invalid_json_schema", "invalid_function_parameters", "unsupported_parameter", "model_not_found", "insufficient_quota", "invalid_api_key", "rate_limit_exceeded", "permission_denied", "other"] | None = None
+    error_type: Literal["AttributeError", "TypeError", "ValueError", "ValidationError", "provider", "other"] | None = None
+    reason: Literal["unauthorized_tool", "invalid_reference", "parallel_calls_rejected", "unsupported_result", "unsupported_highlight"] | None = None

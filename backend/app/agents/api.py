@@ -38,6 +38,7 @@ def get(execution_id: str, request: Request, response: Response, db: Session = D
 def cancel(execution_id: str, request: Request, response: Response, db: Session = Depends(get_session)):
     owned(request, db, execution_id)
     run = locked(db, execution_id)
+    if run is None: raise HTTPException(404)
     if run.status not in TERMINAL:
         run.status = "cancelled"
         event(db, run, "cancelled")

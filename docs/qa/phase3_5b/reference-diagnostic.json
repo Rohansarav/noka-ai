@@ -1,0 +1,40 @@
+{
+  "kind": "Real diagnostic with pass-through timing observer, no mocked responses",
+  "status": "failed",
+  "error_code": "execution_validation_error",
+  "tool_count": 2,
+  "tokens": 11356,
+  "calls": [
+    {
+      "provider_seconds": 5.679,
+      "tokens": 873,
+      "calls": [
+        {
+          "tool": "get_ranked_matches",
+          "role_argument_has_graph_prefix": false
+        }
+      ]
+    },
+    {
+      "provider_seconds": 2.105,
+      "tokens": 4883,
+      "calls": [
+        {
+          "tool": "get_skill_gaps",
+          "role_argument_has_graph_prefix": false
+        }
+      ]
+    },
+    {
+      "provider_seconds": 1.799,
+      "tokens": 5600,
+      "calls": []
+    }
+  ],
+  "diagnostic": {
+    "stage": "result_validation",
+    "error_type": "ValueError",
+    "reason": "invalid_reference"
+  },
+  "cleanup": true
+}

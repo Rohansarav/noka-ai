@@ -1,5 +1,7 @@
 # Phase 3.5B — real interaction verification
 
+Latest status: subsequent repair and successful real OpenAI verification are documented in [the repair report](PHASE_3_5B_REPAIR_REPORT.md). The original findings below are historical.
+
 20 October 2026. **Real verification attempted; unsuccessful. Phase 3.5C not started.** No mocks, fake credentials, substituted provider responses, architecture changes or automated retry were used. The existing local server was restarted to load its newly configured key.
 
 | Check | Actual result |

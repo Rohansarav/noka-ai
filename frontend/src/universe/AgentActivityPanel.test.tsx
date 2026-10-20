@@ -50,6 +50,14 @@ describe('authentic agent activity',()=>{
     fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
     expect(await screen.findByRole('alert')).toHaveTextContent('ai_unavailable');expect(callback).not.toHaveBeenCalled();
   });
+  it('explains quota rejection and exposes only safe diagnostic details',async()=>{
+    status={...queued,status:'failed',error_code:'provider_quota_exceeded',events:[{sequence:1,agent:'matchmaker',type:'failed',status:'failed',at:'now',message:'AI unavailable.',payload:{stage:'provider_request',http_status:429,provider_code:'insufficient_quota'}}]};
+    render(<AgentActivityPanel graph={graph} role={role} onEffects={vi.fn()}/>);
+    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
+    expect(await screen.findByRole('alert')).toHaveTextContent('insufficient API quota');
+    fireEvent.click(screen.getByText('Failure details'));
+    expect(screen.getByText(/OpenAI HTTP 429/)).toBeVisible();
+  });
   it('cancels a queued execution',async()=>{
     render(<AgentActivityPanel graph={graph} role={role} onEffects={vi.fn()}/>);
     fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));

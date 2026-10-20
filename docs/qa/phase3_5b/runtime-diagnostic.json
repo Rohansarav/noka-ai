@@ -1,0 +1,32 @@
+{
+  "kind": "Real provider diagnostic through application ASGI; no mocks",
+  "seconds": 43.882,
+  "status": "failed",
+  "error_code": "provider_or_validation_error",
+  "tool_count": 1,
+  "token_usage": 5758,
+  "events": [
+    {
+      "type": "queued",
+      "payload": {}
+    },
+    {
+      "type": "running",
+      "payload": {}
+    },
+    {
+      "type": "tool_completed",
+      "payload": {
+        "tool": "get_ranked_matches"
+      }
+    },
+    {
+      "type": "failed",
+      "payload": {
+        "stage": "tool_execution",
+        "error_type": "ValueError"
+      }
+    }
+  ],
+  "cleanup": true
+}

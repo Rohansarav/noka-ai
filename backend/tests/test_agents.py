@@ -108,6 +108,28 @@ def test_model_can_choose_gaps_first_and_highlight_retrieved_skill(graph_env,mon
     assert value['result']['effects']['highlight_skills']==[skill]
 
 
+def test_generation_schema_uses_exact_graph_and_retrieved_references(graph_env):
+    client, engine, pid, graph, role=prepare(graph_env)
+    from backend.app.career_graph import build_career_graph
+    from backend.app.agents.registry import definitions
+    with Session(engine) as db:
+        profile=db.get(Profile,pid)
+        current=build_career_graph(profile,db)
+        initial=orchestrator.selection_schema(current,role,{})['properties']
+        assert initial['focus_role']['enum']==['role:'+role]
+        assert initial['highlight_skills']['maxItems']==0
+        assert initial['open_evidence']=={'type':'null'}
+        gaps=invoke('get_skill_gaps',json.dumps({'role_id':role}),profile,db,{role})
+        constrained=orchestrator.selection_schema(current,role,{('get_skill_gaps',role):gaps})['properties']
+        assert constrained['sections']['items']['enum']==['gaps']
+        allowed={n.id for n in current.nodes if n.type in {'owned_skill','required_skill'}}
+        assert set(constrained['highlight_skills']['items']['enum']) <= allowed
+        assert set(constrained['highlight_skills']['items']['enum']) <= {'skill:'+g['skill_id'] for g in gaps}
+    for tool in definitions({role}):
+        if 'role_id' in tool['parameters']['properties']:
+            assert tool['parameters']['properties']['role_id']['enum']==[role]
+
+
 @pytest.mark.parametrize('tool,args', [('delete_profile',{}),('get_current_profile',{'profile_id':'other'}),('get_role_requirements',{'role_id':'other'}),('get_ranked_matches',{'extra':True})])
 def test_reject_unauthorized_tool_and_args(graph_env,monkeypatch,tool,args):
     client, engine, pid, graph, role = prepare(graph_env)
@@ -209,3 +231,11 @@ def test_cancellation_wins_over_inflight_provider(graph_env,monkeypatch):
     rid=start(client,role).json()['id']
     value=client.get(BASE+'/'+rid).json()
     assert value['status']=='cancelled' and value['result'] is None
+
+
+def test_cancel_handles_execution_removed_before_lock(graph_env,monkeypatch):
+    client, engine, pid, graph, role=prepare(graph_env)
+    monkeypatch.setattr(api,'execute',lambda *args:None)
+    rid=start(client,role).json()['id']
+    monkeypatch.setattr(api,'locked',lambda *args:None)
+    assert client.post(BASE+'/'+rid+'/cancel',headers=HEADERS).status_code==404

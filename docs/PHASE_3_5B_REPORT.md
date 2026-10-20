@@ -1,5 +1,7 @@
 # Phase 3.5B — Agent execution, live activity and Universe enhancements
 
+Latest status: subsequent repair and successful real OpenAI verification are documented in [the repair report](PHASE_3_5B_REPAIR_REPORT.md). The original findings below are historical.
+
 20 October 2026. Implemented Phase 3.5B only. Local app: http://localhost:8000/universe. Replit publishing remains on hold pending owner credits. No Phase 3.5C work, GPU job, search-provider request or deployment was performed.
 
 ## Outcome and verification boundary

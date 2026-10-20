@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '../components';
-import { agentRequest, validEffects, type Execution, type Effects } from './agent-api';
+import { agentRequest, executionFailure, validEffects, type Execution, type Effects } from './agent-api';
 import type { CareerGraphData, CareerNode } from './universe-types';
 
 const terminal = (status: string) => ['completed','failed','cancelled'].includes(status);
@@ -58,7 +58,7 @@ export default function AgentActivityPanel({graph, role, onEffects}: {graph: Car
     <div role="status" aria-live="polite">{run ? `Matchmaker: ${run.status.replaceAll('_',' ')}${run.events.at(-1) ? '. '+run.events.at(-1)!.message : ''}` : ''}</div>
     {run && !terminal(run.status) && <Button className="button-secondary" onClick={() => void cancel()}>Cancel exploration</Button>}
     {error && <p role="alert">{error}</p>}
-    {run?.status === 'failed' && <p role="alert">AI exploration is unavailable ({run.error_code}). Your skill matches and evidence remain available.</p>}
+    {run?.status === 'failed' && <><p role="alert">{executionFailure(run.error_code)} ({run.error_code}). Your skill matches and evidence remain available.</p>{run.events.at(-1)?.payload.stage && <details><summary>Failure details</summary><p>Step: {run.events.at(-1)!.payload.stage}{run.events.at(-1)!.payload.http_status ? ` · OpenAI HTTP ${run.events.at(-1)!.payload.http_status}` : ''}{run.events.at(-1)!.payload.provider_code ? ` · ${run.events.at(-1)!.payload.provider_code}` : ''}{run.events.at(-1)!.payload.reason ? ` · ${run.events.at(-1)!.payload.reason}` : ''}</p></details>}</>}
     {run?.status === 'cancelled' && <p>Exploration cancelled. Your profile is unchanged.</p>}
     {run && <details open={expanded} onToggle={e => setExpanded(e.currentTarget.open)}><summary>Execution activity · {run.events.length} recorded events</summary><ol>{run.events.map(e => <li key={e.sequence}><strong>{e.agent}</strong> · {e.message} {e.payload.tool && <code>{e.payload.tool}</code>}{e.payload.related_entity && graph.nodes.some(n=>n.id===e.payload.related_entity) && <button className="text-link" onClick={()=>onEffects({focus_role:e.payload.related_entity!,highlight_skills:[],open_evidence:null})}>View role</button>}</li>)}</ol></details>}
     {run?.result && <div className="agent-result"><h3>Exploration of {contextLabel}</h3><p>{run.result.notice}</p>{run.result.sections.map((section, i) => <EvidenceSection key={i} kind={section.kind} data={section.data}/>)}{(() => {const effects = validEffects(run.result, graph); const source = effects?.open_evidence ? graph.sources.find(s=>s.id===effects.open_evidence) : null; return source ? <a className="text-link" href={source.canonical_url} target="_blank" rel="noreferrer">Open cited evidence</a> : null;})()}</div>}

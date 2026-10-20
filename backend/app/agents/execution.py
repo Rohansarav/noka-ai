@@ -9,7 +9,7 @@ from backend.app.config import get_settings
 from backend.app.agents.contracts import EventPayload
 
 TERMINAL = {"completed", "failed", "cancelled"}
-MESSAGES = {"queued": "Matchmaker request accepted.", "running": "Matchmaker connected to the execution service.",
+MESSAGES = {"queued": "Matchmaker request accepted.", "running": "Matchmaker worker started.",
             "tool_completed": "Read-only tool completed.", "completed": "Evidence-backed exploration ready.",
             "failed": "AI exploration unavailable. Your deterministic Universe remains available.", "cancelled": "Exploration cancelled."}
 
@@ -17,7 +17,7 @@ MESSAGES = {"queued": "Matchmaker request accepted.", "running": "Matchmaker con
 def now(): return datetime.now(timezone.utc)
 
 
-def locked(db, execution_id):
+def locked(db, execution_id) -> AgentExecution | None:
     # An UPDATE acquires a write lock on both PostgreSQL and SQLite before event allocation.
     db.execute(update(AgentExecution).where(AgentExecution.id == execution_id).values(event_sequence=AgentExecution.event_sequence))
     return db.scalar(select(AgentExecution).where(AgentExecution.id == execution_id).execution_options(populate_existing=True))
@@ -42,14 +42,15 @@ def recover(db):
     db.commit()
 
 
-def owner_profile(request, db):
+def owner_profile(request, db) -> tuple[PrivateSession, Profile]:
     owner = active_session(request, db)
-    profile = db.scalar(select(Profile).where(Profile.session_hash == owner.token_hash)) if owner else None
+    if owner is None: raise HTTPException(404)
+    profile = db.scalar(select(Profile).where(Profile.session_hash == owner.token_hash))
     if not profile: raise HTTPException(404)
     return owner, profile
 
 
-def owned(request, db, execution_id):
+def owned(request, db, execution_id) -> AgentExecution:
     owner, _ = owner_profile(request, db)
     run = db.get(AgentExecution, execution_id)
     if not run or run.session_hash != owner.token_hash: raise HTTPException(404)

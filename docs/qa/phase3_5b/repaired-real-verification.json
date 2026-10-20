@@ -1,0 +1,101 @@
+{
+  "verified_at": "2026-10-20T14:24:54.604109+00:00",
+  "kind": "Real OpenAI Responses through existing application ASGI; timing observer passes all inputs/outputs unchanged; no mocked responses",
+  "success": true,
+  "observed_seconds": 61.247,
+  "status": "completed",
+  "error_code": null,
+  "tool_count": 3,
+  "recorded_tokens": 21748,
+  "provider_roundtrips": [
+    {
+      "seconds": 5.875,
+      "tokens": 1031,
+      "tools": [
+        "get_ranked_matches"
+      ]
+    },
+    {
+      "seconds": 1.442,
+      "tokens": 5030,
+      "tools": [
+        "get_skill_gaps"
+      ]
+    },
+    {
+      "seconds": 1.431,
+      "tokens": 5772,
+      "tools": [
+        "get_ranked_matches"
+      ]
+    },
+    {
+      "seconds": 3.112,
+      "tokens": 9915,
+      "tools": []
+    }
+  ],
+  "events": [
+    {
+      "sequence": 1,
+      "type": "queued",
+      "payload": {}
+    },
+    {
+      "sequence": 2,
+      "type": "running",
+      "payload": {}
+    },
+    {
+      "sequence": 3,
+      "type": "tool_completed",
+      "payload": {
+        "tool": "get_ranked_matches"
+      }
+    },
+    {
+      "sequence": 4,
+      "type": "tool_completed",
+      "payload": {
+        "tool": "get_skill_gaps"
+      }
+    },
+    {
+      "sequence": 5,
+      "type": "tool_completed",
+      "payload": {
+        "tool": "get_ranked_matches"
+      }
+    },
+    {
+      "sequence": 6,
+      "type": "completed",
+      "payload": {}
+    }
+  ],
+  "authoritative_checks": {
+    "fit": true,
+    "gaps": true,
+    "focus_role": true,
+    "skills_in_graph": true
+  },
+  "postgres_persisted": true,
+  "persisted_event_sequences": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "sse_matches_persisted_events": true,
+  "sse_done": true,
+  "foreign_read_status": 404,
+  "foreign_sse_status": 404,
+  "universe_unchanged": true,
+  "demo_deleted": true,
+  "execution_deleted": true,
+  "model": "gpt-4.1-mini",
+  "official_https_openai_endpoint": true,
+  "total_observed_provider_seconds": 11.86
+}
