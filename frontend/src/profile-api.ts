@@ -18,5 +18,6 @@ export async function profileRequest<T>(path: string, method = 'GET', body?: unk
   return response.status === 204 ? undefined as T : await response.json() as T;
 }
 export function useProfile() {
-  return useQuery({ queryKey: ['private-profile'], queryFn: () => profileRequest<{ profile: Profile | null }>('/current'), retry: false });
+  const query = useQuery({ queryKey: ['private-profile'], queryFn: () => profileRequest<{ profile: Profile | null }>('/current'), retry: false });
+  return { ...query, journeyPath: query.data?.profile?.confirmed ? '/universe' : '/profile/intake' };
 }

@@ -1,0 +1,33 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight, Compass, ExternalLink } from 'lucide-react';
+import { Badge, Button, ProgressBar } from '../components';
+import type { CareerGraphData, CareerNode } from './universe-types';
+
+export default function CareerDetailPanel({ graph, node }: { graph: CareerGraphData; node: CareerNode | null }) {
+  const byId = new Map(graph.nodes.map(n => [n.id, n]));
+  const connections = node ? graph.edges.filter(e => e.source === node.id || e.target === node.id) : [];
+  const requirements = connections.filter(e => e.type === 'requires_skill');
+  const targetIds = new Set(connections.filter(e => e.type === 'target_belongs_to_goal').map(e => e.source));
+  const sdgLinks = graph.edges.filter(e => e.type === 'contributes_to_target' && (e.source === node?.id || e.target === node?.id || targetIds.has(e.target)));
+  const sourceIds = new Set([...(node?.source_ids ?? []), ...connections.flatMap(e => e.source_ids), ...sdgLinks.flatMap(e => e.source_ids)]);
+  return <aside id="universe-details" className="universe-detail-panel" aria-label="Selected connection details" tabIndex={-1}>
+    {!node ? <><span className="feature-icon mint"><Compass size={25}/></span><p className="eyebrow">ROOM TO EXPLORE</p><h2>Follow your curiosity.</h2><p>Select a career to see the strengths you bring and the skills you could build.</p><div className="universe-detail-note">Every line has a reason.<br/><span>Connections come from your reviewed profile, O*NET requirements and reviewed SDG records.</span></div><h3>A guide, not a prediction</h3><p>Skill fit is a transparent heuristic. No live signals, forecasts or agents are running here.</p><Button asChild className="button-secondary"><Link to="/matches">See full Role Matches <ArrowRight size={15}/></Link></Button></> : <>
+      <div className="universe-detail-heading" aria-live="polite"><Badge tone={node.type === 'required_skill' ? 'warning' : 'mint'}>{node.type.replaceAll('_', ' ')}</Badge><h2>{node.label}</h2></div>
+      <p>{node.description}</p>
+      {node.type === 'profile' && <><p><strong>{node.skill_count} confirmed skills</strong> · {node.country} preference</p>{node.is_demo && <Badge tone="warning">Demo profile · illustrative experience</Badge>}<p>Levels are self-reported. Only confirmed fields appear here.</p><Link className="text-link" to="/profile">View or edit my profile <ArrowRight size={15}/></Link></>}
+      {node.type === 'role' && <><div className="universe-detail-score"><strong>{node.score}</strong><span>/ 100 heuristic skill fit</span></div><ProgressBar label="Weighted skill coverage" value={node.coverage ?? 0}/><p>{node.explanation}</p><p className="caption">Occupation geography: {node.country}. Curation: {node.review_status?.replaceAll('_', ' ')}.</p><h3>Requirements in this view</h3></>}
+      {(node.type === 'owned_skill' || node.type === 'required_skill') && <><p>{node.level ? <><strong className="skill-level">{node.level}</strong> · self-reported{node.years !== null ? ` · ${node.years} years` : ''}</> : 'Not recorded in your confirmed profile. This is a requirement of a displayed role.'}</p><h3>Relevant career requirements</h3></>}
+      {requirements.length > 0 && <ul className="universe-requirements">{requirements.map(edge => {
+        const other = byId.get(edge.source === node!.id ? edge.target : edge.source);
+        return <li key={edge.id}><strong>{other?.label}</strong><span>O*NET importance {edge.importance}/5{edge.critical ? ' · critical requirement' : ''}</span><span className={edge.gap ? 'requirement-gap' : ''}>{edge.gap === 1 ? 'Not recorded · 100% proficiency gap' : edge.gap ? `Partial · ${Math.round(edge.gap * 100)}% proficiency gap` : 'Covered at your self-rated level'}</span></li>;
+      })}</ul>}
+      {requirements.length === 0 && (node.type === 'owned_skill' || node.type === 'required_skill') && <p>No important requirement for this skill among the three displayed roles. It remains part of your profile.</p>}
+      {sdgLinks.length > 0 && <><h3>Reviewed relevance</h3>{sdgLinks.map(edge => <div className="universe-sdg-rationale" key={edge.id}><strong>{byId.get(edge.source)?.label} → {byId.get(edge.target)?.label}</strong><Badge tone="mint">Human reviewed</Badge><p>{edge.rationale}</p><p className="caption">{byId.get(edge.target)?.description}</p></div>)}<p className="caption">Contextual relevance only. No measured impact or UN endorsement is claimed.</p></>}
+      {node.type === 'sdg_target' && <Link className="text-link" to="/sdgs">Explore official targets <ArrowRight size={15}/></Link>}
+      {node.type === 'sdg' && <a className="text-link" href={`https://sdgs.un.org/goals/goal${node.goal_id}`} target="_blank" rel="noreferrer">Official goal <ExternalLink size={14}/></a>}
+      {node.type === 'role' && <div className="universe-detail-links"><Link className="text-link" to="/matches">Full Role Matches <ArrowRight size={15}/></Link><Link className="text-link" to="/roles">Role catalogue & evidence <ArrowRight size={15}/></Link></div>}
+      {node.type === 'role' && <details className="universe-method"><summary>Skill-fit methodology</summary><p>{graph.methodology}</p></details>}
+      {sourceIds.size > 0 && <details className="universe-method"><summary>Supporting sources</summary><ul>{graph.sources.filter(s => sourceIds.has(s.id)).map(source => <li key={source.id}><a href={source.canonical_url} target="_blank" rel="noreferrer">{source.title} <ExternalLink size={12}/></a><span>{source.publisher} · {source.version}</span></li>)}</ul></details>}
+    </>}
+  </aside>;
+}

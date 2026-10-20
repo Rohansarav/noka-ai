@@ -100,3 +100,9 @@ At 375px, 768px and 1440px viewport widths, inspect `/`, `/design-preview`, `/pr
 Run `uv sync --frozen`, `uv run alembic upgrade head`, `pnpm build`, then `uv run python scripts/start.py`. Use `data/demo/demo_cv.docx` with the **Demo profile** checkbox for a labelled sample, or enter manual skills. Originals and excerpts are not retained; session-owned confirmed skills/preferences are stored. An optional OpenAI key enables opt-in structured extraction; local/manual fallback works without it. Never place credentials in `.env.example`. Set `PUBLIC_ORIGIN` to the exact HTTPS production origin when publishing. Replit remains on hold pending credits.
 
 See [Phase 3 report](docs/PHASE_3_REPORT.md) for endpoint contracts, privacy/retention details, formula and weights, tests, screenshots, commands and limitations.
+
+## Phase 3.5A Career Universe
+
+Open `/universe` or **My Universe** to explore your confirmed skills, the top three deterministic role matches, priority role-specific gaps and supported human-reviewed SDG connections. The canvas has pan/zoom, filters, focus/reset and detail panels; a list provides access without the canvas. Build My Future now opens Universe for a confirmed profile and intake otherwise. Existing routes remain available.
+
+The session-owned, read-only `GET /api/profiles/current/career-graph` aggregates existing records and the unchanged matcher. No schema migration, agent, forecast, search provider or extra API key is required. After pulling, run `pnpm install --frozen-lockfile`, `pnpm build`, and start the existing server. See [Phase 3.5A report](docs/PHASE_3_5A_REPORT.md) for contracts, exact bounds, response example and verification. Replit publishing remains on hold pending credits.

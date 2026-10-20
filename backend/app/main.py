@@ -16,11 +16,13 @@ from backend.app.database import engine
 from backend.app.evidence_api import router as evidence_router
 from backend.app.profile_api import router as profile_router
 from backend.app.profile_security import ProfileBodyLimit
+from backend.app.career_graph_api import router as career_graph_router
 
 DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 app = FastAPI(title="Noka API", version="0.1.0")
 logger = logging.getLogger("noka")
 app.include_router(evidence_router)
+app.include_router(career_graph_router)
 app.include_router(profile_router)
 app.add_middleware(ProfileBodyLimit)
 if get_settings().environment == "development":

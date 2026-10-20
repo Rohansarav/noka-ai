@@ -1,0 +1,23 @@
+{
+  "database": "postgresql",
+  "profile_origin": "Disposable labelled manual Demo profile; no real person",
+  "confirmed_skill_count": 6,
+  "nodes": 20,
+  "edges": 47,
+  "role_scores_equal_existing_matcher": true,
+  "reviewed_sdg_links": 3,
+  "public_counts": {
+    "roles": 25,
+    "skills": 35,
+    "role_skills": 875,
+    "job_demand_observations": 114821,
+    "sdgs": 17,
+    "sdg_targets": 169,
+    "sdg_links": 7
+  },
+  "public_date_range": [
+    "2020-02-01",
+    "2026-10-09"
+  ],
+  "response_cache_control": "no-store"
+}

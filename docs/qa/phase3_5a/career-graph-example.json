@@ -1,0 +1,1184 @@
+{
+  "status": "ready",
+  "profile_revision": "2026-10-20T09:32:02.266924+00:00",
+  "generated_at": "2026-10-20T09:32:12.034803Z",
+  "nodes": [
+    {
+      "id": "profile:demo-profile",
+      "type": "profile",
+      "entity_id": "demo-profile",
+      "label": "Demo profile",
+      "description": "Your confirmed strengths and preferences",
+      "source_ids": [],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": 6,
+      "country": "MY",
+      "is_demo": true,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "role:15-1242.00",
+      "type": "role",
+      "entity_id": "15-1242.00",
+      "label": "Database Administrators",
+      "description": "Administer, test, and implement computer databases, applying knowledge of database management systems. Coordinate changes to computer databases. Identify, investigate, and resolve database performance issues, database capacity, and database scalability. May plan, coordinate, and implement security measures to safeguard computer databases.",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041",
+        "97e809f3a7845d2014717bcf775735de7347f0ce",
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": "human_reviewed",
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": "US",
+      "is_demo": false,
+      "score": 19.4,
+      "coverage": 19.4,
+      "explanation": "Your self-rated skills cover 19% of weighted requirements across 17 important skills. Selected-role interest adds 0 points. Transferable skills are included once in coverage, with a separate breakdown. Years are not scored because role experience thresholds are unavailable.",
+      "goal_id": null
+    },
+    {
+      "id": "role:15-2051.00",
+      "type": "role",
+      "entity_id": "15-2051.00",
+      "label": "Data Scientists",
+      "description": "Develop and implement a set of techniques or analytics applications to transform raw data into meaningful information using data-oriented programming languages and visualization software. Apply data mining, data modeling, natural language processing, and machine learning to extract and analyze information from large structured and unstructured datasets. Visualize, interpret, and report data findings. May create dynamic data reports.",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041",
+        "97e809f3a7845d2014717bcf775735de7347f0ce",
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": "human_reviewed",
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": "US",
+      "is_demo": false,
+      "score": 22.4,
+      "coverage": 22.4,
+      "explanation": "Your self-rated skills cover 22% of weighted requirements across 12 important skills. Selected-role interest adds 0 points. Transferable skills are included once in coverage, with a separate breakdown. Years are not scored because role experience thresholds are unavailable.",
+      "goal_id": null
+    },
+    {
+      "id": "role:17-2199.11",
+      "type": "role",
+      "entity_id": "17-2199.11",
+      "label": "Solar Energy Systems Engineers",
+      "description": "Perform site-specific engineering analysis or evaluation of energy efficiency and solar projects involving residential, commercial, or industrial customers. Design solar domestic hot water and space heating systems for new and existing structures, applying knowledge of structural energy requirements, local climates, solar technology, and thermodynamics.",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041",
+        "97e809f3a7845d2014717bcf775735de7347f0ce",
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": "human_reviewed",
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": "US",
+      "is_demo": false,
+      "score": 19.5,
+      "coverage": 19.5,
+      "explanation": "Your self-rated skills cover 20% of weighted requirements across 17 important skills. Selected-role interest adds 0 points. Transferable skills are included once in coverage, with a separate breakdown. Years are not scored because role experience thresholds are unavailable.",
+      "goal_id": null
+    },
+    {
+      "id": "sdg:4",
+      "type": "sdg",
+      "entity_id": "4",
+      "label": "Goal 4",
+      "description": "Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 4
+    },
+    {
+      "id": "sdg:7",
+      "type": "sdg",
+      "entity_id": "7",
+      "label": "Goal 7",
+      "description": "Ensure access to affordable, reliable, sustainable and modern energy for all",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 7
+    },
+    {
+      "id": "sdg:9",
+      "type": "sdg",
+      "entity_id": "9",
+      "label": "Goal 9",
+      "description": "Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 9
+    },
+    {
+      "id": "sdg_target:4.4",
+      "type": "sdg_target",
+      "entity_id": "4.4",
+      "label": "Target 4.4",
+      "description": "By 2030, substantially increase the number of youth and adults who have relevant skills, including technical and vocational skills, for employment, decent jobs and entrepreneurship",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 4
+    },
+    {
+      "id": "sdg_target:7.2",
+      "type": "sdg_target",
+      "entity_id": "7.2",
+      "label": "Target 7.2",
+      "description": "By 2030, increase substantially the share of renewable energy in the global energy mix",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 7
+    },
+    {
+      "id": "sdg_target:9.5",
+      "type": "sdg_target",
+      "entity_id": "9.5",
+      "label": "Target 9.5",
+      "description": "Enhance scientific research, upgrade the technological capabilities of industrial sectors in all countries, in particular developing countries, including, by 2030, encouraging innovation and substantially increasing the number of research and development workers per 1 million people and public and private research and development spending",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": 9
+    },
+    {
+      "id": "skill:2.A.1.a",
+      "type": "required_skill",
+      "entity_id": "2.A.1.a",
+      "label": "Reading Comprehension",
+      "description": "A displayed role's priority requirement",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.1.b",
+      "type": "required_skill",
+      "entity_id": "2.A.1.b",
+      "label": "Active Listening",
+      "description": "A displayed role's priority requirement",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.1.c",
+      "type": "owned_skill",
+      "entity_id": "2.A.1.c",
+      "label": "Writing",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.1.e",
+      "type": "required_skill",
+      "entity_id": "2.A.1.e",
+      "label": "Mathematics",
+      "description": "A displayed role's priority requirement",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.1.f",
+      "type": "owned_skill",
+      "entity_id": "2.A.1.f",
+      "label": "Science",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.2.a",
+      "type": "owned_skill",
+      "entity_id": "2.A.2.a",
+      "label": "Critical Thinking",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.A.2.b",
+      "type": "owned_skill",
+      "entity_id": "2.A.2.b",
+      "label": "Active Learning",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.B.1.e",
+      "type": "owned_skill",
+      "entity_id": "2.B.1.e",
+      "label": "Instructing",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.B.2.i",
+      "type": "required_skill",
+      "entity_id": "2.B.2.i",
+      "label": "Complex Problem Solving",
+      "description": "A displayed role's priority requirement",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "review_status": null,
+      "level": null,
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    },
+    {
+      "id": "skill:2.B.3.e",
+      "type": "owned_skill",
+      "entity_id": "2.B.3.e",
+      "label": "Programming",
+      "description": "Confirmed, self-reported skill",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "review_status": null,
+      "level": "working",
+      "years": null,
+      "skill_count": null,
+      "country": null,
+      "is_demo": false,
+      "score": null,
+      "coverage": null,
+      "explanation": null,
+      "goal_id": null
+    }
+  ],
+  "edges": [
+    {
+      "id": "contributes_to_target:2e99628812b6fce903beaf2ac152fd2a02e7b225",
+      "type": "contributes_to_target",
+      "source": "role:17-2199.11",
+      "target": "sdg_target:7.2",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": "human_reviewed",
+      "rationale": "Solar energy system design can support renewable-energy deployment, relevant to target 7.2. Employment alone does not prove a contribution.",
+      "supporting_id": "2e99628812b6fce903beaf2ac152fd2a02e7b225"
+    },
+    {
+      "id": "contributes_to_target:a69baef32dfef78fd4a8cff8aa785eba3afaa5c0",
+      "type": "contributes_to_target",
+      "source": "skill:2.A.1.f",
+      "target": "sdg_target:9.5",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": "human_reviewed",
+      "rationale": "Scientific methods can support research capability relevant to target 9.5 when applied in research and innovation contexts.",
+      "supporting_id": "a69baef32dfef78fd4a8cff8aa785eba3afaa5c0"
+    },
+    {
+      "id": "contributes_to_target:e34d8c805c21eb3887e35bb97ab6efd2ba53fdf6",
+      "type": "contributes_to_target",
+      "source": "skill:2.B.1.e",
+      "target": "sdg_target:4.4",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": "human_reviewed",
+      "rationale": "Instructing can enable technical and vocational skills development described in target 4.4 when used in relevant training.",
+      "supporting_id": "e34d8c805c21eb3887e35bb97ab6efd2ba53fdf6"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.A.1.c",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.A.1.c",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.A.1.c"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.A.1.f",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.A.1.f",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.A.1.f"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.A.2.a",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.A.2.a",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.A.2.a"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.A.2.b",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.A.2.b",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.A.2.b"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.B.1.e",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.B.1.e",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.B.1.e"
+    },
+    {
+      "id": "has_skill:profile:demo-profile:skill:2.B.3.e",
+      "type": "has_skill",
+      "source": "profile:demo-profile",
+      "target": "skill:2.B.3.e",
+      "source_ids": [],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "demo-profile:2.B.3.e"
+    },
+    {
+      "id": "missing_skill:role:15-1242.00:skill:2.A.1.b",
+      "type": "missing_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.1.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.75,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.1.b"
+    },
+    {
+      "id": "missing_skill:role:15-1242.00:skill:2.A.2.a",
+      "type": "missing_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.88,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.2.a"
+    },
+    {
+      "id": "missing_skill:role:15-1242.00:skill:2.B.2.i",
+      "type": "missing_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.B.2.i",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.B.2.i"
+    },
+    {
+      "id": "missing_skill:role:15-2051.00:skill:2.A.1.a",
+      "type": "missing_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.a"
+    },
+    {
+      "id": "missing_skill:role:15-2051.00:skill:2.A.1.e",
+      "type": "missing_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.e",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.38,
+      "gap": 1.0,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.e"
+    },
+    {
+      "id": "missing_skill:role:15-2051.00:skill:2.A.2.a",
+      "type": "missing_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.25,
+      "gap": 0.35,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.2.a"
+    },
+    {
+      "id": "missing_skill:role:17-2199.11:skill:2.A.1.a",
+      "type": "missing_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.0,
+      "gap": 1.0,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.a"
+    },
+    {
+      "id": "missing_skill:role:17-2199.11:skill:2.A.2.a",
+      "type": "missing_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.0,
+      "gap": 0.35,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.2.a"
+    },
+    {
+      "id": "missing_skill:role:17-2199.11:skill:2.B.2.i",
+      "type": "missing_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.B.2.i",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.B.2.i"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.1.a",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.1.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.75,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.1.a"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.1.b",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.1.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.75,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.1.b"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.1.c",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.1.c",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.25,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.1.c"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.1.e",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.1.e",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.0,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.1.e"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.2.a",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.88,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.2.a"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.A.2.b",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.A.2.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.5,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.A.2.b"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.B.1.e",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.B.1.e",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.0,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.B.1.e"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.B.2.i",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.B.2.i",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.B.2.i"
+    },
+    {
+      "id": "requires_skill:role:15-1242.00:skill:2.B.3.e",
+      "type": "requires_skill",
+      "source": "role:15-1242.00",
+      "target": "skill:2.B.3.e",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.38,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-1242.00:2.B.3.e"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.1.a",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.a"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.1.b",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.5,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.b"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.1.c",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.c",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.5,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.c"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.1.e",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.1.e",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.38,
+      "gap": 1.0,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.1.e"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.2.a",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.25,
+      "gap": 0.35,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.2.a"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.A.2.b",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.A.2.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.62,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.A.2.b"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.B.2.i",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.B.2.i",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.75,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.B.2.i"
+    },
+    {
+      "id": "requires_skill:role:15-2051.00:skill:2.B.3.e",
+      "type": "requires_skill",
+      "source": "role:15-2051.00",
+      "target": "skill:2.B.3.e",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.75,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "15-2051.00:2.B.3.e"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.1.a",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.0,
+      "gap": 1.0,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.a"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.1.b",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.75,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.b"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.1.c",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.c",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.88,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.c"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.1.e",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.e",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.38,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.e"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.1.f",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.1.f",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.25,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.1.f"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.2.a",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.2.a",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 4.0,
+      "gap": 0.35,
+      "critical": true,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.2.a"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.A.2.b",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.A.2.b",
+      "source_ids": [
+        "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd"
+      ],
+      "importance": 3.25,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.A.2.b"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.B.1.e",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.B.1.e",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.0,
+      "gap": 0.35,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.B.1.e"
+    },
+    {
+      "id": "requires_skill:role:17-2199.11:skill:2.B.2.i",
+      "type": "requires_skill",
+      "source": "role:17-2199.11",
+      "target": "skill:2.B.2.i",
+      "source_ids": [
+        "96c43eefd7f161caac3d4c2db1719f7433678041"
+      ],
+      "importance": 3.88,
+      "gap": 1.0,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "17-2199.11:2.B.2.i"
+    },
+    {
+      "id": "target_belongs_to_goal:4.4",
+      "type": "target_belongs_to_goal",
+      "source": "sdg_target:4.4",
+      "target": "sdg:4",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "4.4"
+    },
+    {
+      "id": "target_belongs_to_goal:7.2",
+      "type": "target_belongs_to_goal",
+      "source": "sdg_target:7.2",
+      "target": "sdg:7",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "7.2"
+    },
+    {
+      "id": "target_belongs_to_goal:9.5",
+      "type": "target_belongs_to_goal",
+      "source": "sdg_target:9.5",
+      "target": "sdg:9",
+      "source_ids": [
+        "0e1ab354ace6a87a24c638b2f1d51eba2b58083f"
+      ],
+      "importance": null,
+      "gap": null,
+      "critical": false,
+      "review_status": null,
+      "rationale": null,
+      "supporting_id": "9.5"
+    }
+  ],
+  "sources": [
+    {
+      "id": "0e1ab354ace6a87a24c638b2f1d51eba2b58083f",
+      "dataset": "un-sdgs",
+      "title": "Official UN SDG goals and targets",
+      "canonical_url": "https://sdgs.un.org/goals",
+      "file_url": "https://unstats.un.org/SDGAPI/v1/sdg/Goal/List?includechildren=true",
+      "publisher": "United Nations Statistics Division",
+      "publication_date": "2015-09-25",
+      "retrieved_at": "2026-10-20T03:49:55.530892Z",
+      "version": "API snapshot aa66ad325ce8",
+      "sha256": "aa66ad325ce809cb8e1df3afa698579b7d9d3611000842b6bf4a45ca0a4aeda8",
+      "license": "UN terms of use; no CC licence asserted",
+      "license_url": "https://www.un.org/en/about-us/terms-of-use",
+      "geography": "Global",
+      "granularity": "17 goals / 169 targets",
+      "notes": "Official API title fields are retained verbatim; nested indicator/series data is not imported. Original agenda adoption date is distinct from API retrieval date. Reference-only UN text; no UN logos or endorsement. Review UN terms before commercial redistribution."
+    },
+    {
+      "id": "96c43eefd7f161caac3d4c2db1719f7433678041",
+      "dataset": "onet-transferable",
+      "title": "O*NET 31.0 transferable skills",
+      "canonical_url": "https://www.onetcenter.org/database.html",
+      "file_url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/transferable_skills.csv",
+      "publisher": "USDOL/ETA, National Center for O*NET Development",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:52:00.222889Z",
+      "version": "31.0",
+      "sha256": "f17d0419e818a3bf2f55076510c76c4aef01cc8f5aee2670d2f44f6f44ac60f7",
+      "license": "CC BY 4.0",
+      "license_url": "https://www.onetcenter.org/license_db.html",
+      "geography": "US",
+      "granularity": "occupation / skill",
+      "notes": "Noka selected 25 occupations; importance uses original 1\u20135 IM scale, not skill-demand probabilities. Empty aliases mean no verified aliases imported. Crosswalk/SDG additions are Noka judgements; USDOL/ETA has not endorsed these modifications."
+    },
+    {
+      "id": "97e809f3a7845d2014717bcf775735de7347f0ce",
+      "dataset": "onet-occupations",
+      "title": "O*NET 31.0 occupations",
+      "canonical_url": "https://www.onetcenter.org/database.html",
+      "file_url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/occupation_data.csv",
+      "publisher": "USDOL/ETA, National Center for O*NET Development",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:50:00.204013Z",
+      "version": "31.0",
+      "sha256": "a09eae1d6609686e44e05b7290993a1c8b523d8ca224bc0eedc194c855c3ee02",
+      "license": "CC BY 4.0",
+      "license_url": "https://www.onetcenter.org/license_db.html",
+      "geography": "US",
+      "granularity": "occupation / skill",
+      "notes": "Noka selected 25 occupations; importance uses original 1\u20135 IM scale, not skill-demand probabilities. Empty aliases mean no verified aliases imported. Crosswalk/SDG additions are Noka judgements; USDOL/ETA has not endorsed these modifications."
+    },
+    {
+      "id": "9dd19c2637a1cfd0a0ed99c1e115a4e87910e1dd",
+      "dataset": "onet-essential",
+      "title": "O*NET 31.0 essential skills",
+      "canonical_url": "https://www.onetcenter.org/database.html",
+      "file_url": "https://www.onetcenter.org/dl_files/database/db_31_0_csv/essential_skills.csv",
+      "publisher": "USDOL/ETA, National Center for O*NET Development",
+      "publication_date": null,
+      "retrieved_at": "2026-10-20T03:50:18.420124Z",
+      "version": "31.0",
+      "sha256": "68c4d31d8c55077238395dca40cc4e6d32e6a608b5474bb8264b1f98ae415bd7",
+      "license": "CC BY 4.0",
+      "license_url": "https://www.onetcenter.org/license_db.html",
+      "geography": "US",
+      "granularity": "occupation / skill",
+      "notes": "Noka selected 25 occupations; importance uses original 1\u20135 IM scale, not skill-demand probabilities. Empty aliases mean no verified aliases imported. Crosswalk/SDG additions are Noka judgements; USDOL/ETA has not endorsed these modifications."
+    }
+  ],
+  "methodology": "Skill coverage = sum(O*NET importance \u00d7 self-rated level) / sum(importance), using role skills rated at least 3 of 5. Levels: learning 0.25, working 0.65, strong 1.0. Score = min(100, coverage \u00d7 100 + 5 for a selected role interest). Requires 3 confirmed skills. Years and location do not alter the score. This is a heuristic, not a probability or forecast. Critical gaps have importance \u22654.",
+  "limitations": [
+    "Skill fit is the existing heuristic, not a forecast, hiring probability or local vacancy claim.",
+    "US O*NET requirements describe occupations; your preferred location does not establish local demand.",
+    "Showing up to 3 roles, 3 priority gaps per role and 6 reviewed SDG links. Other relationships may exist.",
+    "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
+    "No AI agents, AI signals or forecasts are connected to this view."
+  ]
+}
