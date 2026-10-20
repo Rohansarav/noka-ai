@@ -39,15 +39,15 @@ def same_origin(request: Request):
 
 
 class ProfileBodyLimit:
-    """Bound multipart bodies before Starlette can spool arbitrary upload bytes to disk."""
+    """Bound resume and agent bodies before parsing or spooling arbitrary input."""
     def __init__(self, app):
         self.app = app
 
     async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or not scope["path"].startswith("/api/profiles") or scope["method"] not in {"POST", "PUT"}:
+        if scope["type"] != "http" or not scope["path"].startswith(("/api/profiles", "/api/agent-executions")) or scope["method"] not in {"POST", "PUT"}:
             return await self.app(scope, receive, send)
         from starlette.responses import JSONResponse
-        limit = 5 * 1024 * 1024 + 65536
+        limit = 8192 if scope["path"].startswith("/api/agent-executions") else 5 * 1024 * 1024 + 65536
         chunks, size = [], 0
         while True:
             message = await receive()
@@ -55,7 +55,8 @@ class ProfileBodyLimit:
                 return
             size += len(message.get("body", b""))
             if size > limit:
-                return await JSONResponse({"error": {"code": "upload_too_large", "message": "Maximum upload size is 5 MB."}}, status_code=413)(scope, receive, send)
+                agent = scope["path"].startswith("/api/agent-executions")
+                return await JSONResponse({"error": {"code": "request_too_large" if agent else "upload_too_large", "message": "Agent request exceeds 8 KB." if agent else "Maximum upload size is 5 MB."}}, status_code=413)(scope, receive, send)
             chunks.append(message)
             if not message.get("more_body", False):
                 break

@@ -11,7 +11,7 @@ import { filterGraph } from './universe-layout';
 
 // JSDOM cannot measure a pan/zoom canvas. This page-level adapter exercises the
 // selection contract; the real React Flow renderer is checked in live browser QA.
-vi.mock('./CareerGraph', () => ({ default: ({ graph, filter, onSelect }: { graph: CareerGraphData; filter: UniverseFilter; onSelect: (id: string) => void }) => <div role="region" aria-label="Interactive career connections">{filterGraph(graph, filter).nodes.map(n => <button key={n.id} onClick={() => onSelect(n.id)}>Select canvas node {n.label}</button>)}</div> }));
+vi.mock('./CareerGraph', () => ({ default: ({ graph, filter, onSelect, highlighted }: { highlighted?: string[]; graph: CareerGraphData; filter: UniverseFilter; onSelect: (id: string) => void }) => <div role="region" aria-label="Interactive career connections">{filterGraph(graph, filter).nodes.map(n => <button key={n.id} data-agent-highlighted={highlighted?.includes(n.id) ? "true" : "false"} onClick={() => onSelect(n.id)}>Select canvas node {n.label}</button>)}</div> }));
 
 // Occupational labels/IDs and target text come from the attributed real-row fixture.
 // Scores/profile levels below are unit-test inputs, not asserted market observations.
@@ -123,4 +123,19 @@ describe('Career Universe page', () => {
     failed = false; fireEvent.click(screen.getByRole('button',{name:'Retry Universe'}));
     expect(await screen.findByRole('button',{name:`Select canvas node ${role.title}`})).toBeInTheDocument();
   });
+});
+
+
+it('passes validated Matchmaker highlights to the existing canvas and clears them on selection', async () => {
+  const ordinaryFetch = globalThis.fetch;
+  vi.stubGlobal('fetch', vi.fn(async (input, init) => {
+    if (String(input) === '/api/agent-executions') return {ok:true,json:async()=>({id:'test-execution',status:'completed',error_code:null,tool_count:1,token_usage:1,events:[],result:{sections:[],notice:'Unit-test server result.',profile_revision:graph.profile_revision,effects:{focus_role:career.id,highlight_skills:[prog.id],open_evidence:null}}})} as Response;
+    return ordinaryFetch(input, init);
+  }));
+  visit();
+  fireEvent.click(await screen.findByRole('button',{name:'Select canvas node '+career.label}));
+  fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
+  await waitFor(()=>expect(screen.getByRole('button',{name:'Select canvas node '+prog.label})).toHaveAttribute('data-agent-highlighted','true'));
+  fireEvent.click(screen.getByRole('button',{name:'Select canvas node '+prog.label}));
+  expect(screen.getByRole('button',{name:'Select canvas node '+prog.label})).toHaveAttribute('data-agent-highlighted','false');
 });

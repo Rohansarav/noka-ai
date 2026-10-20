@@ -21,7 +21,7 @@ function useReducedMotion() {
   return reduced;
 }
 
-export default function CareerGraph({ graph, filter, selected, onSelect }: { graph: CareerGraphData; filter: UniverseFilter; selected: string | null; onSelect: (id: string | null) => void }) {
+export default function CareerGraph({ graph, filter, selected, onSelect, highlighted = [] }: { highlighted?: string[]; graph: CareerGraphData; filter: UniverseFilter; selected: string | null; onSelect: (id: string | null) => void }) {
   const [instance, setInstance] = useState<ReactFlowInstance<UniverseFlowNode, Edge> | null>(null);
   const reduced = useReducedMotion();
   const duration = reduced ? 0 : 240;
@@ -29,8 +29,8 @@ export default function CareerGraph({ graph, filter, selected, onSelect }: { gra
   const visible = useMemo(() => filterGraph(graph, filter), [graph, filter]);
   const positions = useMemo(() => layoutNodes(graph.nodes), [graph.nodes]);
   const related = useMemo(() => relatedNodeIds(visible, selected), [visible, selected]);
-  const nodes: UniverseFlowNode[] = useMemo(() => visible.nodes.map(n => ({ id: n.id, type: 'career', position: positions[n.id], data: { entity: n, dimmed: !!selected && !related.has(n.id) }, selected: n.id === selected, draggable: false, connectable: false, focusable: true,
-    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related]);
+  const nodes: UniverseFlowNode[] = useMemo(() => visible.nodes.map(n => ({ id: n.id, type: 'career', position: positions[n.id], data: { entity: n, dimmed: !!selected && !related.has(n.id) && !highlighted.includes(n.id) }, selected: n.id === selected || highlighted.includes(n.id), draggable: false, connectable: false, focusable: true,
+    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related, highlighted]);
   const edges: Edge[] = useMemo(() => {
     // The API retains both evidence and gap edges; draw the gap once to avoid overlapping lines.
     const gapPairs = new Set(visible.edges.filter(e => e.type === 'missing_skill').map(e => `${e.source}:${e.target}`));

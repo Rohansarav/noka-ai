@@ -161,3 +161,32 @@ class ProfileSkill(Base):
     skill_id: Mapped[str] = mapped_column(ForeignKey("skills.id"), primary_key=True)
     level: Mapped[str] = mapped_column(String(16))
     years: Mapped[float | None] = mapped_column(Float)
+
+
+class AgentExecution(Base):
+    __tablename__ = "agent_executions"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    session_hash: Mapped[str] = mapped_column(ForeignKey("private_sessions.token_hash", ondelete="CASCADE"), index=True)
+    agent: Mapped[str] = mapped_column(String(24))
+    status: Mapped[str] = mapped_column(String(24))
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    deadline: Mapped[datetime] = mapped_column(UTCDateTime)
+    updated_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    model: Mapped[str] = mapped_column(String(100))
+    tool_count: Mapped[int] = mapped_column(Integer, default=0)
+    token_usage: Mapped[int] = mapped_column(Integer, default=0)
+    event_sequence: Mapped[int] = mapped_column(Integer, default=0)
+    error_code: Mapped[str | None] = mapped_column(String(40))
+    result: Mapped[dict | None] = mapped_column(JSON)
+
+
+class AgentEvent(Base):
+    __tablename__ = "agent_events"
+    execution_id: Mapped[str] = mapped_column(ForeignKey("agent_executions.id", ondelete="CASCADE"), primary_key=True)
+    sequence: Mapped[int] = mapped_column(Integer, primary_key=True)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    agent: Mapped[str] = mapped_column(String(24))
+    type: Mapped[str] = mapped_column(String(40))
+    status: Mapped[str] = mapped_column(String(24))
+    message: Mapped[str] = mapped_column(String(200))
+    payload: Mapped[dict] = mapped_column(JSON)

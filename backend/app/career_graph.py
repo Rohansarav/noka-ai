@@ -19,7 +19,7 @@ def build_career_graph(profile, db):
         "US O*NET requirements describe occupations; your preferred location does not establish local demand.",
         "Showing up to 3 roles, 3 priority gaps per role and 6 reviewed SDG links. Other relationships may exist.",
         "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
-        "No AI agents, AI signals or forecasts are connected to this view.",
+        "Optional Matchmaker exploration reads this evidence; AI signals and forecasts remain unavailable.",
     ]
     if profile is None:
         return CareerGraph(status="no_profile", profile_revision=None, generated_at=datetime.now(timezone.utc),

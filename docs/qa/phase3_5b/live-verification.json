@@ -1,0 +1,61 @@
+{
+  "database": "postgresql",
+  "ready": {
+    "status": "ready",
+    "database": "connected",
+    "migration": "current",
+    "frontend": "built"
+  },
+  "public_counts": {
+    "roles": 25,
+    "skills": 35,
+    "role_skills": 875,
+    "job_demand_observations": 114821,
+    "sdgs": 17,
+    "sdg_targets": 169,
+    "sdg_links": 7
+  },
+  "observation_range": [
+    "2020-02-01",
+    "2026-10-09"
+  ],
+  "input": "Disposable labelled manual demo; no real CV or personal data.",
+  "selected_role": "13-2011.00",
+  "execution": {
+    "status": "failed",
+    "error_code": "ai_unavailable",
+    "tool_count": 0,
+    "token_usage": 0,
+    "events": [
+      {
+        "sequence": 1,
+        "agent": "matchmaker",
+        "type": "queued",
+        "status": "queued",
+        "at": "2026-10-20T10:45:25.724225+00:00",
+        "message": "Matchmaker request accepted.",
+        "payload": {}
+      },
+      {
+        "sequence": 2,
+        "agent": "matchmaker",
+        "type": "failed",
+        "status": "failed",
+        "at": "2026-10-20T10:45:30.236247+00:00",
+        "message": "AI exploration unavailable. Your deterministic Universe remains available.",
+        "payload": {}
+      }
+    ],
+    "result": null
+  },
+  "postgres_persisted": {
+    "status": "failed",
+    "error_code": "ai_unavailable",
+    "event_sequence": 2
+  },
+  "foreign_read_status": 404,
+  "sse_terminal": true,
+  "live_provider_verified": false,
+  "reason": "OPENAI_API_KEY is not configured.",
+  "disposable_profile_and_execution_removed": true
+}
