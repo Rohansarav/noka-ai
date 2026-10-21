@@ -67,8 +67,13 @@ describe('Future workspace interactions',()=>{
     expect(screen.getByText(/at least 20 characters/)).toBeVisible();
   });
   it('explains which world effects are planning assumptions',async()=>{
+    state={...state,matches:[{role_id:'fixture-role',title:'Fixture role',priority_skills:['Active Listening']}]};
     setup(<WorldDial/>);
     expect(await screen.findByText(/Saved planning lens/)).toBeVisible();
+    expect(screen.getByRole('heading',{name:'Fixture role'})).toBeVisible();
+    expect(screen.getByText('Active Listening')).toBeVisible();
+    expect(screen.getByRole('link',{name:'Explore your pathway'})).toHaveAttribute('href','/roadmap');
+    fireEvent.click(screen.getByText('What changes with this lens?'));
     expect(screen.getByText(/Profile coverage, published requirements and reviewed SDG evidence stay fixed/)).toBeVisible();
     fireEvent.click(screen.getByRole('button',{name:'Human-AI Collaboration'}));
     expect(writes).toHaveLength(0);

@@ -1,0 +1,263 @@
+/* Presentation only. Keep tokens, the graph/dock and destination sidebar intact.
+   Selectors deliberately name eligible surfaces rather than all cards or text. */
+.app .sidebar { background:#fff; border-right-color:#e2e7f0; }
+.app .sidebar nav a { color:#58677f; }
+.app .sidebar nav a.active { background:#edf3ff; color:#245bc1; box-shadow:inset 3px 0 #477ce5; }
+.app .brand-mark { color:#386dde; }
+.app .sidebar-bottom { border-top-color:#e4e9f2; }
+.app .topbar { background:#ffffffc9; border-bottom-color:#e4e9f2; }
+.app .page-header { padding:8px 0 4px; margin-bottom:30px; }
+.app .page-header h1 { color:#203149; letter-spacing:-1.4px; }
+.app .page-header>p:last-child { font-size:14px; line-height:1.8; color:#5c6a80; max-width:72ch; }
+.app .page-header .eyebrow { color:#4c6da9; font-weight:700; margin-bottom:12px; }
+
+/* World Dial: two compact rows; the summary spans the entire parent grid. */
+.app .world-dial { grid-template-columns:230px minmax(0,1fr); gap:20px; padding:22px; background:linear-gradient(115deg,#f2f6ff,#f8f7fd 58%,#eff9fa); border-color:#dce4f1; border-radius:24px; box-shadow:0 8px 30px #233c6a05; }
+.app .world-dial .world-dial-label { gap:13px; }
+.app .world-dial .world-dial-label p { color:#5a6881; font-size:12px; }
+.app .world-dial .dial-compass { background:#fff; color:#426ed0; border-color:#d2dff4; width:42px; height:42px; box-shadow:0 0 0 5px #ffffff85; }
+.app .world-dial .eyebrow,.app .world-dial .dial-year { color:#607297; }
+.app .world-dial .world-options { gap:10px; }
+.app .world-dial .world-options button { border:1px solid #dde4f0; background:#ffffff7d; color:#596c88; min-height:64px; padding:13px; border-radius:14px; }
+.app .world-dial .world-options strong { font-size:12px; }
+.app .world-dial .world-options small { font-size:10px; white-space:normal; }
+.app .world-dial .world-options button[aria-pressed=true] { background:#fff; border-color:#a9bfee; color:#2d59b2; box-shadow:0 4px 16px #3b61a912; }
+.app .world-dial.world-governed .world-options button[aria-pressed=true] { color:#197187; border-color:#9fcfd9; }
+.app .world-dial.world-collaboration .world-options button[aria-pressed=true] { color:#7052ad; border-color:#c8b9e7; }
+.app .world-dial .world-outcome { grid-column:1/-1; display:grid; grid-template-columns:1.15fr 1fr 1fr; gap:24px; border-top:1px solid #dce4f0; padding-top:22px; color:#354761; min-width:0; }
+.app .world-outcome>div { min-width:0; }
+.app .world-outcome .surface-kicker { display:flex; align-items:center; gap:7px; color:#5d6c85; font-size:10px; font-weight:700; letter-spacing:1.1px; margin-bottom:12px; }
+.app .world-context-title { display:flex; align-items:center; flex-wrap:wrap; gap:8px 12px; }
+.app .world-context h2 { font-size:18px; letter-spacing:-.45px; color:#253a59; line-height:1.4; }
+.app .world-save-state { display:inline-flex; align-items:center; gap:4px; font-size:10px; color:#546b8c; }
+.app .world-outcome p { font-size:12px; line-height:1.75; margin:9px 0 0; max-width:60ch; color:#62718a; }
+.app .world-direction { padding:0 22px; border-left:1px solid #dce4f0; border-right:1px solid #dce4f0; }
+.app .world-direction h3 { font-size:16px; line-height:1.45; color:#263b5e; text-wrap:pretty; }
+.app .world-milestones { display:flex; align-items:center; gap:7px; color:#647492; font-size:11px; margin-top:12px; }
+.app .world-focus .focus-chip-list { display:flex; flex-wrap:wrap; gap:6px; }
+.app .world-focus .focus-chip-list span { background:#fff; color:#63518b; border:1px solid #e0d8ef; border-radius:8px; padding:6px 9px; font-size:11px; line-height:1.5; }
+.app .world-focus>a { display:inline-flex; align-items:center; gap:7px; margin-top:14px; font-size:11px; font-weight:650; color:#3967c0; }
+.app .world-outcome .world-explainer { grid-column:1/-1; padding-top:14px; border-top:1px solid #dfe6f2; margin-top:-5px; }
+.app .world-explainer summary { font-size:11px; color:#617493; }
+.app .world-explainer p { max-width:100ch; }
+
+/* Distinct choices with aligned content and a restrained numerical hierarchy. */
+.app .direction-options { border:1px solid #e0e6ef; background:#fff; padding:28px; border-radius:24px; margin:20px 0; box-shadow:0 8px 30px #263f6d04; color:#263b59; }
+.app .direction-options>h2 { font-size:20px; letter-spacing:-.5px; margin-bottom:9px; color:#263b59; }
+.app .direction-options>.caption { max-width:100ch; font-size:12px; line-height:1.8; color:#6b7990; margin-bottom:20px; }
+.app .direction-options>.text-link { display:inline-flex; margin:12px 0 30px; color:#376bd0; font-weight:600; }
+.app .direction-options>.direction-card-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(225px,1fr)); gap:14px; overflow:visible; padding-bottom:6px; }
+.app .direction-card-list .direction-card { --card-accent:#426ed0; --card-wash:#edf3ff; display:flex; flex-direction:column; gap:0; min-width:0; max-width:none; min-height:260px; padding:20px; border:1px solid #dce5f2; border-radius:18px; background:linear-gradient(150deg,#fff 58%,#f4f7fd); color:#263b59; position:relative; transition:box-shadow .18s,border-color .18s,transform .18s; }
+.app .direction-card-list .direction-target { --card-accent:#7a5ab0; --card-wash:#f0ebfa; background:linear-gradient(150deg,#fff 58%,#f7f4fc); border-color:#e1d8ef; }
+.app .direction-card-list .direction-card:hover:not(:disabled) { transform:translateY(-2px); border-color:var(--card-accent); box-shadow:0 10px 24px #3b508615; }
+.app .direction-card-list .direction-card[aria-pressed=true] { border-color:var(--card-accent); background:linear-gradient(145deg,#fff,var(--card-wash)); box-shadow:0 0 0 1px var(--card-accent),0 8px 22px #334d8010; }
+.app .direction-card-list .direction-card:disabled { opacity:.7; }
+.app .direction-card-top { display:flex; align-items:center; gap:9px; width:100%; margin-bottom:17px; }
+.app .direction-card-icon { display:grid; place-items:center; width:32px; height:32px; border-radius:10px; background:var(--card-wash); color:var(--card-accent); }
+.app .direction-card-kind { font-size:9px; letter-spacing:.85px; font-weight:750; color:var(--card-accent); }
+.app .direction-card-arrow { margin-left:auto; color:var(--card-accent); display:flex; }
+.app .direction-card-title { display:block; font-size:16px; font-weight:650; line-height:1.5; min-height:48px; text-wrap:pretty; margin-bottom:20px; }
+.app .direction-card-measure { display:flex; gap:9px; align-items:center; margin-top:auto; }
+.app .direction-card-score { font-size:31px; line-height:1; letter-spacing:-1px; font-weight:600; color:#304766; font-variant-numeric:tabular-nums; }
+.app .direction-card-measure>span:last-child { font-size:11px; line-height:1.55; color:#62718a; }
+.app .direction-meter { height:4px; background:#e9edf5; border-radius:4px; width:100%; margin-top:14px; overflow:hidden; }
+.app .direction-meter>span { display:block; height:100%; border-radius:inherit; background:var(--card-accent); }
+.app .direction-evidence-count { font-size:11px; color:#62718a; line-height:1.6; margin-top:8px; }
+.app .direction-card-footer { display:flex; align-items:center; flex-wrap:wrap; gap:6px 12px; border-top:1px solid #e4e9f2; margin-top:15px; padding-top:13px; font-size:11px; color:#61738e; line-height:1.6; }
+.app .direction-card-footer>span { display:flex; align-items:center; gap:5px; }
+.app .direction-context { font-size:9px; color:#6c7a92; margin-top:7px; }
+.app .direction-options>details { margin-top:16px; padding-top:16px; border-top:1px solid #e4e9f2; font-size:12px; line-height:1.8; color:#687790; }
+.app .direction-options>details summary { font-weight:600; color:#42638f; }
+.app .scenario-insight { border-color:#ddd7ee; background:linear-gradient(110deg,#f4f0fb,#f8faff); padding:24px; border-radius:20px; gap:20px; color:#4c5071; }
+.app .scenario-insight.scenario-governed { background:linear-gradient(110deg,#edf8fa,#f5f9ff); border-color:#cde5eb; }
+.app .scenario-insight.scenario-acceleration { background:linear-gradient(110deg,#eff4ff,#f6f8ff); border-color:#d6e1f5; }
+.app .scenario-insight h2 { font-size:20px; color:#36405e; line-height:1.4; }
+.app .scenario-insight p { font-size:13px; line-height:1.8; }
+.app .scenario-insight .scenario-priorities span { border-color:#dcd5ee; background:#fff; color:#65538c; border-radius:9px; }
+.app .scenario-insight .scenario-lens-count { color:#6e7591; line-height:1.8; }
+.app .scenario-insight .scenario-change { border-top-color:#dedff0; }
+.app section.impact-evidence { border:1px solid #d7e9eb; background:linear-gradient(120deg,#f1faf9,#f7fbff); padding:26px; margin:20px 0; border-radius:22px; color:#526d7d; }
+.app section.impact-evidence h2 { font-size:20px; color:#2b5368; margin-bottom:10px; }
+.app section.impact-evidence>p { max-width:110ch; font-size:12px; line-height:1.8; }
+.app section.impact-evidence>div { background:#ffffffb0; border:1px solid #dae9ed; border-radius:14px; padding:16px; margin-top:12px; }
+.app section.impact-evidence button { color:#25657c; border-color:#c9e2e8; margin:0 0 9px; border-radius:9px; font-weight:600; font-size:12px; }
+.app section.impact-evidence>p:last-child { border-top:1px solid #dce9eb; padding-top:14px; margin-top:18px; color:#687d88; font-size:11px; }
+
+/* Learning content only: no selector touches .pathway-commitment or its children. */
+.app .roadmap { color:#354862; }
+.app .roadmap .pathway-project { background:linear-gradient(120deg,#edf3ff,#f5f0fc 85%); border:1px solid #dce1f1; border-radius:22px; padding:28px; margin-bottom:30px; position:relative; overflow:hidden; }
+.app .roadmap .pathway-project h2 { font-size:24px; color:#2a4169; line-height:1.4; margin:10px 0 14px; letter-spacing:-.5px; }
+.app .roadmap .pathway-project .eyebrow { color:#6d64a1; font-weight:700; }
+.app .roadmap .pathway-project p { font-size:13px; color:#66748b; line-height:1.85; max-width:85ch; margin:10px 0; }
+.app .roadmap .pathway-project p:last-child { padding-top:14px; border-top:1px solid #dce1ef; font-size:12px; color:#566a8c; }
+.app .pathway-intro-heading { display:flex; gap:16px; align-items:flex-start; }
+.app .pathway-project-icon { background:#ffffffb5; border:1px solid #d8e1f5; border-radius:14px; width:48px; height:48px; display:grid; place-items:center; color:#6276b7; flex-shrink:0; }
+.app .roadmap .pathway-intro-heading h2 { margin:8px 0 4px; font-size:23px; }
+.app .pathway-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; padding:23px 0; margin-top:15px; border-top:1px solid #dce1ef; }
+.app .pathway-facts>div+div { border-left:1px solid #dce1ef; padding-left:20px; }
+.app .pathway-facts>div>span { display:block; font-size:9px; letter-spacing:1px; font-weight:700; color:#5f708d; }
+.app .pathway-facts strong { display:flex; align-items:baseline; gap:8px; font-size:30px; color:#50699b; line-height:1.4; margin:8px 0 3px; font-weight:600; font-variant-numeric:tabular-nums; }
+.app .pathway-facts strong svg { align-self:center; color:#899ac0; }
+.app .pathway-facts strong small { font-size:13px; font-weight:450; color:#7c8aa5; }
+.app .pathway-facts>div>small { display:block; color:#62738e; font-size:11px; line-height:1.7; }
+.app .pathway-project-note { display:flex; align-items:flex-start; gap:9px; font-size:11px; color:#667c9e; line-height:1.8; padding-top:16px; border-top:1px solid #dce1ef; }
+.app .pathway-project-note svg { margin-top:3px; }
+.app .roadmap .roadmap-heading { color:#62789a; margin-bottom:22px; }
+.app .roadmap .roadmap-stop { border-left-color:#d3dff2; padding-bottom:26px; }
+.app .roadmap .roadmap-stop::after { border-left-color:#d3dff2; left:-1px; }
+.app .roadmap .roadmap-stop>summary { background:#f8f8f2; gap:18px; }
+.app .roadmap .milestone-number { background:#edf3ff; border-color:#cddcf7; color:#4473c8; width:40px; height:40px; }
+.app .roadmap .roadmap-stop.complete .milestone-number { background:#3c77b1; border-color:#3c77b1; color:#fff; }
+.app .roadmap .stop-title>strong { color:#2c4364; font-size:23px; line-height:1.4; }
+.app .roadmap .stop-meta { color:#6d7f98; font-size:11px; }
+.app .roadmap .world-priority { background:#f0eafb; color:#775aa4; padding:4px 8px; border-radius:6px; }
+.app .roadmap .stop-content { background:#fff; border:1px solid #e0e6ef; border-radius:18px; padding:24px; margin:0 0 0 28px; box-shadow:0 4px 18px #2c477409; }
+.app .roadmap .stop-objective { font-size:14px; color:#415777; margin:18px 0; }
+.app .roadmap .pathway-handoff { background:#f0f5ff; border-left-color:#8ca9dd; color:#5b7194; font-size:12px; padding:15px 18px; margin:0; }
+.app .roadmap .pathway-handoff strong { color:#3d6096; }
+.app .roadmap .practice-block { background:linear-gradient(120deg,#f5f2fb,#f7f9fd); border:1px solid #e7e4f1; padding:22px; }
+.app .roadmap .practice-block .eyebrow { color:#7c6b9b; font-weight:700; }
+.app .roadmap .practice-block p { color:#5d6b83; font-size:13px; }
+.app .roadmap .pathway-checks h3 { color:#415778; font-size:15px; }
+.app .roadmap .pathway-checks { color:#66748b; font-size:12px; }
+.app .roadmap .pathway-checks ul { padding-left:19px; }
+.app .roadmap .stop-actions { padding-top:18px; border-top:1px solid #e4e9f2; color:#5c6e89; font-size:11px; }
+.app .roadmap .stop-actions select { border-color:#d0dcef; padding:9px; border-radius:9px; color:#3b5b89; }
+.app .roadmap .pathway-note { color:#577099; margin-top:24px; }
+.app .roadmap .pathway-note textarea { background:#f8faff; border-color:#d8e2f2; padding:14px; font-size:13px; }
+.app .roadmap .roadmap-end { color:#627799; line-height:1.8; margin-top:10px; }
+
+/* Profile, intake and public evidence pages share spacing, not a green wash. */
+.app :is(.private-card,.profile-card,.onboarding-stage,.match-card,.coverage-panel,.history-panel,.source-card,.role-card) { border-color:#dfe6f0; background:#fff; box-shadow:0 8px 28px #243e6a06; border-radius:22px; color:#344963; }
+.app .private-card { padding:30px; background:linear-gradient(135deg,#fff 70%,#f2f5fc); }
+.app .private-card h2 { color:#2a4061; margin:22px 0; font-size:27px; letter-spacing:-.6px; }
+.app .private-card .confirmation { gap:14px; }
+.app .private-card .confirmation>div { background:#f5f7fc; border:1px solid #e3e8f3; border-radius:14px; padding:18px; }
+.app .private-card .confirmation dt { color:#7b88a0; font-size:10px; text-transform:uppercase; letter-spacing:1px; }
+.app .private-card .confirmation dd { color:#354e73; font-size:14px; line-height:1.65; margin-top:8px; }
+.app .private-card .skill-chip { background:#eef4ff; color:#3b619a; border:1px solid #dce6f7; padding:11px 14px; border-radius:12px; }
+.app .private-card .skill-chip:nth-child(3n+2) { background:#f3effa; border-color:#e4dbf1; color:#735a9a; }
+.app .private-card .skill-chip:nth-child(3n) { background:#edf8f9; border-color:#d2eaed; color:#387783; }
+.app .private-card .skill-chip small { color:inherit; opacity:.85; }
+.app .onboarding .onboarding-stage { padding:30px; }
+.app .onboarding .onboarding-welcome h1 { color:#263d61; }
+.app .onboarding .onboarding-symbol { background:linear-gradient(135deg,#edf3ff,#f0edfa); color:#5977be; border-color:#d9e1f2; }
+.app .onboarding .onboarding-stage-meta { color:#6c7da0; padding-bottom:18px; border-bottom:1px solid #e4e9f3; margin-bottom:22px; }
+.app .onboarding .onboarding-progress button { color:#61769a; }
+.app .onboarding .onboarding-progress li.active button { color:#4169ac; }
+.app .onboarding .onboarding-progress button[aria-current=step] { color:#315ec0; font-weight:700; }
+.app .onboarding :is(input:not([type=range]):not([type=checkbox]),textarea,select) { border-color:#d9e2f1; background:#fcfdff; border-radius:12px; padding:13px 14px; color:#354b6d; font-size:13px; }
+.app .onboarding label { color:#4e6485; line-height:1.7; }
+.app .onboarding .input-modes button { background:#f7f9fd; border-color:#dde5f2; color:#5b7092; }
+.app .onboarding .input-modes button[aria-pressed=true] { background:#edf3ff; border-color:#9fbbee; color:#315fb4; }
+.app .onboarding .career-discovery { background:linear-gradient(120deg,#f5f8ff,#f8f5fc); border-color:#e0e3f1; padding:24px; border-radius:18px; }
+.app .onboarding .career-results article { border-color:#dde5f2; padding:18px; border-radius:14px; }
+.app .onboarding .target-chips button { background:#f0ebfa; border-color:#ded4f0; color:#70559c; }
+.app .onboarding .skill-category-tabs button[aria-pressed=true] { color:#315fae; background:#edf3ff; border-color:#adbfdf; }
+.app .onboarding .confirmed-skill { background:#f4f7fc; border-color:#dce5f3; border-radius:13px; padding:15px; }
+.app .match-card { padding:26px; }
+.app .match-card h2 { color:#2b436a; margin:20px 0 14px; line-height:1.4; }
+.app .match-card>p { color:#687892; font-size:13px; line-height:1.85; }
+.app .match-card .readiness-evidence { background:#f3f6fd; border-color:#dee6f5; color:#536c91; }
+.app .match-card .technical-evidence { background:#eff8fa; color:#467783; }
+.app :is(.private-card,.onboarding,.match-card,.roadmap) .button:not(.button-secondary) { background:#3269cf; box-shadow:0 4px 12px #3269cf18; }
+.app :is(.private-card,.onboarding,.match-card,.roadmap) .button-secondary { background:#fff; color:#4a6ca2; border-color:#d8e2f2; }
+.app :is(.coverage-panel,.history-panel,.source-card,.role-card) { padding:26px; }
+.app .evidence-stats .stat-tile { background:linear-gradient(135deg,#f0f5ff,#fff); border-color:#e0e7f3; box-shadow:none; }
+.app .evidence-stats .stat-tile:nth-child(even) { background:linear-gradient(135deg,#f4f0fb,#fff); }
+.app .evidence-stats .stat-tile strong { color:#405f99; font-variant-numeric:tabular-nums; }
+.app :is(.role-card,.source-card) h2,.app .source-card h3 { color:#324f79; line-height:1.5; }
+.app :is(.role-card,.source-card)>p { font-size:13px; line-height:1.85; color:#697a92; }
+.app .catalogue-search { background:#fff; border:1px solid #d8e3f3; border-radius:14px; padding:13px 17px; color:#6e86af; }
+.app .role-card .button-secondary { border-color:#d7e2f3; color:#5074a9; background:#f7faff; }
+.app .sdg-grid .sdg-card { border-color:#dce6ee; background:linear-gradient(140deg,#fff 70%,#f0f8fb); border-radius:22px; box-shadow:0 6px 24px #2c516b06; padding:26px; }
+.app .sdg-card .sdg-number { background:#eaf4fa; color:#3f769a; border-radius:13px; }
+.app .sdg-card h2 { color:#7291a8; font-size:12px; margin:14px 0 8px; }
+.app .sdg-card h3 { color:#344f71; font-size:19px; line-height:1.5; }
+.app .sdg-card .target-details { border-top:1px solid #e2eaf2; padding-top:16px; margin-top:20px; color:#607793; font-size:12px; }
+
+/* Research, impact and forecasts each get an identifiable palette and hierarchy. */
+.app .radar-page .outlook-explorer { background:linear-gradient(115deg,#f0f5ff,#f5f3fb); border:1px solid #dfe6f4; border-radius:24px; padding:28px; }
+.app .radar-page .outlook-topline h2 { color:#36527b; }
+.app .radar-page .outlook-topline h2 em { color:#7b69a1; }
+.app .radar-page .outlook-row { border-bottom-color:#dce4f1; }
+.app .radar-page .outlook-row summary { color:#3f587d; padding:17px 0; }
+.app .radar-page .outlook-caveat { color:#6b7d99; line-height:1.8; }
+.app .radar-page .research-desk { border-color:#dce5f1; border-radius:22px; overflow:hidden; background:#fff; }
+.app .radar-page .research-index { background:#f5f8fd; }
+.app .radar-page .research-index button { border-color:#e1e7f1; padding:22px; color:#587296; }
+.app .radar-page .research-index button[aria-pressed=true] { background:#eaf1ff; color:#355fab; border-left-color:#6b91d2; }
+.app .radar-page .research-index strong { font-size:13px; line-height:1.65; }
+.app .radar-page .research-feature { background:#fff; padding:34px; }
+.app .radar-page .research-feature h2 { color:#2d4468; font-size:30px; line-height:1.4; }
+.app .radar-page .research-deck { color:#66768d; font-size:14px; }
+.app .radar-page .radar-toolbar button[aria-pressed=true] { background:#3f6bb8; color:#fff; }
+.app .impact-page .impact-stage { background:linear-gradient(125deg,#eef8fa,#f6f8fe 65%,#f4effa); border-color:#dce5f0; }
+.app .impact-page .impact-origin { background:radial-gradient(ellipse at 50% 25%,#d8eef2a0,transparent 65%); }
+.app .impact-page .impact-orbit { color:#4a829c; border-color:#bcdce5; background:#eef8fa; box-shadow:0 0 0 12px #e8f3f880,0 0 0 13px #d4e7ee; }
+.app .impact-page .impact-origin h2 { color:#345471; line-height:1.4; }
+.app .impact-page .impact-choices button { background:#ffffffb0; border-color:#d2e2ec; color:#4e7694; font-size:12px; padding:13px 15px; }
+.app .impact-page .impact-choices button[aria-pressed=true] { background:#3a7395; color:#fff; border-color:#3a7395; }
+.app .impact-page .impact-destination { border-left-color:#d8e4ef; background:#ffffff8a; }
+.app .impact-page .target-statement { color:#566b87; line-height:1.9; }
+.app .impact-page .impact-role-select select { color:#48678f; border-color:#d4e0f0; font-size:13px; padding:13px; max-width:100%; }
+.app .model-audit .glass-card { border:1px solid #dfe5f1; background:linear-gradient(130deg,#eff4fe,#fff); border-radius:20px; padding:26px; box-shadow:none; color:#5a7092; }
+.app .model-audit .glass-card:nth-child(2) { background:linear-gradient(130deg,#f3effa,#fff); }
+.app .model-audit h2 { color:#3b5680; }
+.app .forecast-result { border-color:#d8e4f3; background:linear-gradient(120deg,#edf5ff,#f1f8fa); border-radius:24px; }
+.app .forecast-result h2 { color:#3b65a3; font-variant-numeric:tabular-nums; }
+.app .forecast-result p { color:#5c7392; font-size:13px; }
+.app .metric-table { border:1px solid #dfe6f1; border-radius:16px; }
+.app .metric-table :is(td,th) { background:#fff; padding:16px; border-color:#e5eaf2; color:#526885; font-size:12px; font-variant-numeric:tabular-nums; }
+.app .metric-table thead th { background:#f1f5fc; color:#3e5d8a; }
+
+@media(min-width:1500px) { .app .direction-options>.direction-card-list { grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); } }
+@media(max-width:1200px) {
+  .app .world-dial { grid-template-columns:1fr; }
+  .app .world-dial .world-dial-label>div { display:block; }
+  .app .world-dial .world-dial-label p { margin:4px 0 0; display:block; }
+  .app .world-outcome .world-context { grid-column:1/-1; }
+  .app .world-dial .world-outcome { grid-template-columns:1fr 1fr; }
+  .app .world-direction { border-left:0; padding:0 20px 0 0; }
+  .app .direction-options>.direction-card-list { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+}
+@media(max-width:650px) {
+  .app .world-dial { padding:16px; gap:16px; border-radius:20px; }
+  .app .world-dial .world-options { gap:5px; }
+  .app .world-dial .world-options button { padding:10px 5px; justify-content:center; min-height:52px; }
+  .app .world-dial .world-options strong { font-size:10px; white-space:normal; }
+  .app .world-dial .world-options small { display:none; }
+  .app .world-dial .world-outcome { grid-template-columns:1fr; gap:20px; padding-top:20px; }
+  .app .world-direction { padding:0; border:0; }
+  .app .world-context h2 { font-size:17px; }
+  .app .world-save-state { font-size:9px; }
+  .app .world-explainer p { font-size:11px; }
+  .app .direction-options { padding:20px 16px; }
+  .app .direction-options>.direction-card-list { grid-template-columns:1fr; gap:12px; }
+  .app .direction-card-list .direction-card { min-height:0; padding:20px; }
+  .app .direction-card-title { min-height:0; margin-bottom:18px; }
+  .app .direction-card-score { font-size:29px; }
+  .app .scenario-insight { grid-template-columns:1fr; padding:20px; }
+  .app .scenario-insight h2 { font-size:18px; }
+  .app section.impact-evidence { padding:20px; }
+  .app .roadmap .pathway-project { padding:22px; }
+  .app .roadmap .pathway-project h2 { font-size:21px; }
+  .app .pathway-intro-heading { gap:12px; }
+  .app .pathway-project-icon { width:38px; height:38px; border-radius:11px; }
+  .app .pathway-facts { gap:10px; }
+  .app .pathway-facts>div+div { padding-left:10px; }
+  .app .pathway-facts strong { font-size:26px; gap:5px; flex-wrap:wrap; }
+  .app .pathway-facts strong small { font-size:11px; }
+  .app .pathway-facts>div>span { font-size:7px; letter-spacing:.5px; }
+  .app .roadmap .stop-content { padding:18px; margin-left:18px; }
+  .app .roadmap .practice-block { padding:17px; }
+  .app .roadmap .stop-title>strong { font-size:20px; }
+  .app .roadmap .stop-actions { flex-wrap:wrap; }
+  .app .roadmap .stop-actions details { max-width:100%; }
+  .app .onboarding .onboarding-stage { padding:22px 18px; }
+  .app .private-card { padding:22px; }
+  .app .radar-page :is(.outlook-explorer,.research-feature) { padding:22px; }
+  .app .radar-page .research-feature h2 { font-size:25px; }
+  .app .page-header>p:last-child { font-size:13px; }
+}
+@media(prefers-reduced-motion:reduce) { .app .direction-card-list .direction-card { transition:none; } .app .direction-card-list .direction-card:hover { transform:none; } }
