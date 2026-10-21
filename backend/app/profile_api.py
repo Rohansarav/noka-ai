@@ -3,13 +3,15 @@ import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, Response, UploadFile
+from fastapi.responses import JSONResponse
+from pydantic import ValidationError
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 from backend.app.evidence_api import get_session
 from backend.app.models import FutureWorkspace, PrivateSession, Profile, ProfileSkill, Role, Skill
-from backend.app.profile_schemas import CreateProfile, CurrentProfile, ExtractionResponse, MatchesResponse, ProfileView, SaveSkills, OnboardingDraft
+from backend.app.profile_schemas import AnalysisInput, CreateProfile, CurrentProfile, ExtractionResponse, MatchesResponse, ProfileView, SaveSkills, OnboardingDraft
 from backend.app.profile_security import COOKIE, active_session, owned_profile, same_origin, token_hash
-from backend.app.skill_extraction import extract, parse_upload
+from backend.app.skill_extraction import clean_text, extract, parse_upload
 from backend.app.matching import match_profile
 
 router = APIRouter(prefix="/api/profiles", tags=["Private profiles"])
@@ -53,6 +55,7 @@ def get_profile(profile_id: str, request: Request, response: Response, db: Sessi
     return view(owned_profile(profile_id, request, db), db)
 
 
+@router.post("/{profile_id}/analysis", response_model=ExtractionResponse, dependencies=[Depends(same_origin)])
 @router.post("/{profile_id}/resume", response_model=ExtractionResponse, dependencies=[Depends(same_origin)])
 def resume(profile_id: str, request: Request, response: Response,
            file: Annotated[UploadFile | None, File()] = None,
@@ -67,10 +70,26 @@ def resume(profile_id: str, request: Request, response: Response,
             data = file.file.read(5 * 1024 * 1024 + 1)
             text = parse_upload(data, file.filename, file.content_type)
         except ValueError as exc:
-            raise HTTPException(413 if str(exc) == "size" else 422) from None
+            return JSONResponse(status_code=413 if str(exc) == "size" else 422, content={"error": {
+                "code": "upload_too_large" if str(exc) == "size" else "unreadable_document",
+                "message": "Choose a PDF or DOCX up to 5 MB." if str(exc) == "size" else "This document could not be read. Use an unencrypted text PDF or DOCX, or enter your experience manually."}})
         finally:
             file.file.close()
-    return extract(text, list(db.scalars(select(Skill).order_by(Skill.id))), use_ai)
+    was_truncated = len(text) > 20000
+    if request.url.path.endswith("/analysis"):
+        try:
+            standard = AnalysisInput(text=clean_text(text))
+        except ValidationError:
+            return JSONResponse(status_code=422, content={"error": {"code": "insufficient_experience", "message":
+                "No readable experience was found. Scanned PDFs need OCR; enter your experience manually instead." if file else
+                "Describe your experience in at least 20 characters, including tasks, projects or skills."}})
+        text = standard.text
+    catalogue = list(db.scalars(select(Skill).order_by(Skill.id)))
+    if not catalogue:
+        return JSONResponse(status_code=503, content={"error": {"code": "catalogue_unavailable", "message": "The skill catalogue is unavailable. Your input has not been saved; retry when it is available."}})
+    result = extract(text, catalogue, use_ai)
+    result.truncated = result.truncated or was_truncated
+    return result
 
 
 @router.put("/{profile_id}/onboarding", response_model=ProfileView, dependencies=[Depends(same_origin)])

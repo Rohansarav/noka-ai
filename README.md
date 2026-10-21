@@ -2,6 +2,10 @@
 
 Navigate tomorrow’s work, today. NOKA combines a personal career workspace, three future scenarios, an interactive evidence graph, persistent learning pathways, source-linked intelligence, and evaluated US sector forecasts. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
+## Profile analysis — current build
+
+My Profile offers two experience inputs: resume upload or manual entry. Protected PDF text extraction uses pypdf; both inputs then use the same validated text and canonical skill review contracts. OpenAI Structured Outputs are constrained by Pydantic and the current skill catalogue. Suggestions require explicit user confirmation, with searchable skills and level buttons replacing mapping dropdowns. See the [profile analysis report](docs/PROFILE_ANALYSIS_REPORT.md) for the 102 backend / 92 frontend tests, real-provider browser checks and remaining limits. No migration or dependency change is required for this correction. Replit publication remains on hold.
+
 ## Onboarding and scenario interaction — current build
 
 New or incomplete profiles now enter a private, resumable three-stage onboarding flow at `/profile/intake`; existing confirmed profiles continue directly into My Future. The World Dial appears only on My Future, Career Universe and My Pathway. Computed skill emphasis, a previous-world comparison and scenario-aware role details make the selected world explicit while keeping factual fit and the graph camera stable. Apply migration `0006` with `.venv\Scripts\python.exe -m alembic upgrade head` before starting the updated API. See the [implementation and verification report](docs/ONBOARDING_WORLD_DIAL_REPORT.md) for 92 backend tests, 88 frontend tests, real browser checks and limitations.

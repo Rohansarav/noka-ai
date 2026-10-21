@@ -16,7 +16,7 @@ from backend.app.main import app
 from backend.app.evidence_api import get_session
 from backend.app.ingestion.runner import import_all
 from backend.app.models import Base, PrivateSession, Profile, ProfileSkill, Role, Skill
-from backend.app.skill_extraction import extract, normalize, parse_upload
+from backend.app.skill_extraction import extract, normalize, parse_upload, provider_schema
 from backend.app.profile_schemas import ExtractedSkills, SkillMention
 
 HEADERS = {"X-Noka-CSRF": "1", "Origin": "http://testserver"}
@@ -147,7 +147,7 @@ def test_real_document_parser_and_no_resume_storage(client, database, factory, n
 
 def test_provider_failure_and_partial_output(client, database, monkeypatch, caplog):
     profile_id = create(client)
-    def unavailable(text):
+    def unavailable(text, skills):
         raise RuntimeError('Sensitive Name sensitive@example.com')
     monkeypatch.setattr('backend.app.skill_extraction.provider_extract', unavailable)
     with caplog.at_level(logging.WARNING):
@@ -155,10 +155,13 @@ def test_provider_failure_and_partial_output(client, database, monkeypatch, capl
     assert response.json()['mode'] == 'manual_fallback'
     assert 'sensitive@example.com' not in response.text
     assert 'Sensitive Name' not in caplog.text and 'sensitive@example.com' not in caplog.text
-    monkeypatch.setattr('backend.app.skill_extraction.provider_extract', lambda text: ExtractedSkills(skills=[SkillMention(mention='Programming',years=None,evidence_excerpt='invented quote',confidence='low')]))
+    def invented(text, skills):
+        return provider_schema(skills).model_validate({'skills':[{'mention':'Programming','years':None,'evidence_excerpt':'invented quote','confidence':'low','canonical_skill_ids':[s.id for s in skills if s.canonical_name=='Programming']}]})
+    monkeypatch.setattr('backend.app.skill_extraction.provider_extract', invented)
     response = client.post(f'/api/profiles/{profile_id}/resume', data={'text': 'Programming', 'use_ai': 'true'}, headers=HEADERS)
-    assert response.json()['candidates'][0]['evidence_excerpt'] == ''
-    assert response.json()['candidates'][0]['confidence'] == 'low'
+    assert response.json()['mode'] == 'openai'
+    assert response.json()['candidates'] == []
+    assert response.json()['warnings']
 
 
 def test_normalization_ambiguous_unknown_and_fuzzy(database):

@@ -22,6 +22,11 @@ class ExtractedSkills(Contract):
     skills: list[SkillMention] = Field(max_length=60)
 
 
+class AnalysisInput(Contract):
+    """The same text contract follows protected document parsing or manual entry."""
+    text: str = Field(min_length=20, max_length=20000)
+
+
 class ConfirmedSkill(Contract):
     skill_id: str = Field(max_length=40)
     level: Literal["learning", "working", "strong"] = "working"
@@ -68,8 +73,9 @@ class Candidate(Contract):
     years: float | None
     evidence_excerpt: str
     confidence: Literal["low", "medium", "high"]
-    mapping: Literal["exact", "alias", "fuzzy", "ambiguous", "unmapped"]
+    mapping: Literal["exact", "alias", "fuzzy", "ambiguous", "unmapped", "reasoned"]
     options: list[str]
+    mentions: list[str] = Field(default_factory=list)
 
 
 class ExtractionResponse(Contract):
@@ -77,6 +83,9 @@ class ExtractionResponse(Contract):
     mode: Literal["openai", "local", "manual_fallback"]
     message: str
     truncated: bool
+    warnings: list[str] = Field(default_factory=list)
+    duplicates_merged: int = 0
+    schema_version: Literal["skill-review-v2"] = "skill-review-v2"
 
 
 class Gap(Contract):
