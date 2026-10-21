@@ -86,6 +86,57 @@ def test_workspace_validation(clients):
     assert a.post('/api/agent-executions',json={'role_id':role,'node_id':'skill:invented','question':'Explain this node'},headers=HEADERS).status_code==422
 
 
+def test_coverage_separates_missing_evidence_from_proficiency(clients):
+    a,_,engine=clients
+    profile(a,{'2.A.2.a':'strong','2.B.3.e':'working','2.A.1.e':'working'})
+    matches=a.get('/api/profiles/current/future').json()['matches']
+    assert any(m['assessment']['unrecorded_count'] for m in matches)
+    for match in matches:
+        evidence=match['assessment']
+        assert evidence['recorded_count']+evidence['unrecorded_count']==evidence['required_count']
+        if evidence['assessed_proficiency'] is not None:
+            assert abs(match['score']-evidence['evidence_completeness']*evidence['assessed_proficiency']/100)<0.15
+        assert 0<=match['score']<=100
+    with Session(engine) as db:
+        all_skills={s.id:'strong' for s in db.scalars(select(Skill))}
+    profile(a,all_skills)
+    complete=a.get('/api/profiles/current/future').json()['matches']
+    assert all(m['score']==100 and m['assessment']['status']=='complete' for m in complete)
+
+
+def test_connected_pathway_evidence_and_valid_calendar(clients):
+    a,_,_=clients
+    profile(a,{'2.A.2.a':'strong','2.B.3.e':'working','2.A.1.e':'working'})
+    role=a.get('/api/profiles/current/future').json()['matches'][0]['role_id']
+    result=a.put('/api/profiles/current/future',json={'role_id':role},headers=HEADERS).json()
+    tasks=result['pathway']
+    assert 0<len(tasks)<=5
+    assert tasks[0]['dependencies']==[] and 'success criteria' in tasks[0]['handoff']
+    for index,task in enumerate(tasks):
+        assert 1<=task['start_week']<=task['end_week']
+        assert len(task['acceptance_criteria'])==3
+        if index:assert task['dependencies']==[tasks[index-1]['skill_id']]
+        if task['assessment_needed']:assert task['effort_hours']==4
+    first=tasks[0]['skill_id']
+    assert a.put('/api/profiles/current/pathway',json={'skill_id':first,'status':'completed'},headers=HEADERS).status_code==422
+    done=a.put('/api/profiles/current/pathway',json={'skill_id':first,'status':'completed','note':'Tested my case study and recorded limitations.'},headers=HEADERS)
+    assert done.status_code==200
+    assert next(t for t in done.json()['pathway'] if t['skill_id']==first)['status']=='completed'
+    assert all(1<=t['start_week']<=t['end_week'] for t in done.json()['pathway'])
+    faster=a.put('/api/profiles/current/future',json={'weekly_hours':20},headers=HEADERS).json()
+    assert sum(t['effort_hours'] for t in faster['pathway'])==sum(t['effort_hours'] for t in done.json()['pathway'])
+    assert max(t['end_week'] for t in faster['pathway'])<=max(t['end_week'] for t in done.json()['pathway'])
+
+
+def test_world_focus_changes_order_without_changing_coverage():
+    from backend.app.matching import prioritize_gaps
+    gaps=[{'skill_id':'a','name':'Programming','priority':3.5,'importance':3.5},
+          {'skill_id':'b','name':'Monitoring','priority':4,'importance':4}]
+    assert prioritize_gaps(gaps,['Programming'])[0]['skill_id']=='a'
+    assert prioritize_gaps(gaps,['Monitoring'])[0]['skill_id']=='b'
+    assert gaps[0]['priority']==3.5
+
+
 def test_features_and_model_time_integrity():
     series=pd.Series(range(120),dtype=float)
     altered=series.copy();altered.iloc[90:]=99999

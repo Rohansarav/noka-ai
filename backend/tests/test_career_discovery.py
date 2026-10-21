@@ -93,7 +93,8 @@ def test_graph_and_pathway_use_same_weighted_gap_order_for_each_world(clients):
         graph=a.get('/api/profiles/current/career-graph').json()
         graph_gaps={e['target'].removeprefix('skill:') for e in graph['edges'] if e['type']=='missing_skill' and e['source']=='role:'+role}
         assert graph_gaps=={task['skill_id'] for task in value['pathway'][:3]}
-        priority=[task['priority'] for task in value['pathway']]
+        priority=[task['planning_priority'] for task in value['pathway']]
+        assert all(task['planning_priority']==round(task['priority']*(1.25 if task['scenario_priority'] else 1),4) for task in value['pathway'])
         assert priority==sorted(priority,reverse=True)
     gaps=[{'skill_id':'owned','name':'Writing','importance':4.5,'gap':.35,'priority':1.575}, {'skill_id':'absent','name':'Programming','importance':4,'gap':1,'priority':4}]
     assert prioritize_gaps(gaps,['Writing'])[0]['skill_id']=='absent'

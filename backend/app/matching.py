@@ -5,11 +5,12 @@ from backend.app.models import ProfileSkill
 from backend.app.occupation_catalogue import occupation_evidence, skill_evidence
 
 LEVELS = {'learning': .25, 'working': .65, 'strong': 1.0}
-METHOD = ('Readiness = sum(O*NET importance × self-rated level) / sum(importance) × 100, using importance ≥3/5. '
+METHOD = ('Documented coverage = sum(O*NET importance × self-rated level) / sum(importance) × 100, using importance ≥3/5. '
           'Levels: learning .25, working .65, strong 1. Interests do not increase readiness. '
           'Software alignment counts distinct published occupation associations separately; tools add no broad readiness credit. Discovery orders by matched software count, then readiness plus context. All supported occupations are ranked before display; up to five explicit targets are retained alongside five discoveries. '
           'Context alignment is a separate lexical relevance signal, not skill evidence or a probability. '
-          'Development priority = importance × remaining proficiency gap; scenario emphasis breaks ties. '
+          'A missing self-rating is unknown, not proof of inability. The score is documented weighted coverage; evidence completeness and proficiency among recorded requirements are reported separately. '
+          'Development priority = importance × remaining proficiency gap × 1.25 for scenario focus skills, otherwise × 1. This explicit planning assumption changes learning order, never factual coverage. '
           'This is not a probability or forecast. US occupational requirements do not establish local vacancies. Years are not scored.')
 STOP = set('i my me a an and or the to of in on for with from as at is be am have has want work working build building into career role job experience study studying project projects system systems using used'.split())
 
@@ -33,8 +34,8 @@ def context_alignment(profile, role):
 
 
 def prioritize_gaps(gaps, scenario_skills=()):
-    """One rule for graph and pathway; substantial deficits outrank minor deficits."""
-    return sorted(gaps, key=lambda g: (-g['priority'], g['name'] not in scenario_skills, -g['importance'], g['name'], g['skill_id']))
+    """Shared planning rule; scenario weighting never changes the evidence or fit score."""
+    return sorted(gaps, key=lambda g: (-g['priority']*(1.25 if g['name'] in scenario_skills else 1), -g['importance'], g['name'], g['skill_id']))
 
 
 def select_directions(matches, limit=5):
@@ -53,7 +54,6 @@ def match_profile(profile, db, limit=5):
     concepts, software_links=skill_evidence(db)
     software_by_role={}
     for link in software_links:software_by_role.setdefault(link.role_id,[]).append(link)
-    has_broad=any(concepts.get(sid) and concepts[sid].category!='software' for sid in levels)
     grouped = {}
     roles, requirements = occupation_evidence(db)
     for link, skill in requirements:
@@ -66,6 +66,14 @@ def match_profile(profile, db, limit=5):
         if not total:
             continue
         coverage = sum(link.required_importance*levels.get(skill.id,0) for link,skill in requirements)/total
+        recorded = [(link, skill) for link, skill in requirements if skill.id in levels]
+        recorded_weight = sum(link.required_importance for link, _ in recorded)
+        assessment = {'required_count':len(requirements),'recorded_count':len(recorded),
+                      'unrecorded_count':len(requirements)-len(recorded),
+                      'evidence_completeness':round(100*recorded_weight/total,1),
+                      'assessed_proficiency':round(100*coverage*total/recorded_weight,1) if recorded_weight else None,
+                      'status':'complete' if len(recorded)==len(requirements) else 'partial' if recorded else 'unassessed',
+                      'method':'Documented coverage = weighted evidence completeness × self-rated proficiency among recorded requirements / 100. Unrecorded requirements receive no credit, but are unknown rather than demonstrated weaknesses. Software is separate.'}
         transferable = [(link,skill) for link,skill in requirements if skill.category == 'transferable']
         transfer_total = sum(link.required_importance for link,_ in transferable)
         transfer = sum(link.required_importance*levels.get(skill.id,0) for link,skill in transferable)/transfer_total if transfer_total else 0
@@ -88,9 +96,9 @@ def match_profile(profile, db, limit=5):
         matches.append({'role_id':role.id,'title':role.title,'score':round(coverage*100,1),'coverage':round(coverage*100,1),
                         'transferable_coverage':round(transfer*100,1),'interest_adjustment':0,'gaps':gaps,
                         'is_target':target,'context_alignment':alignment,'context_reasons':reasons,
-                        'technical':technical,'readiness_status':'self_reported' if has_broad else 'not_assessed',
+                        'technical':technical,'assessment':assessment,'readiness_status':'self_reported' if recorded else 'not_assessed',
                         'selection_reason':'Your confirmed target; retained regardless of readiness.' if target else 'Discovered from all supported occupations using readiness and separate context relevance.',
-                        'explanation':f"Weighted readiness {coverage:.0%} across {len(requirements)} important requirements. Interest does not increase readiness. Self-ratings are not a verified skills assessment; years are not scored.",
+                        'explanation':f"Documented weighted coverage {coverage:.1%}: {len(recorded)} of {len(requirements)} important requirements recorded; {len(requirements)-len(recorded)} are unassessed, not proven weaknesses. Learning/working/strong self-ratings receive 25/65/100% credit, weighted by published importance. Interest and software add no coverage points. This is not an employability assessment.",
                         'source_ids':sorted({link.source_id for link,_ in requirements}|{link.source_id for link in software})})
     matches.sort(key=lambda m:(-m['technical']['matched_count'],-(m['score']+5*m['context_alignment']),-m['score'],m['title'],m['role_id']))
     result.update(status='ready' if matches else 'insufficient_profile_information',matches=matches if limit is None else select_directions(matches,limit))

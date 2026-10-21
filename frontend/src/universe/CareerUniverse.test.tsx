@@ -62,7 +62,7 @@ describe('Career Universe page', () => {
     visit('/');
     const directions=await screen.findByRole('region',{name:'Career directions'});
     expect(within(directions).getByRole('heading',{name:'Your targets'})).toBeInTheDocument();
-    expect(within(directions).getByText('5/100 readiness')).toBeInTheDocument();
+    expect(within(directions).getByText('5/100 documented coverage')).toBeInTheDocument();
     expect(within(directions).getByText('Your confirmed target · interest adds no points')).toBeInTheDocument();
     expect(within(directions).getByText('My unmapped specialty')).toBeInTheDocument();
     expect(within(directions).getByRole('heading',{name:'Other directions to explore'})).toBeInTheDocument();

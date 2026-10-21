@@ -9,7 +9,7 @@ export type CareerNode = {
   skill_count: number | null; country: string | null; is_demo: boolean; score: number | null;
   coverage: number | null; explanation: string | null; goal_id: number | null;
   is_target?: boolean; context_reasons?:string[]; selection_reason?:string;
-  category?:string|null; technical?:import('../profile-api').TechnicalAlignment|null; readiness_status?:'self_reported'|'not_assessed';
+  assessment?:import('../ReadinessEvidence').Assessment|null; category?:string|null; technical?:import('../profile-api').TechnicalAlignment|null; readiness_status?:'self_reported'|'not_assessed';
 };
 export type CareerEdge = {
   id: string; type: CareerEdgeType; source: string; target: string; source_ids: string[];

@@ -72,7 +72,7 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         nodes[rid] = CareerNode(id=rid, type="role", entity_id=role.id, label=role.title, description=role.description,
             source_ids=sorted(set(match["source_ids"] + [role.source_id])), review_status=role.curation_status,
             score=match["score"], coverage=match["coverage"], explanation=match["explanation"], country=role.country,
-            is_target=match['is_target'], context_reasons=match['context_reasons'], selection_reason=match['selection_reason'],technical=match['technical'],readiness_status=match['readiness_status'])
+            is_target=match['is_target'], context_reasons=match['context_reasons'], selection_reason=match['selection_reason'],technical=match['technical'],readiness_status=match['readiness_status'],assessment=match['assessment'])
         for item in [*match['technical']['matched'],*match['technical']['explore']]:
             sid='skill:'+item['skill_id']
             if sid in nodes:

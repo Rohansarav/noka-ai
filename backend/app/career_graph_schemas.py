@@ -2,7 +2,7 @@
 from datetime import datetime
 from typing import Literal
 from pydantic import Field
-from backend.app.profile_schemas import Contract, TechnicalAlignment
+from backend.app.profile_schemas import Contract, TechnicalAlignment, ReadinessAssessment
 from backend.app.schemas import SourceOut
 
 MAX_NODES = 170
@@ -34,6 +34,7 @@ class CareerNode(Contract):
     category: str | None = None
     technical: TechnicalAlignment | None = None
     readiness_status: Literal['self_reported','not_assessed'] = 'self_reported'
+    assessment: ReadinessAssessment | None = None
 
 
 class CareerEdge(Contract):

@@ -22,8 +22,8 @@ export default function CareerNodeCard({ data, selected }: NodeProps<UniverseFlo
     {node.type === 'profile' && <span>{node.skill_count} confirmed skills · {node.country} preference</span>}
     {node.type === 'owned_skill' && <span className="skill-level">{node.level === 'strong' ? 'Strong' : 'Developing · '+node.level} · self-reported</span>}
     {node.type === 'required_skill' && <span>Not recorded · published occupational requirement</span>}{node.type==='context_skill'&&<span>Published skill context · not a priority gap</span>}{node.type==='technology'&&<span>Published software example · alternatives may exist</span>}
-    {node.type === 'role' && <span className="universe-node-score">{node.readiness_status==='not_assessed'?'Not assessed':node.score}<small>{node.readiness_status==='not_assessed'?'Broad occupational skills': '/ 100 readiness'}</small></span>}
-    {node.type === 'sdg' && <span>{node.description}</span>}
+    {node.type === 'role' && <span className="universe-node-score">{node.readiness_status==='not_assessed'?'Not assessed':node.score}<small>{node.readiness_status==='not_assessed'?'Broad occupational skills': '/ 100 documented coverage'}</small></span>}
+    {node.type==='role'&&node.assessment&&<span>{node.assessment.recorded_count}/{node.assessment.required_count} requirements recorded · {node.assessment.status==='complete'?'complete evidence':'partial evidence'}</span>}{node.type === 'sdg' && <span>{node.description}</span>}
     {node.type === 'sdg_target' && <span>Reviewed relevance link</span>}
     <Handle id="source-left" type="source" position={Position.Left} isConnectable={false}/>
     <Handle id="source-bottom" type="source" position={Position.Bottom} isConnectable={false}/>

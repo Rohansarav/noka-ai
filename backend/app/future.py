@@ -22,7 +22,7 @@ SCENARIOS = {
     "governed": {"name": "Governed AI", "assumption": "Stronger accountability increases emphasis on monitoring, quality and judgment.", "skills": ["Monitoring", "Quality Control Analysis", "Judgment and Decision Making"]},
     "collaboration": {"name": "Human-AI Collaboration", "assumption": "Augmentation increases emphasis on communication, learning and collaborative judgment.", "skills": ["Active Learning", "Coordination", "Critical Thinking", "Active Listening"]},
 }
-VERSION = "skills-software-impact-2026-10-21-v3"
+VERSION = "connected-planning-2026-10-21-v4"
 
 
 class Preferences(BaseModel):
@@ -101,24 +101,37 @@ def pathway(profile, workspace, db, matches):
     match = next((m for m in matches if m["role_id"] == workspace.role_id), None)
     if not match:
         return []
+    role = db.get(Role, workspace.role_id)
     priority = SCENARIOS[workspace.scenario]["skills"]
     gaps = prioritize_gaps(match['gaps'], priority)
+    # A focused project is actionable; retain started work when the lens changes.
+    retained = {g['skill_id'] for g in gaps if workspace.progress.get(f"{workspace.role_id}:{g['skill_id']}", 'planned') != 'planned'}
+    unfinished = [g for g in gaps if workspace.progress.get(f"{workspace.role_id}:{g['skill_id']}", 'planned') != 'completed']
+    focus = {g['skill_id'] for g in unfinished[:5]} | retained
+    gaps = [g for g in gaps if g['skill_id'] in focus]
     tasks, hours = [], 0
     for gap in gaps:
         key = f"{workspace.role_id}:{gap['skill_id']}"
         status = workspace.progress.get(key, "planned")
         activity,project=PRACTICE.get(gap["name"], (f"Choose a realistic {match['title']} task requiring {gap['name'].lower()}, practise it and ask an experienced peer to review the result.", f"Document a {gap['name'].lower()} case study with your approach, a work sample, feedback and a revised result."))
-        effort = max(4, math.ceil(24*gap["gap"]))
+        unassessed = gap.get('development') == 'missing'
+        effort = 4 if unassessed else max(4, math.ceil(16*gap["gap"]))
         start = math.floor(hours/workspace.weekly_hours)+1
         if status != "completed":
             hours += effort
-        tasks.append({**gap, "status": status, "effort_hours": effort, "start_week": start,
-                      "end_week": math.ceil(hours/workspace.weekly_hours), "scenario_priority": gap["name"] in priority,
-                      "objective": f"Demonstrate {gap['name'].lower()} in a practical {match['title']} task.",
-                      "activity": activity, "project": project,
+        previous = tasks[-1] if tasks else None
+        handoff = f"Use the {previous['name'].lower()} work sample from step {len(tasks)} as input; explain how this step improves the same case study." if previous else f"Choose one small case study based on this occupation's work: {role.description if role else match['title']}. Define an audience, a practical problem, success criteria and a scope you can finish within your weekly commitment."
+        tasks.append({**gap, "planning_priority":round(gap['priority']*(1.25 if gap['name'] in priority else 1),4), "status": status, "effort_hours": effort, "start_week": start,
+                      "end_week": max(start, math.ceil(hours/workspace.weekly_hours)), "scenario_priority": gap["name"] in priority,
+                      "objective": f"{'Check your current ability in' if unassessed else 'Strengthen'} {gap['name'].lower()} within your {match['title']} case study.",
+                      "activity": ('Begin with a short independent attempt. If you already demonstrate this skill, update your profile rather than treating it as a deficit. ' if unassessed else '') + activity,
+                      "project": project + ' Add this evidence to the same career portfolio.',
                       "note": workspace.progress.get("note:"+key,""),
-                      "dependencies": [], "why": f"O*NET importance {gap['importance']}/5; self-reported gap {gap['gap']}.",
-                      "estimate_method": "Planning estimate: 24 hours × proficiency gap, minimum 4; not a validated mastery duration."})
+                      "dependencies": [previous['skill_id']] if previous else [],
+                      "handoff": handoff, "assessment_needed":unassessed,
+                      "acceptance_criteria":[f"Include a concrete {gap['name'].lower()} work sample relevant to {match['title']}.", 'Check the result against your case study success criteria and record feedback or a test.', 'Save an evidence link or reflection describing what worked, limitations and the next improvement.'],
+                      "why": f"Published importance {gap['importance']}/5. " + ('No self-rating recorded: validate before committing to more study.' if unassessed else f"Self-rated proficiency leaves a {gap['gap']:.0%} development gap.") + (" Scenario focus applies a 1.25× planning weight." if gap['name'] in priority else " Standard 1× planning weight."),
+                      "estimate_method": "Timebox: 4 hours for an unassessed skill check; otherwise 16 × self-rated gap, minimum 4 hours. Sequential portfolio handoffs are a suggested workflow, not occupational prerequisites or a promise of mastery."})
     return tasks
 
 
@@ -143,7 +156,8 @@ def snapshot(profile, workspace, db):
             "future_self": worlds[workspace.scenario]["future_self"], "conversation": workspace.conversation, "worlds":worlds,
             "comparisons": comparisons,
             "analysis_context": confirmed_context(profile),
-            "method": "Rank all supported occupations by distinct matched software examples, then planning index. Software adds no readiness points. Planning index = readiness + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Interest never increases readiness. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap priority, with scenario tie-breaks."}
+            "pathway_scope": {"total_development_areas":len(selected['gaps']) if selected else 0,"focus_limit":5,"project_title":f"{selected['title']} career portfolio" if selected else None},
+            "method": "Rank all supported occupations by distinct matched software examples, then planning index. Software adds no coverage points. Planning index = documented coverage + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap × 1.25 for scenario focus skills, otherwise × 1. A focused pathway selects five areas and retains started work. Unrecorded skills begin with a validation task, not an assumption of inability."}
 
 
 @router.get("/profiles/current/future")
@@ -175,6 +189,9 @@ def save_progress(body: Progress, request: Request, response: Response, db: Sess
         raise HTTPException(422)
     if body.status is None and body.note is None:
         raise HTTPException(422)
+    evidence = body.note if body.note is not None else workspace.progress.get(f"note:{workspace.role_id}:{body.skill_id}", '')
+    if body.status == 'completed' and len(evidence.strip()) < 20:
+        raise HTTPException(422, detail='Save at least 20 characters of evidence or reflection before completing a milestone.')
     if body.status is not None:
         workspace.progress={**workspace.progress, f"{workspace.role_id}:{body.skill_id}":body.status}
     if body.note is not None:

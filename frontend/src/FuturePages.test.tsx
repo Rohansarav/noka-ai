@@ -57,6 +57,22 @@ describe('Future workspace interactions',()=>{
     fireEvent.click(screen.getByRole('button',{name:'Save commitment'}));
     await waitFor(()=>expect(writes[0].body).toEqual({weekly_hours:12}));
   });
+  it('shows connected project handoffs and requires saved evidence before completion',async()=>{
+    state={...state,pathway:[{...task,status:'planned',note:'',dependencies:[],handoff:'Define one career case study.',acceptance_criteria:['Check the work sample against success criteria.']}]};
+    setup(<PathwayPage/>);
+    expect(await screen.findByRole('heading',{name:'Your career portfolio'})).toBeVisible();
+    expect(screen.getByText('Define one career case study.')).toBeVisible();
+    expect(screen.getByText('Check the work sample against success criteria.')).toBeVisible();
+    expect(screen.getByRole('option',{name:'Completed'})).toBeDisabled();
+    expect(screen.getByText(/at least 20 characters/)).toBeVisible();
+  });
+  it('explains which world effects are planning assumptions',async()=>{
+    setup(<WorldDial/>);
+    expect(await screen.findByText(/Saved planning lens/)).toBeVisible();
+    expect(screen.getByText(/Profile coverage, published requirements and reviewed SDG evidence stay fixed/)).toBeVisible();
+    fireEvent.click(screen.getByRole('button',{name:'Human-AI Collaboration'}));
+    expect(writes).toHaveLength(0);
+  });
 });
 
 

@@ -68,7 +68,7 @@ describe('authentic agent activity',()=>{
     status={...status,status:'completed',result}; listeners.done();
     await screen.findByText('Here’s your next perspective.');
     await waitFor(()=>expect(callback).toHaveBeenCalledWith(result.effects));
-    expect(screen.getByText(/self-reported readiness/)).toBeVisible();
+    expect(screen.getByText(/documented coverage/)).toBeVisible();
   });
   it('shows honest provider failure without applying UI effects',async()=>{
     status={...queued,status:'failed',error_code:'ai_unavailable'};const callback=vi.fn();

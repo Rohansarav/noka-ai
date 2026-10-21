@@ -149,6 +149,16 @@ class TechnicalAlignment(Contract):
     note: str = 'Software associations are examples used in the occupation, not a requirement to master every listed tool. No importance or proficiency threshold is inferred.'
 
 
+class ReadinessAssessment(Contract):
+    required_count: int
+    recorded_count: int
+    unrecorded_count: int
+    evidence_completeness: float
+    assessed_proficiency: float | None
+    status: Literal['complete','partial','unassessed']
+    method: str
+
+
 class Match(Contract):
     role_id: str
     title: str
@@ -163,9 +173,10 @@ class Match(Contract):
     context_alignment: float = 0
     context_reasons: list[str] = Field(default_factory=list)
     selection_reason: str = ''
-    gap_method: str = 'importance × remaining proficiency gap; scenario emphasis breaks ties'
+    gap_method: str = 'importance × remaining proficiency gap; scenario planning applies a 1.25× focus weight'
     technical: TechnicalAlignment = Field(default_factory=TechnicalAlignment)
     readiness_status: Literal['self_reported','not_assessed'] = 'self_reported'
+    assessment: ReadinessAssessment | None = None
 
 
 class MatchesResponse(Contract):
