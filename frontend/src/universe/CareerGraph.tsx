@@ -39,7 +39,7 @@ export default function CareerGraph({ graph, filter, selected, onSelect, highlig
   const positions = useMemo(() => layoutNodes(graph.nodes), [graph.nodes]);
   const related = useMemo(() => relatedNodeIds(visible, selected), [visible, selected]);
   const nodes: UniverseFlowNode[] = useMemo(() => visible.nodes.map(n => ({ id: n.id, type: 'career', position: positions[n.id], data: { entity: n, worldPriority: prioritySkills.includes(n.label), scenarioLabel: prioritySkills.includes(n.label) ? "World priority" : annotations[n.id], dimmed: !!selected && !related.has(n.id) && !highlighted.includes(n.id) }, selected: n.id === selected || highlighted.includes(n.id), draggable: false, connectable: false, focusable: true,
-    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. ${annotations[n.id] ?? ''} Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related, highlighted, annotations, prioritySkills]);
+    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.readiness_status==='not_assessed'?', broad readiness not assessed':n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. ${annotations[n.id] ?? ''} Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related, highlighted, annotations, prioritySkills]);
   const edges: Edge[] = useMemo(() => {
     // The API retains both evidence and gap edges; draw the gap once to avoid overlapping lines.
     const gapPairs = new Set(visible.edges.filter(e => e.type === 'missing_skill').map(e => `${e.source}:${e.target}`));
@@ -48,7 +48,7 @@ export default function CareerGraph({ graph, filter, selected, onSelect, highlig
       const color = e.type === 'missing_skill' ? 'var(--color-warning)' : e.type === 'contributes_to_target' || e.type === 'target_belongs_to_goal' ? 'var(--color-green)' : 'var(--color-action)';
       const vertical = e.type === 'contributes_to_target' || e.type === 'target_belongs_to_goal';
       return { id: e.id, source: e.source, target: e.target, sourceHandle: vertical ? 'source-bottom' : 'source-left', targetHandle: vertical ? 'target-top' : 'target-right', type: 'default', focusable: false, animated: false,
-        style: { stroke: color, strokeWidth: highlighted ? 2.5 : 1.4, opacity: selected ? highlighted ? 0.85 : 0.12 : 0.3, strokeDasharray: e.type === 'missing_skill' ? '5 5' : undefined },
+        style: { stroke: color, strokeWidth: highlighted ? 2.5 : 1.4, opacity: selected ? highlighted ? 0.85 : 0.12 : 0.3, strokeDasharray: e.type === 'missing_skill' ? '5 5' : e.type==='context_requirement'||e.type==='uses_technology'?'2 4':undefined },
         ariaLabel: `${e.type.replaceAll('_', ' ')}${e.importance ? `, importance ${e.importance} of 5` : ''}` };
     });
   }, [visible.edges, related, selected]);

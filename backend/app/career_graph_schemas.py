@@ -2,13 +2,13 @@
 from datetime import datetime
 from typing import Literal
 from pydantic import Field
-from backend.app.profile_schemas import Contract
+from backend.app.profile_schemas import Contract, TechnicalAlignment
 from backend.app.schemas import SourceOut
 
-MAX_NODES = 120
-MAX_EDGES = 1150
-NodeType = Literal["profile", "owned_skill", "required_skill", "role", "sdg", "sdg_target"]
-EdgeType = Literal["has_skill", "requires_skill", "missing_skill", "contributes_to_target", "target_belongs_to_goal"]
+MAX_NODES = 170
+MAX_EDGES = 2000
+NodeType = Literal["profile", "owned_skill", "required_skill", "context_skill", "technology", "role", "sdg", "sdg_target"]
+EdgeType = Literal["has_skill", "requires_skill", "context_requirement", "missing_skill", "uses_technology", "contributes_to_target", "target_belongs_to_goal"]
 
 
 class CareerNode(Contract):
@@ -31,6 +31,9 @@ class CareerNode(Contract):
     is_target: bool = False
     context_reasons: list[str] = Field(default_factory=list)
     selection_reason: str = ''
+    category: str | None = None
+    technical: TechnicalAlignment | None = None
+    readiness_status: Literal['self_reported','not_assessed'] = 'self_reported'
 
 
 class CareerEdge(Contract):
@@ -47,6 +50,12 @@ class CareerEdge(Contract):
     supporting_id: str | None = None
 
 
+class ImpactAvailability(Contract):
+    reviewed_links: int = 0
+    pending_links: int = 0
+    message: str = 'No reviewed SDG relationship is recorded for these displayed careers and skills. This is missing evidence, not proof of no impact.'
+
+
 class CareerGraph(Contract):
     status: Literal["no_profile", "insufficient_profile_information", "ready"]
     profile_revision: str | None
@@ -56,3 +65,4 @@ class CareerGraph(Contract):
     sources: list[SourceOut]
     methodology: str
     limitations: list[str]
+    impact: ImpactAvailability = Field(default_factory=ImpactAvailability)

@@ -4,10 +4,11 @@ from threading import RLock
 from time import monotonic
 from weakref import WeakKeyDictionary
 from sqlalchemy import select
-from backend.app.models import Role, RoleSkill, Skill
+from backend.app.models import Role, RoleSkill, Skill, RoleTechnology
 
 TTL_SECONDS = 30
 _cache = WeakKeyDictionary()
+_skills_cache = WeakKeyDictionary()
 _lock = RLock()
 
 
@@ -38,6 +39,37 @@ class CatalogueSkill:
 def invalidate_catalogue(bind):
     with _lock:
         _cache.pop(bind, None)
+        _skills_cache.pop(bind, None)
+
+
+@dataclass(frozen=True)
+class PublishedSkill:
+    id: str
+    canonical_name: str
+    aliases: tuple
+    category: str
+    source_id: str
+
+
+@dataclass(frozen=True)
+class TechnologyAssociation:
+    role_id: str
+    skill_id: str
+    source_id: str
+    hot_technology: bool
+    in_demand: bool
+
+
+def skill_evidence(db):
+    """Public concepts and unweighted software associations, never private profile levels."""
+    bind=db.get_bind()
+    with _lock:
+        entry=_skills_cache.get(bind)
+        if entry and monotonic()-entry[0]<TTL_SECONDS:return entry[1],entry[2]
+        skills={s.id:PublishedSkill(s.id,s.canonical_name,tuple(s.aliases),s.category,s.source_id) for s in db.execute(select(Skill.id,Skill.canonical_name,Skill.aliases,Skill.category,Skill.source_id))}
+        associations=tuple(TechnologyAssociation(*row) for row in db.execute(select(RoleTechnology.role_id,RoleTechnology.skill_id,RoleTechnology.source_id,RoleTechnology.hot_technology,RoleTechnology.in_demand)))
+        _skills_cache[bind]=(monotonic(),skills,associations)
+        return skills,associations
 
 
 def occupation_evidence(db):

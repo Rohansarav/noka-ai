@@ -22,7 +22,7 @@ SCENARIOS = {
     "governed": {"name": "Governed AI", "assumption": "Stronger accountability increases emphasis on monitoring, quality and judgment.", "skills": ["Monitoring", "Quality Control Analysis", "Judgment and Decision Making"]},
     "collaboration": {"name": "Human-AI Collaboration", "assumption": "Augmentation increases emphasis on communication, learning and collaborative judgment.", "skills": ["Active Learning", "Coordination", "Critical Thinking", "Active Listening"]},
 }
-VERSION = "target-readiness-context-2026-10-21-v2"
+VERSION = "skills-software-impact-2026-10-21-v3"
 
 
 class Preferences(BaseModel):
@@ -90,7 +90,7 @@ def ranked(profile, db, scenario, base=None, requirements=None, selected_role=No
         match["planning_index"] = round(match["score"]+emphasis+match['context_emphasis'], 2)
         match["scenario_reason"] = SCENARIOS[scenario]["assumption"]
         match["priority_skills"] = [skill.canonical_name for link, skill in relevant if link.required_importance > 3]
-    ordered = sorted(matches, key=lambda m: (-m['planning_index'], m['title']))
+    ordered = sorted(matches, key=lambda m: (-m.get('technical',{}).get('matched_count',0),-m['planning_index'], m['title']))
     visible = select_directions(ordered)
     if selected_role and selected_role not in {m['role_id'] for m in visible}:
         visible.extend(m for m in ordered if m['role_id'] == selected_role)
@@ -143,7 +143,7 @@ def snapshot(profile, workspace, db):
             "future_self": worlds[workspace.scenario]["future_self"], "conversation": workspace.conversation, "worlds":worlds,
             "comparisons": comparisons,
             "analysis_context": confirmed_context(profile),
-            "method": "Rank all supported occupations: planning index = readiness + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Interest never increases readiness. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap priority, with scenario tie-breaks."}
+            "method": "Rank all supported occupations by distinct matched software examples, then planning index. Software adds no readiness points. Planning index = readiness + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Interest never increases readiness. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap priority, with scenario tie-breaks."}
 
 
 @router.get("/profiles/current/future")

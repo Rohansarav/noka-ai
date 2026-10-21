@@ -75,6 +75,17 @@ class RoleSkill(Base):
     __table_args__ = (CheckConstraint("required_importance >= 1 AND required_importance <= 5"),)
 
 
+class RoleTechnology(Base):
+    """Published software associations have no invented importance or proficiency threshold."""
+    __tablename__ = 'role_technologies'
+    role_id: Mapped[str] = mapped_column(ForeignKey('roles.id'), primary_key=True)
+    skill_id: Mapped[str] = mapped_column(ForeignKey('skills.id'), primary_key=True)
+    source_id: Mapped[str] = mapped_column(ForeignKey('sources.id'))
+    classifications: Mapped[list] = mapped_column(JSON)
+    hot_technology: Mapped[bool] = mapped_column(Boolean)
+    in_demand: Mapped[bool] = mapped_column(Boolean)
+
+
 class DemandObservation(Base):
     __tablename__ = "job_demand_observations"
     country: Mapped[str] = mapped_column(String(2), primary_key=True)

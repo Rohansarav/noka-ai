@@ -26,6 +26,13 @@ beforeEach(()=>{
 afterEach(()=>vi.unstubAllGlobals());
 
 describe('authentic agent activity',()=>{
+  it('accepts retrieved software/context highlights only when those nodes exist in the current graph',()=>{
+    const expanded={...graph,nodes:[...graph.nodes,{...skill,id:'skill:software-example',type:'technology' as const},{...skill,id:'skill:impact-context',type:'context_skill' as const}]};
+    const answer={...result,effects:{...result.effects,highlight_skills:['skill:software-example','skill:impact-context']}};
+    expect(validEffects(answer,expanded)).toEqual(answer.effects);
+    expect(validEffects(answer,graph)).toBeNull();
+    expect(validEffects({...answer,effects:{...answer.effects,highlight_skills:['invented']}},expanded)).toBeNull();
+  });
   it('switches a named world only for an explicit command without a model call',async()=>{
     const switchWorld=vi.fn().mockResolvedValue({});
     render(<AgentActivityPanel graph={graph} role={role} onEffects={vi.fn()} onScenarioRequest={switchWorld}/>);
@@ -61,7 +68,7 @@ describe('authentic agent activity',()=>{
     status={...status,status:'completed',result}; listeners.done();
     await screen.findByText('Here’s your next perspective.');
     await waitFor(()=>expect(callback).toHaveBeenCalledWith(result.effects));
-    expect(screen.getByText(/heuristic skill fit/)).toBeVisible();
+    expect(screen.getByText(/self-reported readiness/)).toBeVisible();
   });
   it('shows honest provider failure without applying UI effects',async()=>{
     status={...queued,status:'failed',error_code:'ai_unavailable'};const callback=vi.fn();

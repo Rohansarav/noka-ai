@@ -1,5 +1,9 @@
 # Noka public evidence register — Phase 2
 
+## Software evidence addition — 21 October 2026
+
+Software skills use the [O*NET 31.0 Software Skills dictionary](https://www.onetcenter.org/dictionary/31.0/csv/software_skills.html) and its [versioned CSV](https://www.onetcenter.org/dl_files/database/db_31_0_csv/software_skills.csv), published by USDOL/ETA and the National Center for O*NET Development under [CC BY 4.0](https://www.onetcenter.org/license_db.html). Retrieved file SHA-256: `6aabb96b464288db849580e6510530efff3f80e25dde2bb23f1fc36bb526b016`. The source records workplace software examples and hot/in-demand flags; it supplies no importance rating or proficiency threshold for these associations. Noka normalizes concept spelling, filters to supported occupations and provides explicitly identified search aliases. Associations do not imply broad-skill mastery, mandatory tool checklists, Malaysian demand or endorsement. The 13-row software fixture is an attributed subset of this exact source; importer tests retain its parent checksum. Original files remain outside the repository in the ignored public cache.
+
 Verified on 20 October 2026 (Asia/Kuala_Lumpur). The importer stores original URLs, publisher, version, SHA-256, retrieval timestamp, licensing/terms, geography, granularity and publication date when known. Public downloads live in ignored `data/raw/`, not the frontend bundle. `data/raw/manifest.json` records each actual retrieval. The database source rows expose this lineage through `/api/datasets/summary` and `/api/sdgs`.
 
 ## Indeed Hiring Lab: US occupational-sector posting indices

@@ -6,6 +6,20 @@ const nodes = [{id:'profile:p',type:'profile'},{id:'skill:a',type:'owned_skill'}
 const edges = [{id:'owned',type:'has_skill',source:'profile:p',target:'skill:a'}, {id:'req',type:'requires_skill',source:'role:a',target:'skill:a',gap:.35},{id:'partial',type:'missing_skill',source:'role:a',target:'skill:a',gap:.35},{id:'missing',type:'missing_skill',source:'role:a',target:'skill:b',gap:1},{id:'other',type:'requires_skill',source:'role:b',target:'skill:a'},{id:'sdg-link',type:'contributes_to_target',source:'role:a',target:'sdg_target:4.4'},{id:'goal-link',type:'target_belongs_to_goal',source:'sdg_target:4.4',target:'sdg:4'}] as CareerGraphData['edges'];
 const graph = {nodes,edges} as CareerGraphData;
 describe('deterministic Universe presentation',()=>{
+  it('keeps the complete reviewed skill-to-target path visible without implying another career',()=>{
+    const contextGraph={nodes:[...nodes,{id:'skill:context',type:'context_skill'}],edges:[...edges.filter(e=>e.type!=='contributes_to_target'),{id:'context',type:'context_requirement',source:'role:a',target:'skill:context'},{id:'reviewed-context',type:'contributes_to_target',source:'skill:context',target:'sdg_target:4.4'}]} as CareerGraphData;
+    const related=relatedNodeIds(contextGraph,'role:a');
+    expect(related.has('skill:context')&&related.has('sdg_target:4.4')&&related.has('sdg:4')).toBe(true);
+    expect(related.has('role:b')).toBe(false);
+    const filtered=filterGraph(contextGraph,'sdgs');
+    expect(filtered.edges.some(e=>e.id==='context')).toBe(true);
+  });
+  it('places every technology and the SDG lane below the tallest real content lane',()=>{
+    const more=[...nodes,...Array.from({length:11},(_,i)=>({id:'role:extra'+i,type:'role',score:i,label:'Role '+i})),{id:'skill:software',type:'technology'}] as CareerNode[];
+    const positions=layoutNodes(more);
+    expect(positions['skill:software']).toBeDefined();
+    expect(positions['sdg_target:4.4'].y).toBeGreaterThan(Math.max(...more.filter(n=>n.type==='role').map(n=>positions[n.id].y+160)));
+  });
   it('keeps stable non-overlapping lane positions',()=>{
     expect(layoutNodes(nodes)).toEqual(layoutNodes([...nodes].reverse()));
     const positions = Object.values(layoutNodes(nodes)).map(p=>`${p.x}:${p.y}`);

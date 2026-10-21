@@ -1,6 +1,6 @@
 """Direct SQL/service adapters. Neither the model nor caller can select a profile."""
 from sqlalchemy import select, or_
-from backend.app.models import ProfileSkill, Skill, Role, RoleSkill, SDGLink, Source
+from backend.app.models import ProfileSkill, Skill, Role, RoleSkill, RoleTechnology, SDGLink, Source
 from backend.app.matching import match_profile
 from backend.app.agents.registry import TOOLS
 
@@ -47,15 +47,18 @@ def invoke(name, arguments, profile, db, allowed_roles):
     if name == "get_skill_gaps":
         return next(m["gaps"] for m in matches["matches"] if m["role_id"] == role_id)
     if name == "get_role_requirements":
-        return [{"skill_id": s.id, "name": s.canonical_name, "importance": r.required_importance, "source_id": r.source_id}
+        rated=[{"skill_id": s.id, "name": s.canonical_name, "importance": r.required_importance, "source_id": r.source_id,'evidence_kind':'rated_skill'}
                 for r, s in db.execute(select(RoleSkill, Skill).join(Skill).where(RoleSkill.role_id == role_id))]
+        software=[{'skill_id':s.id,'name':s.canonical_name,'importance':None,'source_id':r.source_id,'evidence_kind':'software_association'}
+                  for r,s in db.execute(select(RoleTechnology,Skill).join(Skill,RoleTechnology.skill_id==Skill.id).where(RoleTechnology.role_id==role_id).order_by(RoleTechnology.in_demand.desc(),RoleTechnology.hot_technology.desc(),Skill.canonical_name).limit(64))]
+        return rated+software
     if name == "get_role_evidence":
         role = db.get(Role, role_id)
         source = db.get(Source, role.source_id)
         return {"role_id": role.id, "sector": role.sector, "evidence_status": role.evidence_status,
                 "limitation": "Sector proxy only; no individual-role forecast or local vacancies.",
                 "source_id": source.id, "url": source.canonical_url, "publisher": source.publisher}
-    skill_ids = select(RoleSkill.skill_id).where(RoleSkill.role_id == role_id)
+    skill_ids = select(RoleSkill.skill_id).where(RoleSkill.role_id == role_id,RoleSkill.required_importance>=2)
     links = db.scalars(select(SDGLink).where(SDGLink.curation_status == "human_reviewed", SDGLink.reviewed_by.is_not(None), SDGLink.reviewed_at.is_not(None), or_(SDGLink.role_id == role_id, SDGLink.skill_id.in_(skill_ids)))).all()
     return [{"target_id": l.target_id, "role_id": l.role_id, "skill_id": l.skill_id, "rationale": l.rationale, "source_id": l.source_id,
              "limitation": "Explicit entity link only; a skill link does not imply a role-to-SDG link or measured impact."} for l in links]

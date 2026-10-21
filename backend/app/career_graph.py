@@ -1,8 +1,8 @@
 """Bounded aggregation over authoritative SQL records; no HTTP calls, writes or scoring changes."""
 from datetime import datetime, timezone
-from sqlalchemy import or_, select
+from sqlalchemy import or_, select, case, func
 from sqlalchemy.orm import Session
-from backend.app.career_graph_schemas import CareerEdge, CareerGraph, CareerNode
+from backend.app.career_graph_schemas import CareerEdge, CareerGraph, CareerNode, ImpactAvailability
 from backend.app.matching import LEVELS, METHOD
 from backend.app.models import Profile, ProfileSkill, Role, RoleSkill, SDG, SDGLink, SDGTarget, Skill, Source, FutureWorkspace
 from backend.app.matching import prioritize_gaps
@@ -23,6 +23,7 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         "Showing up to five targets, five discoveries and an explored role; three priority gaps per role and six reviewed SDG links.",
         "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
         "Guide reads authoritative evidence; US sector forecasts and public research are separate from skill fit.",
+        "Skill-level SDG context can include published role-skill links of importance at least 2/5. These context links do not enter readiness (threshold 3/5) or assert direct career impact.",
     ]
     if profile is None:
         return CareerGraph(status="no_profile", profile_revision=None, generated_at=datetime.now(timezone.utc),
@@ -42,13 +43,24 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
     roles = {r.id: r for r in db.scalars(select(Role).where(Role.id.in_(match_ids)))} if match_ids else {}
     # Only priority gaps from the unchanged matcher add absent skill nodes.
     priority = {m['role_id']: {g['skill_id'] for g in prioritize_gaps(m['gaps'], SCENARIOS[scenario]['skills'])[:MAX_GAPS_PER_ROLE]} for m in matches}
-    skill_ids = set(levels) | {sid for ids in priority.values() for sid in ids}
+    all_requirements = list(db.scalars(select(RoleSkill).where(RoleSkill.role_id.in_(match_ids),RoleSkill.required_importance>=2))) if match_ids else []
+    eligible_skills=set(levels)|{r.skill_id for r in all_requirements}
+    scope=or_(SDGLink.role_id.in_(match_ids),SDGLink.skill_id.in_(eligible_skills))
+    approved=(SDGLink.curation_status=='human_reviewed',SDGLink.reviewed_by.is_not(None),SDGLink.reviewed_at.is_not(None))
+    links=db.scalars(select(SDGLink).where(scope,*approved).order_by(case((SDGLink.role_id==(workspace.role_id if workspace else ''),0),(SDGLink.role_id.in_(profile.interests),1),else_=2),SDGLink.id).limit(MAX_SDG_LINKS)).all() if eligible_skills or match_ids else []
+    pending=db.scalar(select(func.count()).select_from(SDGLink).where(scope,or_(SDGLink.curation_status!='human_reviewed',SDGLink.reviewed_by.is_(None),SDGLink.reviewed_at.is_(None)))) if eligible_skills or match_ids else 0
+    impact=ImpactAvailability(reviewed_links=len(links),pending_links=pending or 0,
+        message='Connectors show only attributed, human-reviewed relationships. Follow the supporting career or skill to the official target; relevance is not measured impact.' if links else 'No reviewed SDG relationship is recorded for these displayed careers and skills. Pending proposals are not presented as facts; this does not mean the careers have no impact.')
+    technology={item['skill_id'] for m in matches for item in m['technical']['explore']}
+    priority_ids={sid for ids in priority.values() for sid in ids}
+    impact_skill_ids={link.skill_id for link in links if link.skill_id}
+    skill_ids = set(levels) | priority_ids | impact_skill_ids | technology
     skills = list(db.scalars(select(Skill).where(Skill.id.in_(skill_ids)).order_by(Skill.id))) if skill_ids else []
     for skill in skills:
         record = owned_by_id.get(skill.id)
         sid = "skill:" + skill.id
-        nodes[sid] = CareerNode(id=sid, type="owned_skill" if record else "required_skill", entity_id=skill.id,
-            label=skill.canonical_name, description="Confirmed, self-reported skill" if record else "A displayed role's priority requirement",
+        nodes[sid] = CareerNode(id=sid, type="owned_skill" if record else 'technology' if skill.category=='software' else 'required_skill' if skill.id in priority_ids else 'context_skill', entity_id=skill.id,
+            label=skill.canonical_name, description="Confirmed, self-reported skill" if record else 'Published software example used in this occupation; optional exploration, not a mandatory requirement.' if skill.category=='software' else "A displayed role's published requirement; may also support a reviewed SDG connection.",category=skill.category,
             source_ids=[skill.source_id], level=record.level if record else None, years=record.years if record else None)
         if record:
             edge = CareerEdge(id=f"has_skill:{pid}:{sid}", type="has_skill", source=pid, target=sid,
@@ -60,7 +72,14 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         nodes[rid] = CareerNode(id=rid, type="role", entity_id=role.id, label=role.title, description=role.description,
             source_ids=sorted(set(match["source_ids"] + [role.source_id])), review_status=role.curation_status,
             score=match["score"], coverage=match["coverage"], explanation=match["explanation"], country=role.country,
-            is_target=match['is_target'], context_reasons=match['context_reasons'], selection_reason=match['selection_reason'])
+            is_target=match['is_target'], context_reasons=match['context_reasons'], selection_reason=match['selection_reason'],technical=match['technical'],readiness_status=match['readiness_status'])
+        for item in [*match['technical']['matched'],*match['technical']['explore']]:
+            sid='skill:'+item['skill_id']
+            if sid in nodes:
+                edge=CareerEdge(id=f'uses_technology:{rid}:{sid}',type='uses_technology',source=rid,target=sid,
+                    source_ids=[item['source_id']],supporting_id=role.id+':'+item['skill_id'],
+                    rationale='O*NET publishes this software as a workplace example for the occupation. No importance or proficiency threshold is asserted; alternatives may exist.')
+                edges[edge.id]=edge
     requirements = list(db.scalars(select(RoleSkill).where(RoleSkill.role_id.in_(match_ids), RoleSkill.skill_id.in_(skill_ids), RoleSkill.required_importance >= 3).order_by(RoleSkill.role_id, RoleSkill.skill_id))) if match_ids else []
     for requirement in requirements:
         rid, sid = "role:" + requirement.role_id, "skill:" + requirement.skill_id
@@ -72,9 +91,17 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         if requirement.skill_id in priority[requirement.role_id]:
             edge = CareerEdge(id=f"missing_skill:{rid}:{sid}", type="missing_skill", **evidence)
             edges[edge.id] = edge
-    # Do not infer or promote SDG links; only explicit human-reviewed, attributed records qualify.
-    links = db.scalars(select(SDGLink).where(SDGLink.curation_status == "human_reviewed", SDGLink.reviewed_by.is_not(None),
-        SDGLink.reviewed_at.is_not(None), or_(SDGLink.role_id.in_(match_ids), SDGLink.skill_id.in_(skill_ids))).order_by(SDGLink.id).limit(MAX_SDG_LINKS)).all() if skill_ids or match_ids else []
+    # Context links explain an approved skill-to-target record, without upgrading
+    # a below-threshold skill into a requirement or inventing a direct role/SDG edge.
+    for requirement in all_requirements:
+        if requirement.skill_id in impact_skill_ids and requirement.required_importance<3:
+            rid,sid='role:'+requirement.role_id,'skill:'+requirement.skill_id
+            edge=CareerEdge(id=f'context_requirement:{rid}:{sid}',type='context_requirement',source=rid,target=sid,
+                importance=requirement.required_importance,source_ids=[requirement.source_id],supporting_id=requirement.role_id+':'+requirement.skill_id,
+                rationale='Published occupation-skill context (importance at least 2/5), used to explain a reviewed skill-to-SDG relationship. Excluded from readiness and priority gaps; no direct career impact is inferred.')
+            edges[edge.id]=edge
+    # Only reviewed links with an actual displayed source entity can produce a connector.
+    links=[link for link in links if ('role:'+link.role_id if link.role_id else 'skill:'+link.skill_id) in nodes]
     target_ids = {link.target_id for link in links}
     targets = {t.id: t for t in db.scalars(select(SDGTarget).where(SDGTarget.id.in_(target_ids)))} if target_ids else {}
     goal_ids = {t.goal_id for t in targets.values()}
@@ -98,4 +125,4 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
     sources = db.scalars(select(Source).where(Source.id.in_(used_sources)).order_by(Source.id)).all() if used_sources else []
     return CareerGraph(status='ready' if matches else 'insufficient_profile_information', profile_revision=profile.updated_at.isoformat(), generated_at=datetime.now(timezone.utc),
         nodes=sorted(nodes.values(), key=lambda n: n.id), edges=sorted(edges.values(), key=lambda e: e.id),
-        sources=sources, methodology=METHOD, limitations=limitations)
+        sources=sources, methodology=METHOD, limitations=limitations,impact=impact)

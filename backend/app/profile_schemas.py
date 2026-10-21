@@ -33,6 +33,18 @@ class ConfirmedSkill(Contract):
     years: float | None = Field(default=None, ge=0, le=60)
 
 
+class CustomSkill(Contract):
+    name: str = Field(min_length=2, max_length=100)
+    level: Literal['learning','working','strong'] = 'working'
+    years: float | None = Field(default=None, ge=0, le=60)
+
+    @model_validator(mode='after')
+    def normalized(self):
+        self.name=' '.join(self.name.split())
+        if len(self.name)<2:raise ValueError('Enter a skill name.')
+        return self
+
+
 class CareerAspiration(Contract):
     title: str = Field(min_length=2, max_length=120)
     role_ids: list[str] = Field(default_factory=list, max_length=3)
@@ -57,9 +69,16 @@ class OnboardingDraft(Contract):
     projects: str = Field(default="", max_length=2000)
     constraints: str = Field(default="", max_length=600)
     aspirations: list[CareerAspiration] = Field(default_factory=list, max_length=5)
+    custom_skills: list[CustomSkill] = Field(default_factory=list, max_length=20)
     interests: list[str] = Field(default_factory=list, max_length=5)
     weekly_hours: int = Field(default=6, ge=1, le=40)
     skills: list[ConfirmedSkill] = Field(default_factory=list, max_length=60)
+
+    @model_validator(mode='after')
+    def unique_custom_skills(self):
+        names=[skill.name.casefold() for skill in self.custom_skills]
+        if len(names)!=len(set(names)):raise ValueError('Custom skills must have distinct names.')
+        return self
 
 
 class SaveSkills(Contract):
@@ -114,6 +133,22 @@ class Gap(Contract):
     development: Literal['missing', 'developing'] = 'missing'
 
 
+class SoftwareEvidence(Contract):
+    skill_id: str
+    name: str
+    source_id: str
+    in_demand: bool
+
+
+class TechnicalAlignment(Contract):
+    status: Literal['source_available','no_source_associations'] = 'no_source_associations'
+    associated_count: int = 0
+    matched_count: int = 0
+    matched: list[SoftwareEvidence] = Field(default_factory=list)
+    explore: list[SoftwareEvidence] = Field(default_factory=list)
+    note: str = 'Software associations are examples used in the occupation, not a requirement to master every listed tool. No importance or proficiency threshold is inferred.'
+
+
 class Match(Contract):
     role_id: str
     title: str
@@ -129,6 +164,8 @@ class Match(Contract):
     context_reasons: list[str] = Field(default_factory=list)
     selection_reason: str = ''
     gap_method: str = 'importance × remaining proficiency gap; scenario emphasis breaks ties'
+    technical: TechnicalAlignment = Field(default_factory=TechnicalAlignment)
+    readiness_status: Literal['self_reported','not_assessed'] = 'self_reported'
 
 
 class MatchesResponse(Contract):

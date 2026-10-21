@@ -39,8 +39,11 @@ def role_detail(role_id: str, session: Session = Depends(get_session)):
 
 
 @router.get("/skills", response_model=SkillsResponse)
-def skills(session: Session = Depends(get_session)):
-    return {"skills": session.scalars(select(Skill).order_by(Skill.canonical_name)).all()}
+def skills(core: bool=False, ids:str=Query(default='',max_length=3000),session: Session = Depends(get_session)):
+    from backend.app.occupation_catalogue import skill_evidence
+    selected=set(ids.split(','))
+    values=skill_evidence(session)[0].values()
+    return {'skills':sorted((s for s in values if not core or s.category!='software' or s.id in selected),key=lambda s:s.canonical_name)}
 
 
 @router.get("/datasets/summary", response_model=SummaryResponse)

@@ -18,7 +18,7 @@ beforeEach(() => {
     const path = String(input); requests.push({ path, init });
     let data: unknown = {};
     if (path === '/api/profiles/current') data = { profile: saved };
-    else if (path === '/api/skills') data = { skills };
+    else if (path.split('?')[0] === '/api/skills') data = { skills };
     else if (path === '/api/roles') data = { roles: [] };
     else if (path === '/api/health') data = { status: 'ok', service: 'noka-api' };
     else if (path === '/api/profiles') { saved = { id: 'private-id', country: 'MY', interests: [], is_demo: JSON.parse(String(init?.body)).is_demo ?? false, confirmed: false, updated_at: 'now', skills: [] }; data = saved; }

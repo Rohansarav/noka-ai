@@ -37,7 +37,7 @@ export function validEffects(result: AgentResult, graph: CareerGraphData): Effec
   if (!e || (!graph.profile_revision || Date.parse(result.profile_revision) !== Date.parse(graph.profile_revision)) || !Array.isArray(e.highlight_skills)) return null;
   if (Object.keys(e).some(key => !['focus_role','highlight_skills','open_evidence'].includes(key)) || e.highlight_skills.length > 12) return null;
   if (!graph.nodes.some(n => n.id === e.focus_role && n.type === 'role')) return null;
-  if (e.highlight_skills.some(id => !graph.nodes.some(n => n.id === id && ['owned_skill','required_skill'].includes(n.type)))) return null;
+  if (e.highlight_skills.some(id => !graph.nodes.some(n => n.id === id && ['owned_skill','required_skill','context_skill','technology'].includes(n.type)))) return null;
   if (e.open_evidence !== null && !graph.sources.some(s => s.id === e.open_evidence)) return null;
   return e;
 }

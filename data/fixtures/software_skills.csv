@@ -1,0 +1,14 @@
+O*NET-SOC Code,Title,Workplace Example,Element ID,Element Name,Hot Technology,In Demand
+15-1252.00,Software Developers,Cascading style sheets CSS,2.E.7.h,Web platform development software,Y,Y
+15-1252.00,Software Developers,Hypertext markup language HTML,2.E.7.h,Web platform development software,Y,Y
+15-1252.00,Software Developers,JavaScript,2.E.7.h,Web platform development software,Y,Y
+15-1252.00,Software Developers,Microsoft Excel,2.E.4.i,Spreadsheet software,Y,N
+15-1252.00,Software Developers,Python,2.E.7.e,Object or component oriented development software,Y,Y
+15-1252.00,Software Developers,R,2.E.7.e,Object or component oriented development software,Y,N
+15-1252.00,Software Developers,React,2.E.7.h,Web platform development software,Y,Y
+15-1252.00,Software Developers,Structured query language SQL,2.E.6.f,Data base user interface and query software,Y,Y
+15-2051.00,Data Scientists,JavaScript,2.E.7.h,Web platform development software,Y,N
+15-2051.00,Data Scientists,Microsoft Excel,2.E.4.i,Spreadsheet software,Y,Y
+15-2051.00,Data Scientists,Python,2.E.7.e,Object or component oriented development software,Y,Y
+15-2051.00,Data Scientists,R,2.E.7.e,Object or component oriented development software,Y,Y
+15-2051.00,Data Scientists,Structured query language SQL,2.E.6.f,Data base user interface and query software,Y,Y

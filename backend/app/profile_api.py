@@ -13,6 +13,7 @@ from backend.app.profile_schemas import AnalysisInput, CreateProfile, CurrentPro
 from backend.app.profile_security import COOKIE, active_session, owned_profile, same_origin, token_hash
 from backend.app.skill_extraction import clean_text, extract, parse_upload
 from backend.app.matching import match_profile
+from backend.app.occupation_catalogue import skill_evidence
 
 router = APIRouter(prefix="/api/profiles", tags=["Private profiles"])
 
@@ -95,7 +96,7 @@ def resume(profile_id: str, request: Request, response: Response,
                 "No readable experience was found. Scanned PDFs need OCR; enter your experience manually instead." if file else
                 "Describe your experience in at least 20 characters, including tasks, projects or skills."}})
         text = standard.text
-    catalogue = list(db.scalars(select(Skill).order_by(Skill.id)))
+    catalogue = list(skill_evidence(db)[0].values())
     if not catalogue:
         return JSONResponse(status_code=503, content={"error": {"code": "catalogue_unavailable", "message": "The skill catalogue is unavailable. Your input has not been saved; retry when it is available."}})
     result = extract(text, catalogue, use_ai)
@@ -126,7 +127,7 @@ def save(profile_id: str, body: SaveSkills, request: Request, response: Response
         raise HTTPException(422, detail='Target selections must agree with the reviewed profile.')
     if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
         raise HTTPException(422)
-    if body.onboarding and (len(ids) < 3 or not body.onboarding.current_field.strip()):
+    if body.onboarding and (len(ids)+len(body.onboarding.custom_skills) < 3 or not body.onboarding.current_field.strip()):
         raise HTTPException(422)
     db.execute(delete(ProfileSkill).where(ProfileSkill.profile_id == profile_id))
     for skill in body.skills:
