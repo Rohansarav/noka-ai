@@ -1,6 +1,6 @@
 import { OutlookExplorer, type Intelligence } from './OutlookExplorer';
 import { lazy, Suspense, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { ArrowUpRight, ArrowRight, Check, Compass, Globe2, Sparkles, Zap, ShieldCheck, Users, Clock3, ExternalLink } from 'lucide-react';
 import { Badge, Button, GlassCard, PageHeader, LoadingSkeleton } from './components';
@@ -13,7 +13,10 @@ const labels: Record<Scenario, string> = { acceleration: 'AI Acceleration', gove
 const worlds = [{id:'acceleration',short:'Acceleration',caption:'Technology moves faster',icon:Zap},{id:'governed',short:'Governed AI',caption:'Trust shapes progress',icon:ShieldCheck},{id:'collaboration',short:'Collaboration',caption:'People + AI, together',icon:Users}] as const;
 
 export function WorldDial() {
+  const location = useLocation();
   const future = useFuture();
+  const worldAwarePaths = new Set(['/', '/universe', '/roadmap', '/signals', '/sdgs', '/model-lab', '/forecast']);
+  if (!worldAwarePaths.has(location.pathname)) return null;
   return <section className={`world-dial world-${future.data?.scenario ?? 'acceleration'}`} aria-label="Choose your future world"><div className="world-dial-label"><span className="dial-compass"><Compass size={25}/></span><div><span className="eyebrow">THE WORLD DIAL</span><p>One future? <strong>Explore three.</strong></p></div><span className="dial-year">2030</span></div><div className="world-options" role="group" aria-label="Future scenario">{worlds.map(({id,short,caption,icon:Icon}) => <button key={id} aria-label={labels[id]} aria-pressed={future.data?.scenario === id} disabled={!future.data || future.save.isPending} onClick={() => future.save.mutate({ scenario:id })}><Icon size={18}/><span><strong>{short}</strong><small>{caption}</small></span><span className="world-selected" aria-hidden="true">{future.data?.scenario===id ? <Check size={13}/> : '↗'}</span></button>)}</div>{future.save.isError && <p role="alert">{future.save.error.message}</p>}{future.isError && <p role="alert">Saved world unavailable. <button onClick={()=>void future.refetch()}>Retry</button></p>}{!future.profile && !future.profileLoading && <Link className="dial-setup" to="/profile/intake">Create your profile <ArrowUpRight size={14}/></Link>}</section>;
 }
 export function MyFuture() {
