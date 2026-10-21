@@ -8,8 +8,8 @@ vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
 function visit(path: string) { return render(<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}><MemoryRouter initialEntries={[path]}><App/></MemoryRouter></QueryClientProvider>); }
 afterEach(() => { vi.useRealTimers(); vi.mocked(fetch).mockReset().mockRejectedValue(new Error('offline')); });
 describe('Noka navigation', () => {
-  it('offers the complete module navigation and the branded hero', () => { visit('/'); expect(screen.getByRole('heading', { name: /A little clarity/  })).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(6); expect(screen.getByRole('link', { name: 'Build My Future' })).toHaveAttribute('href', '/profile/intake'); });
-  it.each([['/forecast', 'Look ahead, with perspective.'], ['/roadmap', 'Small steps. A new direction.'], ['/model-lab', 'Look ahead, with perspective.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.queryByText(/illustrative forecast/)).not.toBeInTheDocument(); });
+  it('offers the complete module navigation and the branded Universe', async () => { visit('/'); expect(await screen.findByRole('heading', { name: /Your future has connections/  })).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(6); expect(screen.getByRole('link', { name: 'Build My Future' })).toHaveAttribute('href', '/profile/intake'); });
+  it.each([['/forecast', 'Look ahead, with perspective.'], ['/roadmap', 'Your next chapter, step by step.'], ['/model-lab', 'Look ahead, with perspective.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.queryByText(/illustrative forecast/)).not.toBeInTheDocument(); });
   it('handles missing routes', () => { visit('/missing'); expect(screen.getByText('This path doesn’t exist yet.')).toBeInTheDocument(); });
   it('shows API failure honestly', async () => { visit('/'); expect(await screen.findByText('API unavailable · refresh to retry')).toBeInTheDocument(); });
   it('does not equate API connectivity with source ingestion', async () => {
@@ -26,12 +26,12 @@ describe('Noka navigation', () => {
   });
   it.each(['/roadmap'])('offers honest intake from %s', async path => {
     visit(path);
-    expect(await screen.findByRole('heading', { name: 'Choose the future you want to explore.' })).toBeInTheDocument();
+    expect(await screen.findByRole('heading', { name: 'Every journey starts with a direction.' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Explore My Future' })).toHaveAttribute('href', '/');
   });
-  it('opens the private wizard without saving personal fields', () => {
+  it('opens the private wizard without saving personal fields', async () => {
     visit('/');
-    fireEvent.click(screen.getByRole('link', { name: 'Build My Future' }));
+    fireEvent.click(await screen.findByRole('link', { name: 'Build My Future' }));
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Start with what makes you, you.');
     expect(screen.getByRole('group', { name: 'Experience input method' })).toBeInTheDocument();
     expect(screen.getByLabelText('Resume file')).toBeInTheDocument();

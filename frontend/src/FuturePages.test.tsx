@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
-import { PathwayPage, WorldDial } from './FuturePages';
+import { PathwayPage, WorldDial, ImpactPage, RadarPage } from './FuturePages';
 import { useFuture } from './future-api';
 
 const scenarios={acceleration:{name:'AI Acceleration',assumption:'Test assumption',skills:['Programming']},governed:{name:'Governed AI',assumption:'Test assumption',skills:['Monitoring']},collaboration:{name:'Human-AI Collaboration',assumption:'Test assumption',skills:['Active Listening']}};
@@ -51,5 +51,38 @@ describe('Future workspace interactions',()=>{
     expect(screen.getByDisplayValue('Completed')).toBeInTheDocument();
     fireEvent.click(screen.getByRole('button',{name:'Save commitment'}));
     await waitFor(()=>expect(writes[0].body).toEqual({weekly_hours:12}));
+  });
+});
+
+
+describe('focused evidence exploration',()=>{
+  it('reveals the selected real target without promoting a pending proposal',async()=>{
+    const ordinary=globalThis.fetch;
+    vi.stubGlobal('fetch',vi.fn(async(input,init)=>{
+      const path=String(input);
+      const payload=path==='/api/roles'?{roles:[{id:'fixture-role',title:'Fixture role'}]}:path.startsWith('/api/impact/')?{role:'Fixture role',limitation:'Fixture relevance only',relationships:[{id:'a',skill:'Instructing',responsibility:null,target_id:'4.4',goal_id:4,target:'Fixture education target',explanation:'Fixture reviewed relevance',status:'Curated SDG relationship',url:'https://sdgs.un.org/goals/goal4',relationship_type:'skill_target'},{id:'b',skill:null,responsibility:'Fixture role responsibility',target_id:'3.8',goal_id:3,target:'Fixture health target',explanation:'Fixture proposal',status:'Pending review',url:'https://sdgs.un.org/goals/goal3',relationship_type:'role_target'}]}:null;
+      return payload?{ok:true,json:async()=>payload} as Response:ordinary(input,init);
+    }));
+    setup(<ImpactPage/>);
+    await screen.findByRole('heading',{name:'Target 4.4'});
+    fireEvent.click(screen.getByRole('button',{name:'Role responsibility to target 3.8'}));
+    expect(screen.getByRole('heading',{name:'Target 3.8'})).toBeInTheDocument();
+    expect(screen.getByText('Pending review')).toBeInTheDocument();
+    expect(screen.queryByRole('heading',{name:'Target 4.4'})).not.toBeInTheDocument();
+    expect(writes).toHaveLength(0);
+  });
+  it('filters research and reveals source details without substituting a publication date',async()=>{
+    const ordinary=globalThis.fetch;
+    const finding={url:'https://example.org/evidence',publication_date:null,retrieved_at:'2026-10-20',source_statement:'Fixture source excerpt',inspection:'Fixture inspection',review_status:'pending',role_ids:[],skill_ids:[],interpretation:'Fixture interpretation'};
+    vi.stubGlobal('fetch',vi.fn(async(input,init)=>String(input)==='/api/intelligence'?{ok:true,json:async()=>({outlooks:[],runs:[],method:'Fixture method',findings:[{...finding,id:'global',title:'Global fixture story',market:'Global'},{...finding,id:'my',title:'Malaysia fixture story',market:'MY'}]})} as Response:ordinary(input,init)));
+    setup(<RadarPage/>);
+    await screen.findByRole('heading',{name:'Global fixture story'});
+    fireEvent.click(screen.getByRole('button',{name:'Malaysia'}));
+    expect(screen.getByRole('heading',{name:'Malaysia fixture story'})).toBeInTheDocument();
+    expect(screen.queryByRole('heading',{name:'Global fixture story'})).not.toBeInTheDocument();
+    expect(screen.getByText('Published date not verified')).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Source excerpt & mapping status'));
+    expect(screen.getByText('Fixture source excerpt')).toBeVisible();
+    expect(writes).toHaveLength(0);
   });
 });

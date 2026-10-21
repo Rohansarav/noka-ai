@@ -3,6 +3,10 @@
 Navigate tomorrow’s work, today. NOKA combines a personal career workspace, three future scenarios, an interactive evidence graph, persistent learning pathways, source-linked intelligence, and evaluated US sector forecasts. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
 
+## Premium interface — current design
+
+The current interface centers My Future on the real Career Universe, with a global World Dial and Ask Noka companion. Radar uses editorial trend/source views, Pathway a connected timeline, and Impact an interactive role-to-target stage. Evidence and technical activity remain accessible on demand. See the [UI verification report](docs/PREMIUM_UI_REPORT.md) for actual browser checks, 76 passing frontend tests, screenshots and design limits.
+
 ## Integrated future workspace — current build
 
 The current build adds My Future, a shared three-world selector, persistent role/hour preferences and learning notes/progress, the preserved React Flow Universe with scenario annotations, Intelligence Radar, source-bound qualitative outlooks, Guide conversations and tool access, role-first SDG exploration, and Oracle/Model Lab with actual chronological evaluation. Earlier phase sections below are historical records; they do not describe the final capability boundary.

@@ -55,12 +55,23 @@ describe('Career Universe page', () => {
   it('adds primary navigation and routes a confirmed homepage journey to Universe', async () => {
     visit('/');
     expect(screen.getByRole('link',{name:'My Future'})).toHaveAttribute('href','/');
-    await waitFor(() => expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/universe'));
+    await screen.findByRole('region',{name:'Interactive career connections'});
+    expect(screen.queryByRole('link',{name:'Build My Future'})).not.toBeInTheDocument();
   });
   it('keeps the homepage intake journey for no confirmed profile', async () => {
     hasProfile = false; visit('/');
     await screen.findByRole('link',{name:'Build My Future'});
     expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/profile/intake');
+  });
+  it('switches the companion tabs with arrow keys and restores expansion focus',async()=>{
+    visit(); await screen.findByRole('region',{name:'Interactive career connections'});
+    const ask=screen.getByRole('tab',{name:'Ask Noka'}); ask.focus();
+    fireEvent.keyDown(ask,{key:'ArrowRight'});
+    expect(screen.getByRole('tab',{name:'Connection'})).toHaveFocus();
+    expect(screen.getByRole('tab',{name:'Connection'})).toHaveAttribute('aria-selected','true');
+    const expand=screen.getByRole('button',{name:'Expand Universe'});fireEvent.click(expand);
+    const dialog=screen.getByRole('dialog',{name:'Expanded Career Universe'});expect(dialog).toHaveFocus();
+    fireEvent.keyDown(dialog,{key:'Escape'});expect(expand).toHaveFocus();
   });
   it('shows the backend graph loading state', async () => {
     vi.mocked(fetch).mockImplementation(input => String(input).endsWith('/career-graph') ? new Promise(()=>{}) : Promise.resolve({ok:true,json:async()=>({status:'ok',service:'noka-api'})} as Response));
@@ -92,7 +103,7 @@ describe('Career Universe page', () => {
     expect(vi.mocked(fetch).mock.calls.every(([,init])=>!init?.method || init.method==='GET')).toBe(true);
   });
   it('provides an independently selectable accessible list and reviewed SDG rationale', async () => {
-    visit(); await screen.findByRole('heading',{name:'Explore without the canvas.'});
+    visit(); fireEvent.click(await screen.findByText('Explore connections as a list')); await screen.findByRole('heading',{name:'Explore without the canvas.'});
     const list = screen.getByRole('region',{name:'Explore without the canvas.'});
     const choose = within(list).getByRole('button',{name:/sdg target Target 4.4/});
     choose.focus(); expect(choose).toHaveFocus(); fireEvent.click(choose);
@@ -134,7 +145,8 @@ it('passes validated Matchmaker highlights to the existing canvas and clears the
   }));
   visit();
   fireEvent.click(await screen.findByRole('button',{name:'Select canvas node '+career.label}));
-  fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
+  fireEvent.click(screen.getByRole('tab',{name:'Ask Noka'}));
+  fireEvent.click(screen.getByRole('button',{name:'Send question to Noka'}));
   await waitFor(()=>expect(screen.getByRole('button',{name:'Select canvas node '+prog.label})).toHaveAttribute('data-agent-highlighted','true'));
   fireEvent.click(screen.getByRole('button',{name:'Select canvas node '+prog.label}));
   expect(screen.getByRole('button',{name:'Select canvas node '+prog.label})).toHaveAttribute('data-agent-highlighted','false');

@@ -23,6 +23,15 @@ function useReducedMotion() {
 
 export default function CareerGraph({ graph, filter, selected, onSelect, highlighted = [], annotations = {} }: { annotations?: Record<string,string>; highlighted?: string[]; graph: CareerGraphData; filter: UniverseFilter; selected: string | null; onSelect: (id: string | null) => void }) {
   const [instance, setInstance] = useState<ReactFlowInstance<UniverseFlowNode, Edge> | null>(null);
+  const canvasRef=useRef<HTMLDivElement>(null);
+  const [narrow,setNarrow]=useState(false);
+  useEffect(()=>{
+    const canvas=canvasRef.current;if(!canvas)return;
+    const measure=()=>setNarrow(canvas.clientWidth<560);measure();
+    if(typeof ResizeObserver==='undefined')return;
+    const observer=new ResizeObserver(measure);observer.observe(canvas);
+    return ()=>observer.disconnect();
+  },[]);
   const reduced = useReducedMotion();
   const duration = reduced ? 0 : 240;
   const previousFilter = useRef(filter);
@@ -49,12 +58,19 @@ export default function CareerGraph({ graph, filter, selected, onSelect, highlig
     previousFilter.current = filter;
     // A frame lets React Flow measure newly filtered nodes before fitting.
     const frame = requestAnimationFrame(() => {
+      // On phones, center the selected real node rather than shrinking the whole map.
+      if(narrow && selected && positions[selected]){
+        const entity=graph.nodes.find(n=>n.id===selected);
+        const width=entity?.type==='role'?210:entity?.type==='profile'?225:174;
+        void instance.setCenter(positions[selected].x+width/2,positions[selected].y+(entity?.type==='role'||entity?.type==='profile'?64:45),{zoom:.8,duration:filterChanged?0:duration});
+        return;
+      }
       const focused = selected ? visible.nodes.filter(n => related.has(n.id)).map(n => ({ id: n.id })) : undefined;
-      void instance.fitView({ nodes: focused, padding: 0.18, duration: filterChanged ? 0 : duration, maxZoom: 1.15 });
+      void instance.fitView({ nodes: focused, padding: 0.14, duration: filterChanged ? 0 : duration, minZoom: selected ? (canvasRef.current && canvasRef.current.clientWidth < 560 ? .8 : .62) : .12, maxZoom: 1.15 });
     });
     return () => cancelAnimationFrame(frame);
-  }, [instance, filter, selected, visible.nodes, related, duration]); // Selection/filter drive focus, not pointer hover.
-  return <div className="universe-canvas" role="region" aria-label="Interactive career connections">
+  }, [instance, filter, selected, visible.nodes, related, duration, narrow, positions, graph.nodes]); // Selection/filter drive focus, not pointer hover.
+  return <div ref={canvasRef} className="universe-canvas" role="region" aria-label="Interactive career connections">
     <div className="universe-canvas-heading"><span className="eyebrow">YOUR LIVING CAREER UNIVERSE</span><span>Pan to explore · pinch or scroll to zoom</span></div>
     <ReactFlow<UniverseFlowNode, Edge> nodes={nodes} edges={edges} nodeTypes={nodeTypes} onInit={setInstance}
       onNodeClick={(_, node) => onSelect(node.id)}
@@ -68,6 +84,6 @@ export default function CareerGraph({ graph, filter, selected, onSelect, highlig
       <Background variant={BackgroundVariant.Dots} gap={24} size={1} color="#cddcd3"/>
       <Controls showInteractive={false} fitViewOptions={{ duration, padding: 0.18 }}/>
     </ReactFlow>
-    <div className="universe-floating-controls"><Button className="button-secondary" onClick={() => void instance?.fitView({ padding: 0.18, duration })}><Maximize2 size={14}/>Fit view</Button><Button className="button-secondary" disabled={!selected} onClick={() => void instance?.fitView({ nodes: nodes.filter(n => related.has(n.id)), padding: 0.18, duration })}><Focus size={14}/>Focus</Button><Button className="button-secondary" onClick={() => { onSelect(null); void instance?.fitView({ padding: 0.18, duration }); }}><RotateCcw size={14}/>Reset</Button></div>
+    <div className="universe-floating-controls"><Button className="button-secondary" onClick={() => void instance?.fitView({ padding: 0.18, duration })}><Maximize2 size={14}/>Fit view</Button><Button className="button-secondary" disabled={!selected} onClick={() => {if(narrow && selected && positions[selected])void instance?.setCenter(positions[selected].x+105,positions[selected].y+64,{zoom:.8,duration});else void instance?.fitView({ nodes: nodes.filter(n => related.has(n.id)), padding: 0.14, minZoom:.62, duration });}}><Focus size={14}/>Focus</Button><Button className="button-secondary" onClick={() => { onSelect(null); void instance?.fitView({ padding: 0.18, duration }); }}><RotateCcw size={14}/>Reset</Button></div>
   </div>;
 }

@@ -1,0 +1,62 @@
+{
+  "desktop": {
+    "scroll": 1425,
+    "width": 1425
+  },
+  "scenarios": {
+    "governed": {
+      "scores": [
+        "26.4/ 100 skill fit",
+        "26.7/ 100 skill fit",
+        "28/ 100 skill fit",
+        "30.6/ 100 skill fit",
+        "39.6/ 100 skill fit"
+      ],
+      "story": "YOUR POSSIBLE FUTURE SELF\n\nBring your strengths to Software Developers. In Governed AI, prioritise Judgment and Decision Making.\n\nRead your future story\nShape my pathway",
+      "transform": "transform: translate(15.96px, 111.39px) scale(0.62);"
+    },
+    "acceleration": {
+      "scores": [
+        "26.4/ 100 skill fit",
+        "26.7/ 100 skill fit",
+        "28/ 100 skill fit",
+        "30.6/ 100 skill fit",
+        "39.6/ 100 skill fit"
+      ],
+      "story": "YOUR POSSIBLE FUTURE SELF\n\nBring your strengths to Software Developers. In AI Acceleration, prioritise Technology Design, Programming, Systems Analysis.\n\nRead your future story\nShape my pathway",
+      "transform": "transform: translate(23.46px, 111.39px) scale(0.62);"
+    },
+    "collaboration": {
+      "scores": [
+        "26.4/ 100 skill fit",
+        "26.7/ 100 skill fit",
+        "28/ 100 skill fit",
+        "30.6/ 100 skill fit",
+        "39.6/ 100 skill fit"
+      ],
+      "story": "YOUR POSSIBLE FUTURE SELF\n\nBring your strengths to Software Developers. In Human-AI Collaboration, prioritise Active Listening, Critical Thinking, Active Learning.\n\nRead your future story\nShape my pathway"
+    }
+  },
+  "pan": {
+    "before": "transform: translate(23.46px, 111.39px) scale(0.62);",
+    "after": "transform: translate(88.46px, 156.39px) scale(0.62);"
+  },
+  "worldCamera": {
+    "before": "transform: translate(88.46px, 156.39px) scale(0.62);",
+    "after": "transform: translate(88.46px, 156.39px) scale(0.62);"
+  },
+  "guide": {
+    "status": "completed",
+    "events": 4,
+    "activity": "Activity \u00c2\u00b7 4 recorded events\n\nExecution [redacted] \u00c2\u00b7 Guide: completed \u00c2\u00b7 1 tools\n\nMatchmaker request accepted.\nMatchmaker worker started.\nRead-only tool completed.\nget_future_context\nView role\nEvidence-backed exploration ready."
+  },
+  "mobile": {
+    "graph": "transform: translate(-467.5px, -16.2px) scale(0.8);",
+    "scroll": 375,
+    "width": 375
+  },
+  "tablet": {
+    "scroll": 753,
+    "width": 753
+  }
+}

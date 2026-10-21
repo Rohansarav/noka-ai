@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import { Slot } from '@radix-ui/react-slot';
-import { ArrowUpRight, CircleAlert, CircleDashed, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, CircleAlert, CircleDashed, ShieldCheck, Compass } from 'lucide-react';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -28,7 +28,7 @@ export function ErrorState({ message }: { message: string }) {
   return <div role="alert" className="error-state"><CircleAlert size={17} aria-hidden="true"/><p>{message}</p></div>;
 }
 export function LoadingSkeleton({ label = 'Loading API status' }: { label?: string }) {
-  return <div role="status" aria-label={label} className="skeleton"><span className="sr-only">{label}</span></div>;
+  return <div role="status" aria-label={label} aria-busy="true" className="noka-wait"><span className="noka-wait-compass" aria-hidden="true"><Compass size={27}/></span><span>{label}<span className="noka-wait-line" aria-hidden="true"/></span></div>;
 }
 // A named native progress element exposes its value to assistive technology.
 export function ProgressBar({ label, value }: { label: string; value: number }) {
