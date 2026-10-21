@@ -5,7 +5,7 @@ from backend.app.career_graph_schemas import CareerEdge, CareerGraph, CareerNode
 from backend.app.matching import LEVELS, METHOD, match_profile
 from backend.app.models import ProfileSkill, Role, RoleSkill, SDG, SDGLink, SDGTarget, Skill, Source
 
-MAX_ROLES = 3
+MAX_ROLES = 5
 MAX_GAPS_PER_ROLE = 3
 MAX_SDG_LINKS = 6
 MAX_OWNED_SKILLS = 60  # Same bound as the confirmed-profile API.
@@ -17,9 +17,9 @@ def build_career_graph(profile, db):
     limitations = [
         "Skill fit is the existing heuristic, not a forecast, hiring probability or local vacancy claim.",
         "US O*NET requirements describe occupations; your preferred location does not establish local demand.",
-        "Showing up to 3 roles, 3 priority gaps per role and 6 reviewed SDG links. Other relationships may exist.",
+        "Showing up to 5 roles, 3 priority gaps per role and 6 reviewed SDG links. Other relationships may exist.",
         "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
-        "Optional Matchmaker exploration reads this evidence; AI signals and forecasts remain unavailable.",
+        "Guide reads authoritative evidence; US sector forecasts and public research are separate from skill fit.",
     ]
     if profile is None:
         return CareerGraph(status="no_profile", profile_revision=None, generated_at=datetime.now(timezone.utc),

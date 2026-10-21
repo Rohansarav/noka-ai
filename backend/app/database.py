@@ -5,6 +5,8 @@ from backend.app.config import get_settings
 def make_engine():
     """Normalize hosted PostgreSQL URLs and retain the local SQLite fallback."""
     url = get_settings().database_url
+    if get_settings().environment == "production" and not url.startswith(("postgres://", "postgresql://", "postgresql+psycopg://")):
+        raise RuntimeError("Production requires persistent PostgreSQL; SQLite is development-only.")
     if url.startswith(("postgres://", "postgresql://")):
         url = "postgresql+psycopg://" + url.split("://", 1)[1]
     kwargs = {"check_same_thread": False} if url.startswith("sqlite") else {"connect_timeout": 5}

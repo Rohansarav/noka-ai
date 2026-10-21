@@ -10,6 +10,7 @@ from backend.app.agents.contracts import StartExecution
 from backend.app.agents.execution import create, owned, owner_profile, snapshot, recover, locked, event, TERMINAL
 from backend.app.agents.orchestrator import execute
 from backend.app.skill_extraction import clean_text
+from backend.app.future import private
 
 router = APIRouter(prefix="/api/agent-executions", tags=["Private agent executions"])
 
@@ -19,10 +20,19 @@ def start(body: StartExecution, request: Request, response: Response, tasks: Bac
     owner, profile = owner_profile(request, db)
     graph = build_career_graph(profile, db)
     if body.role_id not in {n.entity_id for n in graph.nodes if n.type == "role"}: raise HTTPException(422)
+    if body.node_id and body.node_id not in {n.id for n in graph.nodes if n.type!='profile'}: raise HTTPException(422)
     run = create(db, owner)
+    _, workspace = private(request, db, lock=True)
+    workspace.conversation = (workspace.conversation + [{
+        "question": clean_text(body.question)[:1000], "execution_id": run.id,
+        "role_id": body.role_id, "scenario": workspace.scenario,
+        "node_id":body.node_id,
+        "created_at": run.created_at.isoformat(),
+    }])[-30:]
+    db.commit()
     response.headers["Cache-Control"] = "no-store"
     value = snapshot(db, run)
-    tasks.add_task(execute, db.get_bind(), run.id, clean_text(body.question)[:1000], body.role_id)
+    tasks.add_task(execute, db.get_bind(), run.id, clean_text(body.question)[:1000], body.role_id, body.node_id)
     return value
 
 

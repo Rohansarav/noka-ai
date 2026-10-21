@@ -190,3 +190,24 @@ class AgentEvent(Base):
     status: Mapped[str] = mapped_column(String(24))
     message: Mapped[str] = mapped_column(String(200))
     payload: Mapped[dict] = mapped_column(JSON)
+
+
+class FutureWorkspace(Base):
+    """One private, revisioned workspace; deletion follows profile ownership."""
+    __tablename__ = "future_workspaces"
+    profile_id: Mapped[str] = mapped_column(ForeignKey("profiles.id", ondelete="CASCADE"), primary_key=True)
+    scenario: Mapped[str] = mapped_column(String(32), default="collaboration")
+    role_id: Mapped[str | None] = mapped_column(ForeignKey("roles.id"))
+    weekly_hours: Mapped[int] = mapped_column(Integer, default=6)
+    progress: Mapped[dict] = mapped_column(JSON, default=dict)
+    conversation: Mapped[list] = mapped_column(JSON, default=list)
+    updated_at: Mapped[datetime] = mapped_column(UTCDateTime)
+
+
+class IntelligenceRecord(Base):
+    """Reusable public research, outlook and run records, never private profile data."""
+    __tablename__ = "intelligence_records"
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    kind: Mapped[str] = mapped_column(String(24), index=True)
+    payload: Mapped[dict] = mapped_column(JSON)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime)

@@ -31,6 +31,24 @@ def start(client, role, **extra):
     return client.post(BASE, json={'question':'Explain the gaps', 'role_id':role, **extra}, headers=HEADERS)
 
 
+def test_future_context_change_rejects_late_provider_output(graph_env,monkeypatch):
+    from backend.app.models import FutureWorkspace
+    client,engine,pid,graph,role=prepare(graph_env)
+    monkeypatch.setattr(get_settings(),'openai_api_key',SecretStr('test-key-not-real'))
+    def change_world(*args,**kwargs):
+        with Session(engine) as db:
+            workspace=db.get(FutureWorkspace,pid)
+            workspace.scenario='governed'
+            workspace.updated_at=now()+timedelta(seconds=1)
+            db.commit()
+        return reply(calls=[call('get_ranked_matches',{})])
+    monkeypatch.setattr(orchestrator,'provider',change_world)
+    response=start(client,role)
+    value=client.get(BASE+'/'+response.json()['id']).json()
+    assert value['status']=='failed' and value['error_code']=='profile_changed'
+    assert value['result'] is None
+
+
 def call(name, args):
     return NS(type='function_call', name=name, arguments=json.dumps(args), call_id='call_'+name)
 

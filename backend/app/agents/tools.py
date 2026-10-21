@@ -13,9 +13,33 @@ def invoke(name, arguments, profile, db, allowed_roles):
     if role_id is not None and role_id not in allowed_roles:
         raise ValueError("invalid_reference")
     if name == "get_current_profile":
-        return {"confirmed": profile.confirmed, "country": profile.country, "interests": profile.interests}
+        from backend.app.models import FutureWorkspace
+        workspace = db.get(FutureWorkspace, profile.id)
+        return {"confirmed": profile.confirmed, "country": profile.country, "interests": profile.interests,
+                "future_context": {"scenario": workspace.scenario, "selected_role": workspace.role_id,
+                                   "weekly_hours": workspace.weekly_hours, "saved_progress": workspace.progress} if workspace else None}
     if name == "get_confirmed_skills":
         return [{"skill_id": s.id, "name": s.canonical_name, "level": p.level} for p, s in db.execute(select(ProfileSkill, Skill).join(Skill).where(ProfileSkill.profile_id == profile.id))]
+    if name == "get_future_context":
+        from backend.app.future import snapshot
+        from backend.app.models import FutureWorkspace
+        workspace=db.get(FutureWorkspace,profile.id)
+        if not workspace: return {"status":"Choose a future direction first."}
+        value=snapshot(profile,workspace,db)
+        value.pop("conversation",None)
+        return value
+    if name == "get_forecast_context":
+        from backend.app.future import forecasts
+        report=forecasts()
+        role=db.get(Role,role_id)
+        return {"status":report["status"],"sector":role.sector,"market":"US",
+                "limitation":"Sector proxy, not a Malaysian role forecast.",
+                "forecasts":[{k:v for k,v in r.items() if k!="backtests"} for r in report.get("sectors",[]) if r["sector"]==role.sector]}
+    if name == "get_scout_findings":
+        from backend.app.models import IntelligenceRecord
+        findings=[r.payload for r in db.scalars(select(IntelligenceRecord).where(IntelligenceRecord.kind.in_(["finding","context"])))]
+        return [{"title":f["title"],"url":f["url"],"market":f["market"],"review_status":f["review_status"],
+                 "retrieved_at":f["retrieved_at"]} for f in findings if role_id in f.get("role_ids",[])][:5]
     matches = match_profile(profile, db)
     if name == "get_ranked_matches":
         return matches
