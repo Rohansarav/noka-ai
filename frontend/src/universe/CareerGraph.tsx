@@ -21,7 +21,7 @@ function useReducedMotion() {
   return reduced;
 }
 
-export default function CareerGraph({ graph, filter, selected, onSelect, highlighted = [], annotations = {} }: { annotations?: Record<string,string>; highlighted?: string[]; graph: CareerGraphData; filter: UniverseFilter; selected: string | null; onSelect: (id: string | null) => void }) {
+export default function CareerGraph({ graph, filter, selected, onSelect, highlighted = [], annotations = {}, prioritySkills = [] }: { prioritySkills?: string[]; annotations?: Record<string,string>; highlighted?: string[]; graph: CareerGraphData; filter: UniverseFilter; selected: string | null; onSelect: (id: string | null) => void }) {
   const [instance, setInstance] = useState<ReactFlowInstance<UniverseFlowNode, Edge> | null>(null);
   const canvasRef=useRef<HTMLDivElement>(null);
   const [narrow,setNarrow]=useState(false);
@@ -38,8 +38,8 @@ export default function CareerGraph({ graph, filter, selected, onSelect, highlig
   const visible = useMemo(() => filterGraph(graph, filter), [graph, filter]);
   const positions = useMemo(() => layoutNodes(graph.nodes), [graph.nodes]);
   const related = useMemo(() => relatedNodeIds(visible, selected), [visible, selected]);
-  const nodes: UniverseFlowNode[] = useMemo(() => visible.nodes.map(n => ({ id: n.id, type: 'career', position: positions[n.id], data: { entity: n, scenarioLabel: annotations[n.id], dimmed: !!selected && !related.has(n.id) && !highlighted.includes(n.id) }, selected: n.id === selected || highlighted.includes(n.id), draggable: false, connectable: false, focusable: true,
-    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. ${annotations[n.id] ?? ''} Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related, highlighted, annotations]);
+  const nodes: UniverseFlowNode[] = useMemo(() => visible.nodes.map(n => ({ id: n.id, type: 'career', position: positions[n.id], data: { entity: n, worldPriority: prioritySkills.includes(n.label), scenarioLabel: prioritySkills.includes(n.label) ? "World priority" : annotations[n.id], dimmed: !!selected && !related.has(n.id) && !highlighted.includes(n.id) }, selected: n.id === selected || highlighted.includes(n.id), draggable: false, connectable: false, focusable: true,
+    ariaLabel: `${n.label}, ${n.type.replaceAll('_', ' ')}${n.score !== null ? `, ${n.score} out of 100 heuristic skill fit` : ''}. ${annotations[n.id] ?? ''} Select for details.`, ariaRole: 'button' })), [visible.nodes, positions, selected, related, highlighted, annotations, prioritySkills]);
   const edges: Edge[] = useMemo(() => {
     // The API retains both evidence and gap edges; draw the gap once to avoid overlapping lines.
     const gapPairs = new Set(visible.edges.filter(e => e.type === 'missing_skill').map(e => `${e.source}:${e.target}`));

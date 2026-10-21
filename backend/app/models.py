@@ -152,6 +152,7 @@ class Profile(Base):
     interests: Mapped[list] = mapped_column(JSON, default=list)
     is_demo: Mapped[bool] = mapped_column(Boolean, default=False)
     confirmed: Mapped[bool] = mapped_column(Boolean, default=False)
+    onboarding: Mapped[dict | None] = mapped_column(JSON, nullable=True)
     updated_at: Mapped[datetime] = mapped_column(UTCDateTime)
 
 

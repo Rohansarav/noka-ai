@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 
 export type Level = 'learning' | 'working' | 'strong';
 export type ProfileSkill = { skill_id: string; level: Level; years: number | null };
-export type Profile = { id: string; country: string; interests: string[]; is_demo: boolean; confirmed: boolean; updated_at: string; skills: ProfileSkill[] };
+export type OnboardingDraft = { step: number; status: 'student'|'employed'|'self_employed'|'seeking'|'other'; current_field: string; experience_years: number; country: string; market: string; goal: string; interests: string[]; weekly_hours: number; skills: ProfileSkill[]; completed?: boolean };
+export type Profile = { id: string; country: string; interests: string[]; is_demo: boolean; confirmed: boolean; updated_at: string; skills: ProfileSkill[]; onboarding?: OnboardingDraft | null };
 export type Candidate = { mention: string; years: number | null; evidence_excerpt: string; confidence: 'low' | 'medium' | 'high'; mapping: string; options: string[] };
 export type Extraction = { candidates: Candidate[]; mode: 'local' | 'openai' | 'manual_fallback'; message: string; truncated: boolean };
 export type Match = { role_id: string; title: string; score: number; coverage: number; transferable_coverage: number; interest_adjustment: number; explanation: string; source_ids: string[]; gaps: { skill_id: string; name: string; importance: number; gap: number; critical: boolean }[] };

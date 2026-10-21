@@ -2,18 +2,21 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Compass, ExternalLink } from 'lucide-react';
 import { Badge, Button, ProgressBar } from '../components';
 import type { CareerGraphData, CareerNode } from './universe-types';
+import type { Future } from '../future-api';
 
-export default function CareerDetailPanel({ graph, node }: { graph: CareerGraphData; node: CareerNode | null }) {
+export default function CareerDetailPanel({ graph, node, future }: { graph: CareerGraphData; node: CareerNode | null; future?: Future }) {
   const byId = new Map(graph.nodes.map(n => [n.id, n]));
   const connections = node ? graph.edges.filter(e => e.source === node.id || e.target === node.id) : [];
   const requirements = connections.filter(e => e.type === 'requires_skill');
   const targetIds = new Set(connections.filter(e => e.type === 'target_belongs_to_goal').map(e => e.source));
   const sdgLinks = graph.edges.filter(e => e.type === 'contributes_to_target' && (e.source === node?.id || e.target === node?.id || targetIds.has(e.target)));
   const sourceIds = new Set([...(node?.source_ids ?? []), ...connections.flatMap(e => e.source_ids), ...sdgLinks.flatMap(e => e.source_ids)]);
+  const scenarioMatch=future?.matches.find(m=>m.role_id===node?.entity_id);
   return <aside id="universe-details" className="universe-detail-panel" aria-label="Selected connection details" tabIndex={-1}>
     {!node ? <><span className="feature-icon mint"><Compass size={25}/></span><p className="eyebrow">ROOM TO EXPLORE</p><h2>Follow your curiosity.</h2><p>Select a career to see the strengths you bring and the skills you could build.</p><div className="universe-detail-note">Every line has a reason.<br/><span>Connections come from your reviewed profile, O*NET requirements and reviewed SDG records.</span></div><h3>A guide, not a prediction</h3><p>Skill fit is a transparent heuristic. Research findings and US sector forecasts are available in Intelligence Radar and Model Lab. Guide reads authoritative evidence.</p><Button asChild className="button-secondary"><Link to="/matches">See full Role Matches <ArrowRight size={15}/></Link></Button></> : <>
       <div className="universe-detail-heading" aria-live="polite"><Badge tone={node.type === 'required_skill' ? 'warning' : 'mint'}>{node.type.replaceAll('_', ' ')}</Badge><h2>{node.label}</h2></div>
       {node.description&&<details className="connection-description"><summary>About this connection</summary><p>{node.description}</p></details>}
+      {node.type==='role'&&future&&<section className="scenario-role-context" aria-label="Role scenario context"><span className="eyebrow">{future.scenarios[future.scenario].name}</span><h3>Where to focus in this world</h3><p>{scenarioMatch?.scenario_reason}</p>{scenarioMatch?.priority_skills.length?<><ul>{scenarioMatch.priority_skills.map(s=><li key={s}>{s}</li>)}</ul><p>Planning index {scenarioMatch.planning_index} = skill fit {scenarioMatch.score} + scenario emphasis {scenarioMatch.scenario_emphasis}. Use these capabilities to explore work in this scenario; this is a planning assumption.</p></>:<p>No above-threshold requirement supports extra emphasis for this role in this world. Factual requirements and skill fit stay the same.</p>}</section>}
       {node.type === 'profile' && <><p><strong>{node.skill_count} confirmed skills</strong> · {node.country} preference</p>{node.is_demo && <Badge tone="warning">Demo profile · illustrative experience</Badge>}<p>Levels are self-reported. Only confirmed fields appear here.</p><Link className="text-link" to="/profile">View or edit my profile <ArrowRight size={15}/></Link></>}
       {node.type === 'role' && <><div className="universe-detail-score"><strong>{node.score}</strong><span>/ 100 heuristic skill fit</span></div><ProgressBar label="Weighted skill coverage" value={node.coverage ?? 0}/><details className="connection-description"><summary>Why this fit?</summary><p>{node.explanation}</p></details><p className="caption">Occupation geography: {node.country}. Curation: {node.review_status?.replaceAll('_', ' ')}.</p><h3>Requirements in this view</h3></>}
       {(node.type === 'owned_skill' || node.type === 'required_skill') && <><p>{node.level ? <><strong className="skill-level">{node.level}</strong> · self-reported{node.years !== null ? ` · ${node.years} years` : ''}</> : 'Not recorded in your confirmed profile. This is a requirement of a displayed role.'}</p><h3>Relevant career requirements</h3></>}

@@ -60,8 +60,8 @@ describe('Career Universe page', () => {
   });
   it('keeps the homepage intake journey for no confirmed profile', async () => {
     hasProfile = false; visit('/');
-    await screen.findByRole('link',{name:'Build My Future'});
-    expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/profile/intake');
+    expect(await screen.findByRole('heading',{name:'Let’s find your direction.'})).toBeInTheDocument();
+    expect(screen.queryByRole('region',{name:'Interactive career connections'})).not.toBeInTheDocument();
   });
   it('switches the companion tabs with arrow keys and restores expansion focus',async()=>{
     visit(); await screen.findByRole('region',{name:'Interactive career connections'});
@@ -74,13 +74,13 @@ describe('Career Universe page', () => {
     fireEvent.keyDown(dialog,{key:'Escape'});expect(expand).toHaveFocus();
   });
   it('shows the backend graph loading state', async () => {
-    vi.mocked(fetch).mockImplementation(input => String(input).endsWith('/career-graph') ? new Promise(()=>{}) : Promise.resolve({ok:true,json:async()=>({status:'ok',service:'noka-api'})} as Response));
+    vi.mocked(fetch).mockImplementation(input => String(input).endsWith('/career-graph') ? new Promise(()=>{}) : Promise.resolve({ok:true,json:async()=>({status:'ok',service:'noka-api',profile:{id:'test',confirmed:true}})} as Response));
     visit(); expect(await screen.findByRole('status',{name:'Loading your career connections'})).toBeInTheDocument();
   });
   it('keeps draft profiles on the intake journey', async () => {
     profileConfirmed = false; visit('/');
-    await screen.findByRole('link',{name:'Build My Future'});
-    expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/profile/intake');
+    expect(await screen.findByRole('heading',{name:'Let’s find your direction.'})).toBeInTheDocument();
+    expect(screen.queryByRole('region',{name:'Interactive career connections'})).not.toBeInTheDocument();
   });
   it('selects a canvas role and opens its real relationships and methodology', async () => {
     visit();

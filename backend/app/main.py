@@ -84,7 +84,7 @@ def ready():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-            if revision != "0005":
+            if revision != "0006":
                 return error(503, "schema_unavailable", "Database migrations are required.")
     except Exception:
         return error(503, "database_unavailable", "Database or migrations unavailable.")

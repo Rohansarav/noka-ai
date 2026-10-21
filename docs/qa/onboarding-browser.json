@@ -1,0 +1,35 @@
+{
+  "cameraBefore": "transform: translate(-467.5px, 115.8px) scale(0.8);",
+  "cameraAfter": "transform: translate(-467.5px, 115.8px) scale(0.8);",
+  "selectedAfter": "role:15-1252.00",
+  "visiblePrioritySkills": [
+    "Programming"
+  ],
+  "mobileWidth": {
+    "client": 375,
+    "scroll": 375
+  },
+  "roadmapSaved": "YOUR DESTINATION\nSoftware Developers\nChange direction\n12\nh / week\nMy weekly commitment\n12 hours\n1 hour\n40 hours\nSave commitment\n\nYour commitment is saved.\n\n1 of 16 milestones complete\nPlanning assumptions",
+  "roadmapAtTwoHours": "01\nWeeks 1–12\n· 24h\nWorld priority\nCoordination",
+  "roadmapAtFortyHours": "01\nWeek 1\n· 24h\nWorld priority\nCoordination",
+  "radarDialCount": 0,
+  "profileDialCount": 0,
+  "impactDialCount": 0,
+  "selectedBeforeLabel": "Software Developers",
+  "newEntry": "/profile/intake",
+  "incompleteReload": "Your Direction restored with goal, Software Developers interest and 12 weekly hours",
+  "manualCompletion": "My Future opened with Software Developers selected",
+  "returningLegacy": "My Future opened directly with 7 confirmed skills",
+  "realResume": "data/demo/demo_cv.docx uploaded through file chooser; local extraction; Python confirmed as Programming",
+  "persistedWorldAfterReload": "Governed AI",
+  "tests": {
+    "backendPassed": 92,
+    "frontendPassed": 88,
+    "frontendFailed": 0,
+    "typecheck": "passed via build",
+    "productionBuild": "passed",
+    "readyStatus": 200
+  },
+  "screenshotCount": 10,
+  "editPace": "Regression test verifies a legacy completed profile opens Direction with the saved 18-hour workspace pace, without a future PUT."
+}

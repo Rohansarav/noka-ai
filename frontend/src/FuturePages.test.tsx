@@ -28,6 +28,11 @@ afterEach(()=>vi.unstubAllGlobals());
 function ReadContext(){const future=useFuture();return <output>{future.data?.scenario}</output>;}
 function setup(children:React.ReactNode){render(<QueryClientProvider client={new QueryClient({defaultOptions:{queries:{retry:false}}})}><MemoryRouter>{children}</MemoryRouter></QueryClientProvider>);}
 describe('Future workspace interactions',()=>{
+  it.each(['/profile','/profile/intake','/signals','/sdgs','/model-lab'])('hides the dial on factual surface %s without scenario writes',path=>{
+    render(<QueryClientProvider client={new QueryClient()}><MemoryRouter initialEntries={[path]}><WorldDial/></MemoryRouter></QueryClientProvider>);
+    expect(screen.queryByRole('region',{name:'Choose your future world'})).not.toBeInTheDocument();
+    expect(writes).toHaveLength(0);
+  });
   it('shares the World Dial selection across query consumers',async()=>{
     setup(<><WorldDial/><ReadContext/></>);
     await waitFor(()=>expect(screen.getByRole('button',{name:'Governed AI'})).toBeEnabled());

@@ -1,5 +1,6 @@
 import WorkspaceBoundary from './WorkspaceBoundary';
-import { WorldDial, MyFuture, PathwayPage, ImpactPage, RadarPage, ModelLab } from './FuturePages';
+import { WorldDial, MyFuture as FuturePage, PathwayPage, ImpactPage, RadarPage, ModelLab } from './FuturePages';
+import { FutureEntry, IntakeWizard } from './Onboarding';
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -8,12 +9,14 @@ import { Badge, Button, EmptyState, ErrorState, EvidenceBadge, GlassCard, Loadin
 import DesignPreview from './DesignPreview';
 import UniverseLoading from './universe/UniverseLoading';
 import { useProfile } from './profile-api';
-import { IntakeWizard, MatchesPage, ProfilePage, ProfileSummaryCard } from './ProfilePages';
+import { MatchesPage, ProfilePage, ProfileSummaryCard } from './ProfilePages';
 import { ToastProvider } from './toasts';
 import { EvidenceOverview, RoleCatalogue, SDGExplorer } from './EvidencePages';
 import { dateLabel, getEvidence, timeLabel, type Summary } from './evidence-api';
 
-const CareerUniverse = lazy(() => import('./universe/CareerUniverse'));
+const UniversePage = lazy(() => import('./universe/CareerUniverse'));
+const MyFuture = () => <FutureEntry><FuturePage/></FutureEntry>;
+const CareerUniverse = () => <FutureEntry><UniversePage/></FutureEntry>;
 
 const pages = [
   { path: '/', label: 'My Future', icon: Home },

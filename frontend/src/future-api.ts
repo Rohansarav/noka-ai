@@ -16,7 +16,7 @@ export function useFuture() {
     const data=await api<Future>('/profiles/current/future');
     if(!data.scenarios || !Array.isArray(data.matches) || !Array.isArray(data.pathway)) throw new Error('Future workspace response unavailable.');
     return data;
-  }, enabled: !!profile.data?.profile, retry: false });
+  }, enabled: !!profile.data?.profile?.confirmed, retry: false });
   const save = useMutation({ scope:{id:'future:'+profile.data?.profile?.id}, mutationFn: (body: { scenario?: Scenario; role_id?: string; weekly_hours?: number }) => api<Future>('/profiles/current/future', 'PUT', body), onMutate: async body => { const key=['future',profile.data?.profile?.id,profile.data?.profile?.updated_at]; await client.cancelQueries({queryKey:key}); const previous=client.getQueryData<Future>(key); if(previous && body.scenario && previous.worlds?.[body.scenario]) client.setQueryData(key,{...previous,scenario:body.scenario,matches:previous.comparisons[body.scenario],...previous.worlds[body.scenario]}); return {previous,key}; }, onError: (_error,_body,context) => { if(context?.previous) client.setQueryData(context.key,context.previous); }, onSuccess: data => { client.setQueryData(['future', data.profile_id, profile.data?.profile?.updated_at], data); } });
   const progress = useMutation({ scope:{id:'future:'+profile.data?.profile?.id}, mutationFn: (body: { skill_id: string; status?: Task['status']; note?: string }) => api<Future>('/profiles/current/pathway', 'PUT', body), onSuccess: data => client.setQueryData(['future', data.profile_id, profile.data?.profile?.updated_at], data) });
   return { ...query, save, progress, profileLoading:profile.isPending, profile: profile.data?.profile };

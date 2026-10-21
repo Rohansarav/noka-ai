@@ -3,7 +3,7 @@ import { Compass, Leaf, Sparkles, Target, UserRound } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import type { CareerNode } from './universe-types';
 
-export type UniverseFlowNode = Node<{ entity: CareerNode; dimmed: boolean; scenarioLabel?: string }, 'career'>;
+export type UniverseFlowNode = Node<{ entity: CareerNode; dimmed: boolean; scenarioLabel?: string; worldPriority?: boolean }, 'career'>;
 
 // Official SDG palette, used as a decorative accent with separately readable text.
 const SDG_COLORS = ['#E5243B','#DDA63A','#4C9F38','#C5192D','#FF3A21','#26BDE2','#FCC30B','#A21942','#FD6925','#DD1367','#FD9D24','#BF8B2E','#3F7E44','#0A97D9','#56C02B','#00689D','#19486A'];
@@ -13,7 +13,7 @@ export default function CareerNodeCard({ data, selected }: NodeProps<UniverseFlo
   const node = data.entity;
   const Icon = node.type === 'profile' ? UserRound : node.type === 'role' ? Compass : node.type.startsWith('sdg') ? Leaf : node.type === 'required_skill' ? Target : Sparkles;
   const kind = node.type === 'profile' ? 'YOUR STARTING POINT' : node.type === 'role' ? 'POSSIBLE DIRECTION' : node.type === 'owned_skill' ? 'MY SKILL' : node.type === 'required_skill' ? 'SKILL TO BUILD' : node.type === 'sdg_target' ? 'VERIFIED TARGET' : 'GLOBAL GOAL';
-  return <div className={`universe-node universe-node-${node.type}${data.dimmed ? ' is-muted' : ''}${selected ? ' is-selected' : ''}`} style={{ '--sdg-accent': sdgColor(node.goal_id) } as CSSProperties}>
+  return <div className={`universe-node universe-node-${node.type}${data.dimmed ? ' is-muted' : ''}${selected ? ' is-selected' : ''}${data.worldPriority?' is-world-priority':''}`} style={{ '--sdg-accent': sdgColor(node.goal_id) } as CSSProperties}>
     <Handle id="target-right" type="target" position={Position.Right} isConnectable={false}/>
     <Handle id="target-top" type="target" position={Position.Top} isConnectable={false}/>
     <span className="universe-node-kicker"><Icon size={14} aria-hidden="true"/>{kind}</span>

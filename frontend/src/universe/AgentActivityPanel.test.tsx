@@ -56,6 +56,7 @@ describe('authentic agent activity',()=>{
     const callback=vi.fn();render(<AgentActivityPanel graph={graph} role={role} onEffects={callback}/>);
     fireEvent.click(screen.getByRole('button',{name:'Send question to Noka'})); await screen.findByText(/Noka is readying your question/);
     status={...queued,status:'running',events:[...queued.events,{sequence:2,agent:'matchmaker',type:'tool_completed',status:'running',at:'now',message:'Read-only tool completed.',payload:{tool:'get_ranked_matches'}}]};
+    await waitFor(()=>expect(listeners.activity).toBeTypeOf('function'));
     listeners.activity(); fireEvent.click(await screen.findByText(/Activity ·/)); await screen.findByText('get_ranked_matches');
     status={...status,status:'completed',result}; listeners.done();
     await screen.findByText('Here’s your next perspective.');

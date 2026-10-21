@@ -1,4 +1,4 @@
-"""Private profile endpoints. Only confirmed canonical skills/preferences are persisted."""
+"""Owned profiles and bounded structured onboarding drafts; raw resumes are discarded."""
 import secrets
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
@@ -6,8 +6,8 @@ from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, Resp
 from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 from backend.app.evidence_api import get_session
-from backend.app.models import PrivateSession, Profile, ProfileSkill, Role, Skill
-from backend.app.profile_schemas import CreateProfile, CurrentProfile, ExtractionResponse, MatchesResponse, ProfileView, SaveSkills
+from backend.app.models import FutureWorkspace, PrivateSession, Profile, ProfileSkill, Role, Skill
+from backend.app.profile_schemas import CreateProfile, CurrentProfile, ExtractionResponse, MatchesResponse, ProfileView, SaveSkills, OnboardingDraft
 from backend.app.profile_security import COOKIE, active_session, owned_profile, same_origin, token_hash
 from backend.app.skill_extraction import extract, parse_upload
 from backend.app.matching import match_profile
@@ -17,7 +17,7 @@ router = APIRouter(prefix="/api/profiles", tags=["Private profiles"])
 
 def view(profile, db):
     return ProfileView(id=profile.id, country=profile.country, interests=profile.interests, is_demo=profile.is_demo,
-        confirmed=profile.confirmed, updated_at=profile.updated_at.isoformat(),
+        confirmed=profile.confirmed, updated_at=profile.updated_at.isoformat(), onboarding=profile.onboarding,
         skills=[{"skill_id": s.skill_id, "level": s.level, "years": s.years} for s in db.scalars(select(ProfileSkill).where(ProfileSkill.profile_id == profile.id).order_by(ProfileSkill.skill_id))])
 
 
@@ -73,16 +73,43 @@ def resume(profile_id: str, request: Request, response: Response,
     return extract(text, list(db.scalars(select(Skill).order_by(Skill.id))), use_ai)
 
 
+@router.put("/{profile_id}/onboarding", response_model=ProfileView, dependencies=[Depends(same_origin)])
+def save_draft(profile_id: str, body: OnboardingDraft, request: Request, response: Response, db: Session = Depends(get_session)):
+    """Persist only bounded structured fields; resume text and suggestions never enter drafts."""
+    profile = owned_profile(profile_id, request, db)
+    ids = [s.skill_id for s in body.skills]
+    if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
+        raise HTTPException(422)
+    profile.onboarding = body.model_dump()
+    db.commit()
+    response.headers["Cache-Control"] = "no-store"
+    return view(profile, db)
+
+
 @router.put("/{profile_id}/skills", response_model=ProfileView, dependencies=[Depends(same_origin)])
 def save(profile_id: str, body: SaveSkills, request: Request, response: Response, db: Session = Depends(get_session)):
     profile = owned_profile(profile_id, request, db)
     ids = [s.skill_id for s in body.skills]
     if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
         raise HTTPException(422)
+    if body.onboarding and (len(ids) < 3 or not body.onboarding.current_field.strip()):
+        raise HTTPException(422)
     db.execute(delete(ProfileSkill).where(ProfileSkill.profile_id == profile_id))
     for skill in body.skills:
         db.add(ProfileSkill(profile_id=profile_id, **skill.model_dump()))
     profile.country, profile.interests, profile.confirmed = body.country, sorted(set(body.interests)), True
+    if body.onboarding:
+        profile.onboarding = {**body.onboarding.model_dump(), "skills": [s.model_dump() for s in body.skills], "completed": True}
+        workspace = db.get(FutureWorkspace, profile_id)
+        if not workspace:
+            workspace = FutureWorkspace(profile_id=profile_id, scenario="collaboration", progress={}, conversation=[], updated_at=datetime.now(timezone.utc))
+            db.add(workspace)
+        workspace.weekly_hours = body.onboarding.weekly_hours
+        db.flush()
+        from backend.app.future import ranked
+        directions = ranked(profile, db, workspace.scenario)
+        if workspace.role_id not in {m["role_id"] for m in directions}:
+            workspace.role_id = directions[0]["role_id"] if directions else None
     profile.updated_at = datetime.now(timezone.utc)
     db.commit()
     response.headers["Cache-Control"] = "no-store"

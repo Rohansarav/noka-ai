@@ -8,7 +8,7 @@ vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
 function visit(path: string) { return render(<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}><MemoryRouter initialEntries={[path]}><App/></MemoryRouter></QueryClientProvider>); }
 afterEach(() => { vi.useRealTimers(); vi.mocked(fetch).mockReset().mockRejectedValue(new Error('offline')); });
 describe('Noka navigation', () => {
-  it('offers the complete module navigation and the branded Universe', async () => { visit('/'); expect(await screen.findByRole('heading', { name: /Your future has connections/  })).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(6); expect(screen.getByRole('link', { name: 'Build My Future' })).toHaveAttribute('href', '/profile/intake'); });
+  it('shows an honest private-session error without bypassing entry checks', async () => { visit('/'); expect(await screen.findByText('Your private workspace could not be checked. Refresh to retry.')).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(6); });
   it.each([['/forecast', 'Look ahead, with perspective.'], ['/roadmap', 'Your next chapter, step by step.'], ['/model-lab', 'Look ahead, with perspective.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.queryByText(/illustrative forecast/)).not.toBeInTheDocument(); });
   it('handles missing routes', () => { visit('/missing'); expect(screen.getByText('This path doesn’t exist yet.')).toBeInTheDocument(); });
   it('shows API failure honestly', async () => { visit('/'); expect(await screen.findByText('API unavailable · refresh to retry')).toBeInTheDocument(); });
@@ -30,13 +30,9 @@ describe('Noka navigation', () => {
     expect(screen.getByRole('link', { name: 'Explore My Future' })).toHaveAttribute('href', '/');
   });
   it('opens the private wizard without saving personal fields', async () => {
-    visit('/');
-    fireEvent.click(await screen.findByRole('link', { name: 'Build My Future' }));
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Start with what makes you, you.');
-    expect(screen.getByRole('group', { name: 'Experience input method' })).toBeInTheDocument();
-    expect(screen.getByLabelText('Resume file')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Manual only' })).toBeInTheDocument();
-    expect(screen.getByRole('main')).toHaveFocus();
+    visit('/profile/intake');
+    expect(await screen.findByText('Your private session could not be loaded.')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Retry' })).toBeInTheDocument();
     expect(document.title).toBe('Noka — Profile intake');
   });
   it('supports Escape and route selection in the mobile navigation disclosure', () => {

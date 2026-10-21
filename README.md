@@ -2,10 +2,14 @@
 
 Navigate tomorrow’s work, today. NOKA combines a personal career workspace, three future scenarios, an interactive evidence graph, persistent learning pathways, source-linked intelligence, and evaluated US sector forecasts. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
+## Onboarding and scenario interaction — current build
+
+New or incomplete profiles now enter a private, resumable three-stage onboarding flow at `/profile/intake`; existing confirmed profiles continue directly into My Future. The World Dial appears only on My Future, Career Universe and My Pathway. Computed skill emphasis, a previous-world comparison and scenario-aware role details make the selected world explicit while keeping factual fit and the graph camera stable. Apply migration `0006` with `.venv\Scripts\python.exe -m alembic upgrade head` before starting the updated API. See the [implementation and verification report](docs/ONBOARDING_WORLD_DIAL_REPORT.md) for 92 backend tests, 88 frontend tests, real browser checks and limitations.
+
 
 ## Premium interface — current design
 
-The current interface centers My Future on the real Career Universe, with a global World Dial and Ask Noka companion. Radar uses editorial trend/source views, Pathway a connected timeline, and Impact an interactive role-to-target stage. Evidence and technical activity remain accessible on demand. See the [UI verification report](docs/PREMIUM_UI_REPORT.md) for actual browser checks, 76 passing frontend tests, screenshots and design limits.
+The interface centers My Future on the real Career Universe, with a World Dial on planning screens and Ask Noka companion. Radar uses editorial trend/source views, Pathway a connected timeline, and Impact an interactive role-to-target stage. Evidence and technical activity remain accessible on demand. See the [earlier UI verification report](docs/PREMIUM_UI_REPORT.md) for the premium redesign's browser checks, screenshots and design limits; the onboarding report above describes the latest corrections.
 
 ## Integrated future workspace — current build
 

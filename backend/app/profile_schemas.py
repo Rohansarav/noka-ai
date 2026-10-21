@@ -28,10 +28,24 @@ class ConfirmedSkill(Contract):
     years: float | None = Field(default=None, ge=0, le=60)
 
 
+class OnboardingDraft(Contract):
+    step: int = Field(default=0, ge=0, le=2)
+    status: Literal["student", "employed", "self_employed", "seeking", "other"] = "student"
+    current_field: str = Field(default="", max_length=160)
+    experience_years: float = Field(default=0, ge=0, le=60)
+    country: Literal["MY", "US", "SG", "GB", "AU", "OTHER"] = "MY"
+    market: Literal["MY", "US", "SG", "GB", "AU", "OTHER"] = "MY"
+    goal: str = Field(default="", max_length=400)
+    interests: list[str] = Field(default_factory=list, max_length=5)
+    weekly_hours: int = Field(default=6, ge=1, le=40)
+    skills: list[ConfirmedSkill] = Field(default_factory=list, max_length=60)
+
+
 class SaveSkills(Contract):
     skills: list[ConfirmedSkill] = Field(max_length=60)
     country: Literal["MY", "US", "SG", "GB", "AU", "OTHER"] = "MY"
     interests: list[str] = Field(default_factory=list, max_length=5)
+    onboarding: OnboardingDraft | None = None
 
 
 class ProfileView(Contract):
@@ -42,6 +56,7 @@ class ProfileView(Contract):
     confirmed: bool
     updated_at: str
     skills: list[ConfirmedSkill]
+    onboarding: dict | None = None
 
 
 class CurrentProfile(Contract):
