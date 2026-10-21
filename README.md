@@ -4,6 +4,8 @@ Navigate tomorrow’s work, today. NOKA combines a personal career workspace, th
 
 ## Profile analysis — current build
 
+Saved profiles can now move directly between About You, Your Skills and Your Direction without repeating extraction. Analysis runs only from its explicit button. See the [navigation fix and My Future audit](docs/PROFILE_NAVIGATION_AND_FUTURE_AUDIT.md) for verification and the current catalogue, matching, scenario and skill-gap rules.
+
 My Profile offers two experience inputs: resume upload or manual entry. Protected PDF text extraction uses pypdf; both inputs then use the same validated text and canonical skill review contracts. OpenAI Structured Outputs are constrained by Pydantic and the current skill catalogue. Suggestions require explicit user confirmation, with searchable skills and level buttons replacing mapping dropdowns. See the [profile analysis report](docs/PROFILE_ANALYSIS_REPORT.md) for the 102 backend / 92 frontend tests, real-provider browser checks and remaining limits. No migration or dependency change is required for this correction. Replit publication remains on hold.
 
 ## Onboarding and scenario interaction — current build

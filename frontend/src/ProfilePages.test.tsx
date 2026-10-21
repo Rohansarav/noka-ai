@@ -42,6 +42,54 @@ async function manual(){
 async function analyse(){fireEvent.click(screen.getByRole('button',{name:'Analyse my experience'}));await screen.findByRole('heading',{name:'Your Skills'});}
 
 describe('private profile journey', () => {
+  it('lets an existing profile jump between steps with a selected PDF without sending analysis',async()=>{
+    saved={id:'existing',country:'MY',interests:[],is_demo:false,confirmed:true,updated_at:'now',skills:skills.slice(0,3).map(s=>({skill_id:s.id,level:'working',years:null}))};
+    visit('/profile/intake');
+    await screen.findByRole('button',{name:'Review my skills'});
+    fireEvent.click(screen.getByRole('button',{name:'Upload resume'}));
+    fireEvent.change(screen.getByLabelText('Resume file'),{target:{files:[new File(['fixture'],'new.pdf',{type:'application/pdf'})]}});
+    fireEvent.click(screen.getByRole('button',{name:/02 Your Skills/}));
+    await screen.findByRole('heading',{name:'Your Skills'});
+    fireEvent.click(within(screen.getByRole('group',{name:'Programming proficiency'})).getByRole('button',{name:'Strong'}));
+    fireEvent.click(screen.getByRole('button',{name:/03 Your Direction/}));
+    await screen.findByRole('heading',{name:'Your Direction'});
+    fireEvent.change(screen.getByLabelText('What would you like to work toward?'),{target:{value:'Build AI systems'}});
+    fireEvent.click(screen.getByRole('button',{name:/About You/}));
+    await screen.findByRole('heading',{name:'About You'});
+    expect(screen.getByLabelText('Resume file')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button',{name:'Continue with saved skills'}));
+    await screen.findByRole('heading',{name:'Your Skills'});
+    expect(within(screen.getByRole('group',{name:'Programming proficiency'})).getByRole('button',{name:'Strong'})).toHaveAttribute('aria-pressed','true');
+    expect(saved?.onboarding?.goal).toBe('Build AI systems');
+    expect(requests.some(r=>/\/(analysis|resume)$/.test(r.path))).toBe(false);
+  });
+  it('keeps typed manual experience optional while navigating saved skills, and analyses only on explicit request',async()=>{
+    saved={id:'existing',country:'MY',interests:[],is_demo:false,confirmed:true,updated_at:'now',skills:skills.slice(0,3).map(s=>({skill_id:s.id,level:'working',years:null}))};
+    visit('/profile/intake');await screen.findByRole('button',{name:'Review my skills'});
+    fireEvent.change(screen.getByRole('textbox',{name:'Your experience'}),{target:{value:experience}});
+    fireEvent.click(screen.getByRole('button',{name:'Continue with saved skills'}));
+    await screen.findByRole('heading',{name:'Your Skills'});
+    expect(requests.some(r=>r.path.endsWith('/analysis'))).toBe(false);
+    fireEvent.click(screen.getByRole('button',{name:/About You/}));
+    await screen.findByRole('heading',{name:'About You'});
+    expect(screen.getByRole('textbox',{name:'Your experience'})).toHaveValue(experience);
+    fireEvent.change(screen.getByLabelText('Current role or field of study'),{target:{value:'Software developer'}});
+    await analyse();
+    expect(requests.filter(r=>r.path.endsWith('/analysis'))).toHaveLength(1);
+  });
+  it('gates new profiles until analysis but never repeats it when returning to reviewed steps',async()=>{
+    await manual();
+    expect(screen.getByRole('button',{name:/02 Your Skills/})).toBeDisabled();
+    expect(screen.getByRole('button',{name:/03 Your Direction/})).toBeDisabled();
+    await analyse();
+    fireEvent.click(screen.getByRole('button',{name:/About You/}));
+    await screen.findByRole('heading',{name:'About You'});
+    fireEvent.click(screen.getByRole('button',{name:/02 Your Skills/}));
+    await screen.findByRole('heading',{name:'Your Skills'});
+    expect(screen.getByRole('button',{name:'Add Programming'})).toBeEnabled();
+    expect(requests.filter(r=>r.path.endsWith('/analysis'))).toHaveLength(1);
+    expect(screen.getByRole('button',{name:/03 Your Direction/})).toBeDisabled();
+  });
   it('preserves the workspace pace and reviews saved skills without compulsory re-analysis',async()=>{
     saved={id:'legacy',country:'MY',interests:[],is_demo:false,confirmed:true,updated_at:'now',skills:skills.slice(0,3).map(s=>({skill_id:s.id,level:'working',years:null}))};
     visit('/profile/intake');
