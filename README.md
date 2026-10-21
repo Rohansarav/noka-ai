@@ -1,6 +1,29 @@
 # Noka
 
-Navigate tomorrow’s work, today. Phase 2 adds a real, attributed role/skill knowledge graph, US sector history, official UN goals/targets and provenance APIs to the light-themed React/FastAPI shell. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
+Navigate tomorrow’s work, today. NOKA combines a personal career workspace, three future scenarios, an interactive evidence graph, persistent learning pathways, source-linked intelligence, and evaluated US sector forecasts. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
+
+
+## Integrated future workspace — current build
+
+The current build adds My Future, a shared three-world selector, persistent role/hour preferences and learning notes/progress, the preserved React Flow Universe with scenario annotations, Intelligence Radar, source-bound qualitative outlooks, Guide conversations and tool access, role-first SDG exploration, and Oracle/Model Lab with actual chronological evaluation. Earlier phase sections below are historical records; they do not describe the final capability boundary.
+
+Migration head is **0005**. Install locked dependencies, migrate, and build before starting. In a freshly provisioned database, import the real public evidence with `uv run python scripts/import_data.py`; use `--offline` only with the full verified existing cache. Then initialize source-backed outlooks and context explicitly:
+
+```sh
+uv run python -m backend.app.outlooks
+uv run python -m scripts.register_context
+uv run python -m scripts.propose_impact
+pnpm build
+uv run python scripts/start.py
+```
+
+The final command for SDG proposals creates **pending** candidates and never records human approval. Seven original approvals are preserved. Verify the expanded store with `uv run python scripts/verify_evidence.py --require-postgres --allow-pending-candidates`; the strict legacy command continues to reject outstanding reviews. Source-dependent outlooks without sufficient evidence remain unclassified, particularly Malaysian per-role numerical demand. Hypothetical scenarios do not alter historical forecasts.
+
+`uv run python -m ml.train` reproduces the actual CPU evaluation and artifacts. The checked-in artifact contains 141 sector/horizon forecasts. See [Oracle methodology](ml/README.md), [Scout scheduling](docs/SCOUT_SCHEDULING.md), and [integrated verification report](docs/INTEGRATED_BUILD_REPORT.md).
+
+Guide reuses the bounded Matchmaker worker and its existing API identifier, with additional read-only context, pathway, forecast and source tools. The last 30 questions and their execution references are now stored privately in the session-owned workspace and can be reopened. Confirmed skills and saved learning context may be sent to OpenAI when the user asks Guide; resumes never go to Scout. Learning plan changes remain explicit user actions. The World Dial and hours preview make no model calls.
+
+Replit publication and its separate scheduled job have **not** been activated. Owner authorization/credits and real public-URL verification remain required. Production startup refuses SQLite.
 
 ## Requirements
 
@@ -28,7 +51,7 @@ pnpm test
 uv run pytest
 ```
 
-Build first: API integration tests verify that the actual bundle exists and is served at `/`, `/profile`, `/forecast`, `/design-preview` and `/profile/intake`. `/api/health` is liveness; `/api/ready` checks database connectivity, migration revision `0002` and (in production) the frontend bundle. Missing dependencies return 503 with a consistent error envelope. Health checks do not require AI/search keys. No API routes in this phase use those services.
+Build first: API integration tests verify that the actual bundle exists and is served at `/`, `/profile`, `/forecast`, `/design-preview` and `/profile/intake`. `/api/health` is liveness; `/api/ready` checks database connectivity, migration revision `0005` and (in production) the frontend bundle. Missing dependencies return 503 with a consistent error envelope. Health checks do not require AI/search keys. Guide uses OpenAI and Scout uses Tavily when configured; their keys remain server-side.
 
 ## Single-service production
 

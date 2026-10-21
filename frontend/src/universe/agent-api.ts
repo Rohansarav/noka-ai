@@ -19,7 +19,7 @@ export function executionFailure(code: string | null): string {
     tool_arguments_invalid:'Noka rejected invalid tool arguments.',
     result_validation_error:'Noka could not validate the model’s result.',
     timeout:'The exploration exceeded its time limit.',
-    profile_changed:'Your profile changed during exploration. Start again with your saved profile.',
+    profile_changed:'Your profile or future context changed during exploration. Start again with your saved context.',
   };
   return messages[code ?? ''] ?? 'AI exploration is unavailable.';
 }

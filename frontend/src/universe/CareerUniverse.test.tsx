@@ -54,12 +54,12 @@ afterEach(() => vi.unstubAllGlobals());
 describe('Career Universe page', () => {
   it('adds primary navigation and routes a confirmed homepage journey to Universe', async () => {
     visit('/');
-    expect(screen.getByRole('link',{name:'My Universe'})).toHaveAttribute('href','/universe');
+    expect(screen.getByRole('link',{name:'My Future'})).toHaveAttribute('href','/');
     await waitFor(() => expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/universe'));
   });
   it('keeps the homepage intake journey for no confirmed profile', async () => {
     hasProfile = false; visit('/');
-    await screen.findByText('US market history imported');
+    await screen.findByRole('link',{name:'Build My Future'});
     expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/profile/intake');
   });
   it('shows the backend graph loading state', async () => {
@@ -68,7 +68,7 @@ describe('Career Universe page', () => {
   });
   it('keeps draft profiles on the intake journey', async () => {
     profileConfirmed = false; visit('/');
-    await screen.findByText('US market history imported');
+    await screen.findByRole('link',{name:'Build My Future'});
     expect(screen.getByRole('link',{name:'Build My Future'})).toHaveAttribute('href','/profile/intake');
   });
   it('selects a canvas role and opens its real relationships and methodology', async () => {

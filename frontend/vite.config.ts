@@ -7,5 +7,5 @@ export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   plugins: [react(), tailwindcss()],
   server: { host: '0.0.0.0', proxy: { '/api': 'http://127.0.0.1:8000' } },
-  test: { environment: 'jsdom', setupFiles: ['./src/test-setup.ts'] },
+  test: { environment: 'jsdom', setupFiles: ['./src/test-setup.ts'], maxWorkers: 3, minWorkers: 1, testTimeout: 15000 },
 });

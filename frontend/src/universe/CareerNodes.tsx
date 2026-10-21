@@ -3,7 +3,7 @@ import { Compass, Leaf, Sparkles, Target, UserRound } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import type { CareerNode } from './universe-types';
 
-export type UniverseFlowNode = Node<{ entity: CareerNode; dimmed: boolean }, 'career'>;
+export type UniverseFlowNode = Node<{ entity: CareerNode; dimmed: boolean; scenarioLabel?: string }, 'career'>;
 
 // Official SDG palette, used as a decorative accent with separately readable text.
 const SDG_COLORS = ['#E5243B','#DDA63A','#4C9F38','#C5192D','#FF3A21','#26BDE2','#FCC30B','#A21942','#FD6925','#DD1367','#FD9D24','#BF8B2E','#3F7E44','#0A97D9','#56C02B','#00689D','#19486A'];
@@ -18,6 +18,7 @@ export default function CareerNodeCard({ data, selected }: NodeProps<UniverseFlo
     <Handle id="target-top" type="target" position={Position.Top} isConnectable={false}/>
     <span className="universe-node-kicker"><Icon size={14} aria-hidden="true"/>{kind}</span>
     <strong>{node.label}</strong>
+    {data.scenarioLabel && <span className="universe-world-label">{data.scenarioLabel}</span>}
     {node.type === 'profile' && <span>{node.skill_count} confirmed skills · {node.country} preference</span>}
     {node.type === 'owned_skill' && <span className="skill-level">{node.level} · self-reported</span>}
     {node.type === 'required_skill' && <span>Missing for a displayed role</span>}

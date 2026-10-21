@@ -1,0 +1,54 @@
+{
+  "base_url": "http://localhost:8010",
+  "checks": [
+    "Distinct workforce/student rankings; cross-session denial",
+    "Three worlds, saved hours, persistent completed progress",
+    "Selected role remains in existing Universe",
+    "Ready endpoint and 141 actual evaluated forecasts"
+  ],
+  "profile_comparison": {
+    "worker_matches": [
+      {
+        "title": "Data Scientists",
+        "score": 30.1
+      },
+      {
+        "title": "Database Administrators",
+        "score": 20.1
+      },
+      {
+        "title": "Software Developers",
+        "score": 18.7
+      }
+    ],
+    "student_matches": [
+      {
+        "title": "Human Resources Specialists",
+        "score": 7.9
+      },
+      {
+        "title": "Industrial Engineers",
+        "score": 7.6
+      },
+      {
+        "title": "Data Scientists",
+        "score": 7.2
+      }
+    ],
+    "worker_priorities": [
+      "Active Listening",
+      "Active Learning",
+      "Reading Comprehension"
+    ],
+    "student_priorities": [
+      "Critical Thinking",
+      "Active Learning",
+      "Active Listening"
+    ],
+    "fixture_notice": "Disposable, explicitly labelled demo profiles; not real people."
+  },
+  "scout": {
+    "findings": 27,
+    "latest_status": "succeeded"
+  }
+}

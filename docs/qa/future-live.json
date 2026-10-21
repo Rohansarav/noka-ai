@@ -1,0 +1,42 @@
+{
+  "base_url": "http://localhost:8010",
+  "checks": [
+    "Distinct workforce/student rankings; cross-session denial",
+    "Three worlds, saved hours, persistent completed progress",
+    "Selected role remains in existing Universe",
+    "Ready endpoint and 141 actual evaluated forecasts"
+  ],
+  "scout": {
+    "findings": 27,
+    "latest_status": "succeeded"
+  },
+  "guide": {
+    "status": "completed",
+    "error_code": null,
+    "tool_count": 1,
+    "events": [
+      {
+        "type": "queued",
+        "payload": {}
+      },
+      {
+        "type": "running",
+        "payload": {}
+      },
+      {
+        "type": "tool_completed",
+        "payload": {
+          "tool": "get_future_context",
+          "related_entity": "role:15-2051.00"
+        }
+      },
+      {
+        "type": "completed",
+        "payload": {}
+      }
+    ],
+    "sections": [
+      "scenario"
+    ]
+  }
+}

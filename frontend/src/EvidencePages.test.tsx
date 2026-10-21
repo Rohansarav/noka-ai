@@ -58,7 +58,7 @@ describe('public evidence journey', () => {
     expect(await screen.findByRole('table')).toBeInTheDocument();
   });
   it('displays all 17 goals, official target descriptions and reviewed links', async () => {
-    visit('/sdgs');
+    visit('/goals');
     expect(await screen.findByText('17 official goals')).toBeInTheDocument();
     const goals = screen.getAllByRole('heading',{level:2}).filter(heading=>heading.textContent?.startsWith('Goal '));
     expect(goals).toHaveLength(17);
@@ -69,9 +69,9 @@ describe('public evidence journey', () => {
     expect(screen.getByRole('link',{name:'United Nations source'})).toHaveAttribute('href','https://sdgs.un.org/goals');
   });
   it('marks market history as historical and keeps live AI feeds disconnected', async () => {
-    visit('/');
+    visit('/welcome');
     expect(await screen.findByText('US market history imported')).toBeInTheDocument();
-    expect(screen.getByText(/Live AI feeds are not connected/)).toBeInTheDocument();
+    expect(screen.getByText(/Research findings and freshness are available in Intelligence Radar/)).toBeInTheDocument();
     expect(screen.getByRole('link',{name:'View data & provenance'})).toHaveAttribute('href','/datasets');
   });
   it('preserves last-successful counts and shows a failed latest attempt', async () => {

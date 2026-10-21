@@ -25,6 +25,14 @@ def verify(base, provider):
             report["checks"].append("Distinct workforce/student rankings; cross-session denial")
             role=a["matches"][0]["role_id"]
             a=worker.put("/api/profiles/current/future",json={"role_id":role},headers=headers).json()
+            student_state=student.put('/api/profiles/current/future',json={'role_id':b['matches'][0]['role_id']},headers=headers).json()
+            assert a['pathway']!=student_state['pathway']
+            report['profile_comparison']={
+                'worker_matches':[{'title':m['title'],'score':m['score']} for m in a['matches'][:3]],
+                'student_matches':[{'title':m['title'],'score':m['score']} for m in student_state['matches'][:3]],
+                'worker_priorities':[t['name'] for t in a['pathway'][:3]],
+                'student_priorities':[t['name'] for t in student_state['pathway'][:3]],
+                'fixture_notice':'Disposable, explicitly labelled demo profiles; not real people.'}
             skill=a["pathway"][0]["skill_id"]
             response=worker.put("/api/profiles/current/pathway",json={"skill_id":skill,"status":"completed"},headers=headers);response.raise_for_status()
             for scenario in ("acceleration","governed","collaboration"):

@@ -24,19 +24,29 @@ beforeEach(()=>{
 afterEach(()=>vi.unstubAllGlobals());
 
 describe('authentic agent activity',()=>{
+  it('switches a named world only for an explicit command without a model call',async()=>{
+    const switchWorld=vi.fn().mockResolvedValue({});
+    render(<AgentActivityPanel graph={graph} role={role} onEffects={vi.fn()} onScenarioRequest={switchWorld}/>);
+    fireEvent.change(screen.getByLabelText('What would you like to understand?'),{target:{value:'Switch to Governed AI'}});
+    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
+    await screen.findByText('Your world is now Governed AI.');
+    expect(switchWorld).toHaveBeenCalledWith('governed');
+    expect(requests).toHaveLength(0);
+  });
+
   it('requires a selected role and submits its real context',async()=>{
     const callback=vi.fn(); const view=render(<AgentActivityPanel graph={graph} role={null} onEffects={callback}/>);
     expect(screen.getByRole('button',{name:'Explore selected role'})).toBeDisabled();
     view.rerender(<AgentActivityPanel graph={graph} role={role} onEffects={callback}/>);
     fireEvent.click(screen.getByRole('button',{name:'Explore selected role'}));
-    await screen.findByText(/Matchmaker: queued/);
+    await screen.findByText(/Guide: queued/);
     expect(requests[0].body).toEqual({agent:'matchmaker',question:expect.any(String),role_id:role.entity_id});
     expect(screen.getByRole('status')).toHaveAttribute('aria-live','polite');
     expect(screen.getByText(/recorded events/)).toBeVisible();
   });
   it('progresses from saved events to completion and valid graph highlighting',async()=>{
     const callback=vi.fn();render(<AgentActivityPanel graph={graph} role={role} onEffects={callback}/>);
-    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'})); await screen.findByText(/Matchmaker: queued/);
+    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'})); await screen.findByText(/Guide: queued/);
     status={...queued,status:'running',events:[...queued.events,{sequence:2,agent:'matchmaker',type:'tool_completed',status:'running',at:'now',message:'Read-only tool completed.',payload:{tool:'get_ranked_matches'}}]};
     listeners.activity(); await screen.findByText('get_ranked_matches');
     status={...status,status:'completed',result}; listeners.done();
@@ -76,7 +86,7 @@ describe('authentic agent activity',()=>{
   it('polls when SSE is unavailable',async()=>{
     vi.stubGlobal('EventSource',undefined);
     render(<AgentActivityPanel graph={graph} role={role} onEffects={vi.fn()}/>);
-    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'})); await screen.findByText(/Matchmaker: queued/);
+    fireEvent.click(screen.getByRole('button',{name:'Explore selected role'})); await screen.findByText(/Guide: queued/);
     status={...queued,status:'completed',result};
     await screen.findByRole('heading',{name:'Exploration of '+role.label},{timeout:3500});
     expect(requests.some(r=>r.path.endsWith('/opaque-test') && r.body===null)).toBe(true);
