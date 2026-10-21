@@ -11,7 +11,7 @@ def client(monkeypatch):
     engine = create_engine("sqlite://", connect_args={"check_same_thread": False}, poolclass=StaticPool)
     with engine.begin() as conn:
         conn.exec_driver_sql("CREATE TABLE alembic_version (version_num TEXT)")
-        conn.exec_driver_sql("INSERT INTO alembic_version VALUES ('0006')")
+        conn.exec_driver_sql("INSERT INTO alembic_version VALUES ('0007')")
     monkeypatch.setattr(main, "engine", engine)
     with TestClient(main.app) as test_client:
         yield test_client

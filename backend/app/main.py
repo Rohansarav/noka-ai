@@ -19,12 +19,14 @@ from backend.app.profile_api import router as profile_router
 from backend.app.profile_security import ProfileBodyLimit
 from backend.app.career_graph_api import router as career_graph_router
 from backend.app.future import router as future_router
+from backend.app.career_discovery import router as discovery_router
 
 DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 app = FastAPI(title="Noka API", version="0.1.0")
 logger = logging.getLogger("noka")
 app.include_router(agent_router)
 app.include_router(future_router)
+app.include_router(discovery_router)
 app.include_router(evidence_router)
 app.include_router(career_graph_router)
 app.include_router(profile_router)
@@ -84,7 +86,7 @@ def ready():
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))
             revision = conn.execute(text("SELECT version_num FROM alembic_version")).scalar()
-            if revision != "0006":
+            if revision != "0007":
                 return error(503, "schema_unavailable", "Database migrations are required.")
     except Exception:
         return error(503, "database_unavailable", "Database or migrations unavailable.")

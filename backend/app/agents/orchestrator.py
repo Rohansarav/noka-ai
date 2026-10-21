@@ -78,6 +78,7 @@ def execute(bind, execution_id, question, role_id, node_id=None):
             future_revision=workspace.updated_at if workspace else None
             context={"scenario":workspace.scenario,"weekly_hours":workspace.weekly_hours,
                      "selected_role":workspace.role_id,
+                     'profile_context': profile.analysis_context or {},
                      "recent_questions":[m["question"] for m in workspace.conversation[-5:]]} if workspace else {}
             db.commit()
         budget = f" You have at most {settings.agent_max_turns} model turns and {settings.agent_max_tools} tool calls. Reserve a turn for the final selection. Retrieve only evidence needed for the question; match and gap tools already use the confirmed profile."

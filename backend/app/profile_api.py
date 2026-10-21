@@ -17,6 +17,17 @@ from backend.app.matching import match_profile
 router = APIRouter(prefix="/api/profiles", tags=["Private profiles"])
 
 
+def validate_targets(body, db):
+    """Unmapped titles remain aspirations; only explicitly confirmed valid IDs become targets."""
+    aspirations = getattr(body, 'aspirations', [])
+    if getattr(body, 'onboarding', None):
+        aspirations = body.onboarding.aspirations
+    targets = set(body.interests) | {rid for item in aspirations for rid in item.role_ids}
+    if len(targets) > 5 or targets - set(db.scalars(select(Role.id))):
+        raise HTTPException(422, detail='Choose up to five supported target occupations.')
+    return sorted(targets)
+
+
 def view(profile, db):
     return ProfileView(id=profile.id, country=profile.country, interests=profile.interests, is_demo=profile.is_demo,
         confirmed=profile.confirmed, updated_at=profile.updated_at.isoformat(), onboarding=profile.onboarding,
@@ -97,6 +108,7 @@ def save_draft(profile_id: str, body: OnboardingDraft, request: Request, respons
     """Persist only bounded structured fields; resume text and suggestions never enter drafts."""
     profile = owned_profile(profile_id, request, db)
     ids = [s.skill_id for s in body.skills]
+    validate_targets(body, db)
     if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
         raise HTTPException(422)
     profile.onboarding = body.model_dump()
@@ -109,6 +121,9 @@ def save_draft(profile_id: str, body: OnboardingDraft, request: Request, respons
 def save(profile_id: str, body: SaveSkills, request: Request, response: Response, db: Session = Depends(get_session)):
     profile = owned_profile(profile_id, request, db)
     ids = [s.skill_id for s in body.skills]
+    targets = validate_targets(body, db)
+    if body.onboarding and set(body.onboarding.interests) != set(body.interests):
+        raise HTTPException(422, detail='Target selections must agree with the reviewed profile.')
     if len(ids) != len(set(ids)) or set(ids) - set(db.scalars(select(Skill.id))) or set(body.interests) - set(db.scalars(select(Role.id))):
         raise HTTPException(422)
     if body.onboarding and (len(ids) < 3 or not body.onboarding.current_field.strip()):
@@ -116,9 +131,10 @@ def save(profile_id: str, body: SaveSkills, request: Request, response: Response
     db.execute(delete(ProfileSkill).where(ProfileSkill.profile_id == profile_id))
     for skill in body.skills:
         db.add(ProfileSkill(profile_id=profile_id, **skill.model_dump()))
-    profile.country, profile.interests, profile.confirmed = body.country, sorted(set(body.interests)), True
+    profile.country, profile.interests, profile.confirmed = body.country, targets, True
     if body.onboarding:
         profile.onboarding = {**body.onboarding.model_dump(), "skills": [s.model_dump() for s in body.skills], "completed": True}
+        profile.analysis_context = {**body.onboarding.model_dump(), 'interests': targets, 'skills':[s.model_dump() for s in body.skills]}
         workspace = db.get(FutureWorkspace, profile_id)
         if not workspace:
             workspace = FutureWorkspace(profile_id=profile_id, scenario="collaboration", progress={}, conversation=[], updated_at=datetime.now(timezone.utc))

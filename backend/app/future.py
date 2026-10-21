@@ -13,7 +13,8 @@ from sqlalchemy.orm import Session
 from backend.app.evidence_api import get_session
 from backend.app.profile_security import active_session, same_origin
 from backend.app.models import FutureWorkspace, Profile, ProfileSkill, Role, RoleSkill, Skill, SDGLink, SDGTarget, Source, IntelligenceRecord
-from backend.app.matching import match_profile
+from backend.app.matching import match_profile, prioritize_gaps, select_directions, confirmed_context
+from backend.app.occupation_catalogue import occupation_evidence
 
 router = APIRouter(prefix="/api", tags=["Future workspace"])
 SCENARIOS = {
@@ -21,7 +22,7 @@ SCENARIOS = {
     "governed": {"name": "Governed AI", "assumption": "Stronger accountability increases emphasis on monitoring, quality and judgment.", "skills": ["Monitoring", "Quality Control Analysis", "Judgment and Decision Making"]},
     "collaboration": {"name": "Human-AI Collaboration", "assumption": "Augmentation increases emphasis on communication, learning and collaborative judgment.", "skills": ["Active Learning", "Coordination", "Critical Thinking", "Active Listening"]},
 }
-VERSION = "scenario-assumptions-2026-10-20-v1"
+VERSION = "target-readiness-context-2026-10-21-v2"
 
 
 class Preferences(BaseModel):
@@ -71,20 +72,29 @@ def private(request, db, lock=False):
     return profile, workspace
 
 
-def ranked(profile, db, scenario, base=None, requirements=None):
+def ranked(profile, db, scenario, base=None, requirements=None, selected_role=None):
     """Preserve skill-fit scores; expose scenario emphasis as a separate planning index."""
-    matches = copy.deepcopy(base if base is not None else match_profile(profile, db)["matches"])
+    matches = copy.deepcopy(base if base is not None else match_profile(profile, db, limit=None)["matches"])
     if requirements is None:
-        requirements = db.execute(select(RoleSkill, Skill).join(Skill)).all()
+        requirements = occupation_evidence(db)[1]
     names = SCENARIOS[scenario]["skills"]
+    grouped = {}
+    for link, skill in requirements:
+        if skill.canonical_name in names:
+            grouped.setdefault(link.role_id, []).append((link, skill))
     for match in matches:
-        relevant = [(link,skill) for link,skill in requirements if link.role_id==match["role_id"] and skill.canonical_name in names]
+        relevant = grouped.get(match['role_id'], [])
         emphasis = sum(max(0, link.required_importance-3) for link, _ in relevant)
         match["scenario_emphasis"] = round(emphasis, 2)
-        match["planning_index"] = round(match["score"]+emphasis, 2)
+        match["context_emphasis"] = round(5*match.get('context_alignment', 0), 2)
+        match["planning_index"] = round(match["score"]+emphasis+match['context_emphasis'], 2)
         match["scenario_reason"] = SCENARIOS[scenario]["assumption"]
         match["priority_skills"] = [skill.canonical_name for link, skill in relevant if link.required_importance > 3]
-    return sorted(matches, key=lambda m: (-m["planning_index"], m["title"]))
+    ordered = sorted(matches, key=lambda m: (-m['planning_index'], m['title']))
+    visible = select_directions(ordered)
+    if selected_role and selected_role not in {m['role_id'] for m in visible}:
+        visible.extend(m for m in ordered if m['role_id'] == selected_role)
+    return visible
 
 
 def pathway(profile, workspace, db, matches):
@@ -92,7 +102,7 @@ def pathway(profile, workspace, db, matches):
     if not match:
         return []
     priority = SCENARIOS[workspace.scenario]["skills"]
-    gaps = sorted(match["gaps"], key=lambda g: (g["name"] not in priority, -g["importance"]*g["gap"], g["name"]))
+    gaps = prioritize_gaps(match['gaps'], priority)
     tasks, hours = [], 0
     for gap in gaps:
         key = f"{workspace.role_id}:{gap['skill_id']}"
@@ -113,9 +123,9 @@ def pathway(profile, workspace, db, matches):
 
 
 def snapshot(profile, workspace, db):
-    base = match_profile(profile, db)["matches"]
-    requirements = db.execute(select(RoleSkill, Skill).join(Skill)).all()
-    comparisons = {s: ranked(profile,db,s,base,requirements) for s in SCENARIOS}
+    base = match_profile(profile, db, limit=None)["matches"]
+    requirements = occupation_evidence(db)[1]
+    comparisons = {s: ranked(profile,db,s,base,requirements,workspace.role_id) for s in SCENARIOS}
     matches = comparisons[workspace.scenario]
     selected = next((m for m in matches if m["role_id"] == workspace.role_id), None)
     strengths = [s.canonical_name for p,s in db.execute(select(ProfileSkill,Skill).join(Skill).where(ProfileSkill.profile_id==profile.id)).all() if p.level in {"strong","working"}]
@@ -132,7 +142,8 @@ def snapshot(profile, workspace, db):
             "scenarios": SCENARIOS, "matches": matches, "pathway": pathway(profile,workspace,db,matches),
             "future_self": worlds[workspace.scenario]["future_self"], "conversation": workspace.conversation, "worlds":worlds,
             "comparisons": comparisons,
-            "method": "Within the original top five skill matches, planning index = unchanged skill fit + sum(max(0, O*NET importance − 3)) for named scenario skills. Assumptions, not demand probabilities; ties remain possible. Historical forecasts never change."}
+            "analysis_context": confirmed_context(profile),
+            "method": "Rank all supported occupations: planning index = readiness + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Interest never increases readiness. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap priority, with scenario tie-breaks."}
 
 
 @router.get("/profiles/current/future")
@@ -146,7 +157,7 @@ def get_future(request: Request, response: Response, db: Session=Depends(get_ses
 def save_future(body: Preferences, request: Request, response: Response, db: Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
     profile,workspace = private(request,db,lock=True)
-    if body.role_id and body.role_id not in {m["role_id"] for m in match_profile(profile,db)["matches"]}:
+    if body.role_id and body.role_id not in {m['role_id'] for m in match_profile(profile,db,limit=None)['matches']}:
         raise HTTPException(422)
     for key,value in body.model_dump(exclude_none=True).items():
         setattr(workspace,key,value)
@@ -159,7 +170,7 @@ def save_future(body: Preferences, request: Request, response: Response, db: Ses
 def save_progress(body: Progress, request: Request, response: Response, db: Session=Depends(get_session)):
     response.headers["Cache-Control"]="no-store"
     profile,workspace=private(request,db,lock=True)
-    tasks=pathway(profile,workspace,db,ranked(profile,db,workspace.scenario))
+    tasks=pathway(profile,workspace,db,ranked(profile,db,workspace.scenario,selected_role=workspace.role_id))
     if body.skill_id not in {t["skill_id"] for t in tasks}:
         raise HTTPException(422)
     if body.status is None and body.note is None:

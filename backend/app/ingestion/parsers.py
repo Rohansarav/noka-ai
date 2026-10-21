@@ -75,8 +75,15 @@ def parse_onet(occupations: bytes, skill_files: dict[str, bytes], crosswalk: lis
     occupation_rows = {r["O*NET-SOC Code"]: r for r in csv_rows(occupations, {"O*NET-SOC Code", "Title", "Description"}, exact=True)}
     roles, skills, links = [], {}, {}
     codes = [item["occupation_code"] for item in crosswalk]
-    if len(codes) != len(set(codes)) or not 20 <= len(codes) <= 30:
-        raise DataValidationError("Curated catalogue must have 20–30 unique occupations.")
+    if len(codes) != len(set(codes)):
+        raise DataValidationError("Curated occupations must be unique.")
+    # Import source occupations independently of optional, human-reviewed sector proxies.
+    curated = {item['occupation_code']: item for item in crosswalk}
+    for code in occupation_rows:
+        if code not in curated:
+            crosswalk = [*crosswalk, {"occupation_code":code, "sector":None,
+                "rationale":"Source occupation; no reviewed sector forecast crosswalk.", "curation_status":"source_imported"}]
+    codes = [item['occupation_code'] for item in crosswalk]
     for item in crosswalk:
         code = item["occupation_code"]
         if code not in occupation_rows or (item["sector"] is not None and item["sector"] not in sectors):
@@ -105,6 +112,8 @@ def parse_onet(occupations: bytes, skill_files: dict[str, bytes], crosswalk: lis
             if key in links and links[key]["required_importance"] != value:
                 raise DataValidationError("Conflicting O*NET rating.")
             links[key] = {"role_id": code, "skill_id": sid, "required_importance": value, "category": category}
-    if any(not any(link["role_id"] == r["id"] for link in links.values()) for r in roles):
+    supported = {link['role_id'] for link in links.values()}
+    if any(code not in supported for code in curated):
         raise DataValidationError("Curated role has no compatible O*NET skill mapping.")
-    return roles, list(skills.values()), list(links.values())
+    # Occupations without published compatible skill evidence cannot be scored.
+    return [role for role in roles if role['id'] in supported], list(skills.values()), list(links.values())

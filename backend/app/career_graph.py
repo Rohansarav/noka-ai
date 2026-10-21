@@ -1,13 +1,13 @@
 """Bounded aggregation over authoritative SQL records; no HTTP calls, writes or scoring changes."""
 from datetime import datetime, timezone
-from typing import Any
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 from backend.app.career_graph_schemas import CareerEdge, CareerGraph, CareerNode
-from backend.app.matching import LEVELS, METHOD, match_profile
-from backend.app.models import Profile, ProfileSkill, Role, RoleSkill, SDG, SDGLink, SDGTarget, Skill, Source
+from backend.app.matching import LEVELS, METHOD
+from backend.app.models import Profile, ProfileSkill, Role, RoleSkill, SDG, SDGLink, SDGTarget, Skill, Source, FutureWorkspace
+from backend.app.matching import prioritize_gaps
 
-MAX_ROLES = 5
+MAX_ROLES = 11
 MAX_GAPS_PER_ROLE = 3
 MAX_SDG_LINKS = 6
 MAX_OWNED_SKILLS = 60  # Same bound as the confirmed-profile API.
@@ -20,7 +20,7 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
     limitations = [
         "Skill fit is the existing heuristic, not a forecast, hiring probability or local vacancy claim.",
         "US O*NET requirements describe occupations; your preferred location does not establish local demand.",
-        "Showing up to 5 roles, 3 priority gaps per role and 6 reviewed SDG links. Other relationships may exist.",
+        "Showing up to five targets, five discoveries and an explored role; three priority gaps per role and six reviewed SDG links.",
         "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
         "Guide reads authoritative evidence; US sector forecasts and public research are separate from skill fit.",
     ]
@@ -34,12 +34,14 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
     nodes[pid] = CareerNode(id=pid, type="profile", entity_id=profile.id, label="Demo profile" if profile.is_demo else "Your profile",
                             description="Your confirmed strengths and preferences", skill_count=len(owned), country=profile.country,
                             is_demo=profile.is_demo)
-    matching: dict[str, Any] = match_profile(profile, db)
-    matches: list[dict[str, Any]] = matching["matches"][:MAX_ROLES]
+    from backend.app.future import ranked, SCENARIOS
+    workspace = db.get(FutureWorkspace, profile.id)
+    scenario = workspace.scenario if workspace else 'collaboration'
+    matches = ranked(profile, db, scenario, selected_role=workspace.role_id if workspace else None)[:MAX_ROLES]
     match_ids = [m["role_id"] for m in matches]
     roles = {r.id: r for r in db.scalars(select(Role).where(Role.id.in_(match_ids)))} if match_ids else {}
     # Only priority gaps from the unchanged matcher add absent skill nodes.
-    priority = {m["role_id"]: {g["skill_id"] for g in m["gaps"][:MAX_GAPS_PER_ROLE]} for m in matches}
+    priority = {m['role_id']: {g['skill_id'] for g in prioritize_gaps(m['gaps'], SCENARIOS[scenario]['skills'])[:MAX_GAPS_PER_ROLE]} for m in matches}
     skill_ids = set(levels) | {sid for ids in priority.values() for sid in ids}
     skills = list(db.scalars(select(Skill).where(Skill.id.in_(skill_ids)).order_by(Skill.id))) if skill_ids else []
     for skill in skills:
@@ -57,7 +59,8 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         rid = "role:" + role.id
         nodes[rid] = CareerNode(id=rid, type="role", entity_id=role.id, label=role.title, description=role.description,
             source_ids=sorted(set(match["source_ids"] + [role.source_id])), review_status=role.curation_status,
-            score=match["score"], coverage=match["coverage"], explanation=match["explanation"], country=role.country)
+            score=match["score"], coverage=match["coverage"], explanation=match["explanation"], country=role.country,
+            is_target=match['is_target'], context_reasons=match['context_reasons'], selection_reason=match['selection_reason'])
     requirements = list(db.scalars(select(RoleSkill).where(RoleSkill.role_id.in_(match_ids), RoleSkill.skill_id.in_(skill_ids), RoleSkill.required_importance >= 3).order_by(RoleSkill.role_id, RoleSkill.skill_id))) if match_ids else []
     for requirement in requirements:
         rid, sid = "role:" + requirement.role_id, "skill:" + requirement.skill_id
@@ -93,6 +96,6 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         edges[edge.id] = edge
     used_sources = {sid for node in nodes.values() for sid in node.source_ids} | {sid for edge in edges.values() for sid in edge.source_ids}
     sources = db.scalars(select(Source).where(Source.id.in_(used_sources)).order_by(Source.id)).all() if used_sources else []
-    return CareerGraph(status=matching["status"], profile_revision=profile.updated_at.isoformat(), generated_at=datetime.now(timezone.utc),
+    return CareerGraph(status='ready' if matches else 'insufficient_profile_information', profile_revision=profile.updated_at.isoformat(), generated_at=datetime.now(timezone.utc),
         nodes=sorted(nodes.values(), key=lambda n: n.id), edges=sorted(edges.values(), key=lambda e: e.id),
         sources=sources, methodology=METHOD, limitations=limitations)

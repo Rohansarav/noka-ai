@@ -10,6 +10,8 @@ from backend.app.evidence_api import get_session
 from backend.app.models import Base, Profile, RoleSkill, SDGLink, Skill
 from backend.app.ingestion.runner import import_all
 from backend.app.matching import LEVELS, match_profile
+from backend.app.future import ranked, SCENARIOS
+from backend.app.matching import prioritize_gaps
 from backend.app.career_graph import MAX_GAPS_PER_ROLE, MAX_ROLES, MAX_SDG_LINKS
 from backend.app.career_graph_schemas import MAX_EDGES, MAX_NODES
 
@@ -94,8 +96,10 @@ def test_graph_scores_are_exactly_the_existing_matcher(graph_env):
     pid, skills = confirmed(client, engine)
     graph = client.get(URL).json()
     with Session(engine) as db:
-        matching = match_profile(db.get(Profile,pid),db)
-    expected = {m['role_id']:m for m in matching['matches'][:MAX_ROLES]}
+        matching = match_profile(db.get(Profile,pid),db,limit=None)
+        directions = ranked(db.get(Profile,pid),db,'collaboration')
+    expected = {m['role_id']:m for m in directions}
+    assert all(m['score']==next(base['score'] for base in matching['matches'] if base['role_id']==m['role_id']) for m in directions)
     actual = {n['entity_id']:n for n in graph['nodes'] if n['type']=='role'}
     assert set(actual) == set(expected)
     for rid in actual:
@@ -111,8 +115,8 @@ def test_role_edges_and_priority_gaps_have_real_attribution(graph_env):
     graph = client.get(URL).json()
     levels = {s['skill_id']:LEVELS[s['level']] for s in skills}
     with Session(engine) as db:
-        matching = match_profile(db.get(Profile,pid),db)
-        gaps = {m['role_id']:{g['skill_id']:g for g in m['gaps'][:MAX_GAPS_PER_ROLE]} for m in matching['matches'][:MAX_ROLES]}
+        directions = ranked(db.get(Profile,pid),db,'collaboration')
+        gaps = {m['role_id']:{g['skill_id']:g for g in prioritize_gaps(m['gaps'],SCENARIOS['collaboration']['skills'])[:MAX_GAPS_PER_ROLE]} for m in directions}
         for edge in graph['edges']:
             if edge['type'] not in ('requires_skill','missing_skill'): continue
             rid, sid = edge['source'].removeprefix('role:'), edge['target'].removeprefix('skill:')

@@ -1,6 +1,6 @@
 """Strict private contracts: resumes and contact details never become profile fields."""
 from typing import Literal
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Contract(BaseModel):
@@ -33,6 +33,19 @@ class ConfirmedSkill(Contract):
     years: float | None = Field(default=None, ge=0, le=60)
 
 
+class CareerAspiration(Contract):
+    title: str = Field(min_length=2, max_length=120)
+    role_ids: list[str] = Field(default_factory=list, max_length=3)
+    status: Literal['confirmed', 'unmapped'] = 'unmapped'
+
+    @model_validator(mode='after')
+    def consistent(self):
+        self.title = self.title.strip()
+        if len(self.title) < 2 or len(set(self.role_ids)) != len(self.role_ids) or (self.status == 'confirmed') != bool(self.role_ids):
+            raise ValueError('Confirm a catalogue interpretation, or keep the aspiration unmapped.')
+        return self
+
+
 class OnboardingDraft(Contract):
     step: int = Field(default=0, ge=0, le=2)
     status: Literal["student", "employed", "self_employed", "seeking", "other"] = "student"
@@ -41,6 +54,9 @@ class OnboardingDraft(Contract):
     country: Literal["MY", "US", "SG", "GB", "AU", "OTHER"] = "MY"
     market: Literal["MY", "US", "SG", "GB", "AU", "OTHER"] = "MY"
     goal: str = Field(default="", max_length=400)
+    projects: str = Field(default="", max_length=2000)
+    constraints: str = Field(default="", max_length=600)
+    aspirations: list[CareerAspiration] = Field(default_factory=list, max_length=5)
     interests: list[str] = Field(default_factory=list, max_length=5)
     weekly_hours: int = Field(default=6, ge=1, le=40)
     skills: list[ConfirmedSkill] = Field(default_factory=list, max_length=60)
@@ -94,6 +110,8 @@ class Gap(Contract):
     importance: float
     gap: float
     critical: bool
+    priority: float = 0
+    development: Literal['missing', 'developing'] = 'missing'
 
 
 class Match(Contract):
@@ -106,6 +124,11 @@ class Match(Contract):
     gaps: list[Gap]
     explanation: str
     source_ids: list[str]
+    is_target: bool = False
+    context_alignment: float = 0
+    context_reasons: list[str] = Field(default_factory=list)
+    selection_reason: str = ''
+    gap_method: str = 'importance × remaining proficiency gap; scenario emphasis breaks ties'
 
 
 class MatchesResponse(Contract):

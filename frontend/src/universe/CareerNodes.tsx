@@ -12,7 +12,7 @@ export function sdgColor(goal: number | null) { return goal && goal >= 1 && goal
 export default function CareerNodeCard({ data, selected }: NodeProps<UniverseFlowNode>) {
   const node = data.entity;
   const Icon = node.type === 'profile' ? UserRound : node.type === 'role' ? Compass : node.type.startsWith('sdg') ? Leaf : node.type === 'required_skill' ? Target : Sparkles;
-  const kind = node.type === 'profile' ? 'YOUR STARTING POINT' : node.type === 'role' ? 'POSSIBLE DIRECTION' : node.type === 'owned_skill' ? 'MY SKILL' : node.type === 'required_skill' ? 'SKILL TO BUILD' : node.type === 'sdg_target' ? 'VERIFIED TARGET' : 'GLOBAL GOAL';
+  const kind = node.type === 'profile' ? 'YOUR STARTING POINT' : node.type === 'role' ? (node.is_target?'YOUR TARGET':'POSSIBLE DIRECTION') : node.type === 'owned_skill' ? 'MY SKILL' : node.type === 'required_skill' ? 'SKILL TO BUILD' : node.type === 'sdg_target' ? 'VERIFIED TARGET' : 'GLOBAL GOAL';
   return <div className={`universe-node universe-node-${node.type}${data.dimmed ? ' is-muted' : ''}${selected ? ' is-selected' : ''}${data.worldPriority?' is-world-priority':''}`} style={{ '--sdg-accent': sdgColor(node.goal_id) } as CSSProperties}>
     <Handle id="target-right" type="target" position={Position.Right} isConnectable={false}/>
     <Handle id="target-top" type="target" position={Position.Top} isConnectable={false}/>
@@ -20,9 +20,9 @@ export default function CareerNodeCard({ data, selected }: NodeProps<UniverseFlo
     <strong>{node.label}</strong>
     {data.scenarioLabel && <span className="universe-world-label">{data.scenarioLabel}</span>}
     {node.type === 'profile' && <span>{node.skill_count} confirmed skills · {node.country} preference</span>}
-    {node.type === 'owned_skill' && <span className="skill-level">{node.level} · self-reported</span>}
+    {node.type === 'owned_skill' && <span className="skill-level">{node.level === 'strong' ? 'Strong' : 'Developing · '+node.level} · self-reported</span>}
     {node.type === 'required_skill' && <span>Missing for a displayed role</span>}
-    {node.type === 'role' && <span className="universe-node-score">{node.score}<small>/ 100 skill fit</small></span>}
+    {node.type === 'role' && <span className="universe-node-score">{node.score}<small>/ 100 readiness</small></span>}
     {node.type === 'sdg' && <span>{node.description}</span>}
     {node.type === 'sdg_target' && <span>Reviewed relevance link</span>}
     <Handle id="source-left" type="source" position={Position.Left} isConnectable={false}/>

@@ -52,6 +52,23 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 describe('Career Universe page', () => {
+  it('keeps a low-readiness target explicit and separates it from discovered directions',async()=>{
+    const targetNode=graph.nodes.find(n=>n.type==='role')!;
+    targetNode.is_target=true;targetNode.score=5;targetNode.coverage=5;
+    const match={role_id:targetNode.entity_id,title:targetNode.label,is_target:true,score:5,coverage:5,planning_index:7,context_emphasis:1,scenario_emphasis:1,priority_skills:[],gaps:[],scenario_reason:'Planning assumption'};
+    const future={profile_id:'test-profile',scenario:'collaboration',role_id:targetNode.entity_id,matches:[match],pathway:[],conversation:[],scenarios:{collaboration:{name:'Human-AI Collaboration',assumption:'Planning assumption',skills:[]}},comparisons:{collaboration:[match]},worlds:{},analysis_context:{goal:'Explore an ambitious career',aspirations:[{title:'My unmapped specialty',role_ids:[],status:'unmapped'}]}};
+    const previous=vi.mocked(fetch).getMockImplementation()!;
+    vi.mocked(fetch).mockImplementation((input,init)=>String(input).endsWith('/future')?Promise.resolve({ok:true,status:200,json:async()=>future} as Response):previous(input,init));
+    visit('/');
+    const directions=await screen.findByRole('region',{name:'Career directions'});
+    expect(within(directions).getByRole('heading',{name:'Your targets'})).toBeInTheDocument();
+    expect(within(directions).getByText('5/100 readiness')).toBeInTheDocument();
+    expect(within(directions).getByText('Your confirmed target · interest adds no points')).toBeInTheDocument();
+    expect(within(directions).getByText('My unmapped specialty')).toBeInTheDocument();
+    expect(within(directions).getByRole('heading',{name:'Other directions to explore'})).toBeInTheDocument();
+    fireEvent.click(within(directions).getByRole('button',{name:new RegExp(targetNode.label)}));
+    await waitFor(()=>expect(vi.mocked(fetch).mock.calls.some(([path,init])=>String(path).endsWith('/future')&&init?.method==='PUT'&&JSON.parse(String(init.body)).role_id===targetNode.entity_id)).toBe(true));
+  });
   it('adds primary navigation and routes a confirmed homepage journey to Universe', async () => {
     visit('/');
     expect(screen.getByRole('link',{name:'My Future'})).toHaveAttribute('href','/');

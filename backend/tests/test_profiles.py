@@ -142,7 +142,9 @@ def test_real_document_parser_and_no_resume_storage(client, database, factory, n
     assert response.status_code == 200
     assert len(response.json()['candidates']) >= 3
     assert client.get(f'/api/profiles/{profile_id}').json()['skills'] == []
-    assert not any('resume' in c.name or 'text' in c.name or 'name' in c.name for c in Profile.__table__.columns)
+    assert not any('resume' in c.name or 'text' in c.name or 'name' in c.name for c in Profile.__table__.columns if c.name != 'analysis_context')
+    with Session(database) as db:
+        assert db.get(Profile, profile_id).analysis_context is None
 
 
 def test_provider_failure_and_partial_output(client, database, monkeypatch, caplog):
@@ -211,7 +213,8 @@ def test_score_bounds_interest_and_experience_independence(client, database):
     data['interests'] = [role]
     client.put(f'/api/profiles/{profile_id}/skills', json=data, headers=HEADERS)
     adjusted = client.get(f'/api/profiles/{profile_id}/matches').json()['matches']
-    assert adjusted[0]['role_id'] == role and adjusted[0]['score'] == 70
+    assert adjusted[0]['role_id'] == role and adjusted[0]['score'] == 65
+    assert adjusted[0]['is_target'] and adjusted[0]['interest_adjustment'] == 0
 
 
 @pytest.mark.parametrize('malicious', ['macro', 'external-template', 'entity', 'zip-bomb'])

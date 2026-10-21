@@ -16,6 +16,7 @@ def invoke(name, arguments, profile, db, allowed_roles):
         from backend.app.models import FutureWorkspace
         workspace = db.get(FutureWorkspace, profile.id)
         return {"confirmed": profile.confirmed, "country": profile.country, "interests": profile.interests,
+                'analysis_context': profile.analysis_context or {},
                 "future_context": {"scenario": workspace.scenario, "selected_role": workspace.role_id,
                                    "weekly_hours": workspace.weekly_hours, "saved_progress": workspace.progress} if workspace else None}
     if name == "get_confirmed_skills":
@@ -40,9 +41,9 @@ def invoke(name, arguments, profile, db, allowed_roles):
         findings=[r.payload for r in db.scalars(select(IntelligenceRecord).where(IntelligenceRecord.kind.in_(["finding","context"])))]
         return [{"title":f["title"],"url":f["url"],"market":f["market"],"review_status":f["review_status"],
                  "retrieved_at":f["retrieved_at"]} for f in findings if role_id in f.get("role_ids",[])][:5]
-    matches = match_profile(profile, db)
+    matches = match_profile(profile, db, limit=None)
     if name == "get_ranked_matches":
-        return matches
+        return {**matches, 'matches':[m for m in matches['matches'] if m['role_id'] in allowed_roles]}
     if name == "get_skill_gaps":
         return next(m["gaps"] for m in matches["matches"] if m["role_id"] == role_id)
     if name == "get_role_requirements":

@@ -62,7 +62,12 @@ def test_worlds_progress_and_isolation(clients):
         assert next(t for t in changed["pathway"] if t["skill_id"]==task)["status"]=="completed"
         assert next(t for t in changed["pathway"] if t["skill_id"]==task)["note"]=="My fixture portfolio reflection"
         assert changed["scenarios"][scenario]["name"] in changed["future_self"]
-        assert {m["role_id"]:m["score"] for m in changed["matches"]}=={m["role_id"]:m["score"] for m in worker["matches"]}
+        from backend.app.matching import match_profile
+        from backend.app.models import Profile
+        with Session(engine) as db:
+            all_scores = {m['role_id']:m['score'] for m in match_profile(db.get(Profile,pid),db,limit=None)['matches']}
+        assert all(m['score']==all_scores[m['role_id']] for m in changed['matches'])
+        assert role in {m['role_id'] for m in changed['matches']}
         assert a.get("/api/profiles/current/future").json()["scenario"]==scenario
     assert b.get("/api/profiles/current/future").json()["role_id"] is None
     assert a.delete(f"/api/profiles/{pid}",headers=HEADERS).status_code==204

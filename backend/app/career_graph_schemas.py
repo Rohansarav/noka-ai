@@ -5,8 +5,8 @@ from pydantic import Field
 from backend.app.profile_schemas import Contract
 from backend.app.schemas import SourceOut
 
-MAX_NODES = 88
-MAX_EDGES = 300
+MAX_NODES = 120
+MAX_EDGES = 1150
 NodeType = Literal["profile", "owned_skill", "required_skill", "role", "sdg", "sdg_target"]
 EdgeType = Literal["has_skill", "requires_skill", "missing_skill", "contributes_to_target", "target_belongs_to_goal"]
 
@@ -28,6 +28,9 @@ class CareerNode(Contract):
     coverage: float | None = Field(default=None, ge=0, le=100)
     explanation: str | None = None
     goal_id: int | None = None
+    is_target: bool = False
+    context_reasons: list[str] = Field(default_factory=list)
+    selection_reason: str = ''
 
 
 class CareerEdge(Contract):
