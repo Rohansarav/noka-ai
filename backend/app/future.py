@@ -235,7 +235,8 @@ def intelligence(db: Session=Depends(get_session)):
     records=[]
     for kind,limit in (("context",10),("finding",60),("scout_run",10),("outlook",100)):
         records.extend(db.scalars(select(IntelligenceRecord).where(IntelligenceRecord.kind==kind).order_by(IntelligenceRecord.created_at.desc()).limit(limit)))
-    successful=next((r.payload for r in records if r.kind=="scout_run" and r.payload.get("status")=="succeeded"),None)
+    successful_record=db.scalar(select(IntelligenceRecord).where(IntelligenceRecord.kind=="scout_run", IntelligenceRecord.payload["status"].as_string()=="succeeded").order_by(IntelligenceRecord.created_at.desc()).limit(1))
+    successful=successful_record.payload if successful_record else None
     return {"market":"Malaysia first; international context is labelled",
             "last_successful_run":successful,
             "findings":sorted({r.payload['url']:r.payload for r in reversed(records) if r.kind in {"finding","context"}}.values(), key=lambda p:p.get("evidence_type")!="Source-checked context"),

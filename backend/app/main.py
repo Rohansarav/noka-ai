@@ -19,6 +19,7 @@ from backend.app.profile_api import router as profile_router
 from backend.app.profile_security import ProfileBodyLimit
 from backend.app.career_graph_api import router as career_graph_router
 from backend.app.future import router as future_router
+from backend.app.market_api import router as market_router
 from backend.app.career_discovery import router as discovery_router
 from backend.app.skill_catalogue import router as skill_catalogue_router
 
@@ -27,6 +28,7 @@ app = FastAPI(title="Noka API", version="0.1.0")
 logger = logging.getLogger("noka")
 app.include_router(agent_router)
 app.include_router(future_router)
+app.include_router(market_router)
 app.include_router(discovery_router)
 app.include_router(skill_catalogue_router)
 app.include_router(evidence_router)

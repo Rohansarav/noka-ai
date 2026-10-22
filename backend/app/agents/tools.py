@@ -55,7 +55,9 @@ def invoke(name, arguments, profile, db, allowed_roles):
     if name == "get_role_evidence":
         role = db.get(Role, role_id)
         source = db.get(Source, role.source_id)
-        return {"role_id": role.id, "sector": role.sector, "evidence_status": role.evidence_status,
+        from backend.app.market_evidence import load_evidence, role_outlook
+        opportunity = role_outlook(role.id, profile.country, load_evidence(db))
+        return {"role_id": role.id, "sector": role.sector, "evidence_status": role.evidence_status, "opportunity": opportunity,
                 "limitation": "Sector proxy only; no individual-role forecast or local vacancies.",
                 "source_id": source.id, "url": source.canonical_url, "publisher": source.publisher}
     skill_ids = select(RoleSkill.skill_id).where(RoleSkill.role_id == role_id,RoleSkill.required_importance>=2)

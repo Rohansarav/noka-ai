@@ -68,6 +68,19 @@ def refresh(bind):
         last=db.scalar(select(IntelligenceRecord).where(IntelligenceRecord.kind=="scout_run",IntelligenceRecord.created_at>now-timedelta(hours=1)))
         if last: return {"status":"rate_limited","message":"At most one scheduled refresh per hour."}
         settings=get_settings()
+        from backend.app.market_evidence import load_evidence, import_bundle
+        from backend.app.market_research import extract_proposals, proposal_bundle
+        mappings=[m for m in load_evidence(db)['mappings'] if m['taxonomy'].startswith('MyCOL')]
+        # Two rotating public occupations plus two global searches. No profile access.
+        selected=[]
+        if mappings:
+            mappings.sort(key=lambda m:m['id'])
+            start=(now.toordinal()*2)%len(mappings)
+            selected=[mappings[(start+i)%len(mappings)] for i in range(min(2,len(mappings)))]
+        queries=[('MY', 'Malaysia '+m['occupation_title']+' employment shortage emerging changing skills report', ['talentcorp.com.my','dosm.gov.my','open.dosm.gov.my']) for m in selected]+QUERIES[2:] if selected else QUERIES
+        extracted={}
+        run['proposals']=0
+        run['proposal_status']='no_extracted_sources'
         try:
             if not settings.tavily_api_key:
                 run["status"]="unavailable"
@@ -76,7 +89,7 @@ def refresh(bind):
                 headers={"Authorization":"Bearer "+settings.tavily_api_key.get_secret_value()}
                 findings={}
                 with httpx.Client(timeout=25,follow_redirects=False) as client:
-                    for market,query,domains in QUERIES:
+                    for market,query,domains in queries:
                         result=client.post("https://api.tavily.com/search",headers=headers,json={
                             "query":query,"max_results":4,"include_domains":domains,"exclude_domains":["community.openai.com"],"time_range":"year","search_depth":"basic","include_raw_content":False})
                         result.raise_for_status()
@@ -101,6 +114,7 @@ def refresh(bind):
                                     findings[fid]["inspection"]="source content retrieved"
                                     # Keep bounded excerpts only. No source instructions are executed.
                                     findings[fid]["source_statement"]=str(item.get("raw_content",""))[:1600]
+                                    extracted[fid]=str(item.get("raw_content",""))[:12000]
                             run["events"].append({"type":"extract_completed","at":datetime.now(timezone.utc).isoformat()})
                     for finding in list(findings.values())[:3]:
                         if finding['publication_date']: continue
@@ -111,6 +125,20 @@ def refresh(bind):
                         except httpx.HTTPError:
                             pass
                         run['events'].append({'type':'publisher_metadata_inspected','url':finding['url'],'at':datetime.now(timezone.utc).isoformat()})
+                    # Extraction failure never erases prior evidence. At most two LLM calls.
+                    if extracted and selected:
+                        run['proposal_status']='unconfigured' if not settings.openai_api_key else 'completed'
+                        for fid,content in list(extracted.items())[:2]:
+                            if not settings.openai_api_key:break
+                            try:
+                                proposed=extract_proposals(content,selected,settings)
+                                bundle=proposal_bundle(findings[fid],content,selected,proposed)
+                                with db.begin_nested():
+                                    result=import_bundle(db,bundle)
+                                run['proposals']+=result['claims']
+                            except Exception:
+                                run['proposal_status']='partial_or_failed'
+                                run['events'].append({'type':'proposal_validation_failed','at':datetime.now(timezone.utc).isoformat()})
                     roles=list(db.scalars(select(Role)))
                     skills=list(db.scalars(select(Skill)))
                     for fid,finding in findings.items():
