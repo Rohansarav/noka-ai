@@ -98,7 +98,7 @@ def test_incomplete_provider_response_is_never_used(database,monkeypatch):
         def __exit__(self,*args):pass
         def parse(self,**kwargs):return SimpleNamespace(status='incomplete',output_parsed=kwargs['text_format'].model_validate({'skills':[]}))
     from pydantic import SecretStr
-    monkeypatch.setattr('backend.app.skill_extraction.get_settings',lambda:SimpleNamespace(openai_api_key=SecretStr('test-key'),openai_model='configured-model'))
+    monkeypatch.setattr('backend.app.skill_extraction.get_settings',lambda:SimpleNamespace(openai_api_key=SecretStr('test-key'),openai_extraction_model='configured-model'))
     monkeypatch.setattr('openai.OpenAI',FakeClient)
     result=extract('Python programming and writing are my skills.',catalogue(database),True)
     assert result.mode=='manual_fallback' and result.candidates
@@ -119,3 +119,24 @@ def test_analysis_ownership_and_csrf_and_generic_mime(client):
         assert other.post(f'/api/profiles/{pid}/analysis',data={'text':'Python programming and writing.'},headers=HEADERS).status_code==404
     assert client.post(f'/api/profiles/{pid}/analysis',data={'text':'Python programming and writing.'}).status_code==403
     assert client.post(f'/api/profiles/{pid}/analysis',files={'file':('demo.pdf',pdf_bytes(),'application/octet-stream')},data={'use_ai':'false'},headers=HEADERS).status_code==200
+
+
+def test_extraction_uses_its_model_instead_of_guide_or_legacy(database, monkeypatch):
+    from pydantic import SecretStr
+    from backend.app.config import get_settings
+    settings = get_settings()
+    monkeypatch.setattr(settings, 'openai_api_key', SecretStr('test-key'))
+    monkeypatch.setattr(settings, 'openai_extraction_model', 'extraction-only')
+    monkeypatch.setattr(settings, 'openai_guide_model', 'guide-only')
+    monkeypatch.setattr(settings, 'openai_model', 'scout-only')
+    seen = []
+    class FakeClient:
+        def __init__(self, **kwargs): self.responses = self
+        def __enter__(self): return self
+        def __exit__(self, *args): pass
+        def parse(self, **kwargs):
+            seen.append(kwargs['model'])
+            return SimpleNamespace(status='completed', output_parsed=kwargs['text_format'].model_validate({'skills': []}))
+    monkeypatch.setattr('openai.OpenAI', FakeClient)
+    assert extract('Python programming and writing are my skills.', catalogue(database), True).mode == 'openai'
+    assert seen == ['extraction-only']

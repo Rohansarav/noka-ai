@@ -2,6 +2,10 @@
 
 Navigate tomorrow’s work, today. NOKA combines a personal career workspace, three future scenarios, an interactive evidence graph, persistent learning pathways, source-linked intelligence, and evaluated US sector forecasts. See [product specification](docs/PRODUCT_SPEC.md), [source register](docs/DATA_SOURCES.md) and [original playbook](docs/IMPLEMENTATION_PLAYBOOK.md).
 
+## AI model routing
+
+Set `OPENAI_EXTRACTION_MODEL=gpt-4.1-mini` for resume/manual experience extraction and `OPENAI_GUIDE_MODEL=gpt-6-sol` for Guide. These are also the defaults. `OPENAI_MODEL` remains the separate Scout research setting; it no longer controls extraction or Guide. Both workload settings use the existing server-side `OPENAI_API_KEY`. Restart the backend after changing `.env`, because settings are cached. Guide execution records store the Guide model. Existing timeouts, output budgets and human review requirements still apply.
+
 ## Profile analysis — current build
 
 Saved profiles can now move directly between About You, Your Skills and Your Direction without repeating extraction. Analysis runs only from its explicit button. See the [navigation fix and My Future audit](docs/PROFILE_NAVIGATION_AND_FUTURE_AUDIT.md) for verification and the current catalogue, matching, scenario and skill-gap rules.

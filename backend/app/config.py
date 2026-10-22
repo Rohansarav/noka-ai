@@ -9,6 +9,9 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./noka.db"
     openai_api_key: SecretStr | None = None
     openai_model: str = "gpt-4.1-mini"
+    # Route resume extraction and Guide independently; the legacy model serves Scout.
+    openai_extraction_model: str = Field(default="gpt-4.1-mini", min_length=1)
+    openai_guide_model: str = Field(default="gpt-6-sol", min_length=1)
     tavily_api_key: SecretStr | None = None
     ingestion_secret: SecretStr | None = None
     public_origin: str | None = None

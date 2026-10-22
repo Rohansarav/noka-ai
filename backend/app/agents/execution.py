@@ -70,7 +70,7 @@ def create(db, owner):
         raise HTTPException(429)
     run = AgentExecution(id=secrets.token_urlsafe(24), session_hash=owner.token_hash, agent="matchmaker", status="queued",
                          created_at=now(), updated_at=now(), deadline=now()+timedelta(seconds=settings.agent_timeout_seconds),
-                         model=settings.openai_model, tool_count=0, token_usage=0, event_sequence=0)
+                         model=settings.openai_guide_model, tool_count=0, token_usage=0, event_sequence=0)
     db.add(run)
     db.flush()
     event(db, run, "queued")

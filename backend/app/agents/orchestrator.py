@@ -94,7 +94,7 @@ def execute(bind, execution_id, question, role_id, node_id=None):
                 db.commit()
             if remaining <= 0: raise RuntimeError("timeout")
             stage = "provider_request"
-            reply = provider(client.with_options(timeout=min(20, remaining)), model=settings.openai_model, store=False,
+            reply = provider(client.with_options(timeout=min(20, remaining)), model=settings.openai_guide_model, store=False,
                              input=history, tools=definitions(allowed_roles), parallel_tool_calls=False, max_output_tokens=settings.agent_max_output_tokens,
                              text={"format": {"type": "json_schema", "name": "selection", "strict": True, "schema": selection_schema(graph, role_id, retrieved)}})
             stage = "provider_response"

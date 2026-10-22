@@ -257,3 +257,23 @@ def test_cancel_handles_execution_removed_before_lock(graph_env,monkeypatch):
     rid=start(client,role).json()['id']
     monkeypatch.setattr(api,'locked',lambda *args:None)
     assert client.post(BASE+'/'+rid+'/cancel',headers=HEADERS).status_code==404
+
+
+def test_guide_routes_and_records_its_own_model(graph_env, monkeypatch):
+    client, engine, _, _, role = prepare(graph_env)
+    settings = get_settings()
+    monkeypatch.setattr(settings, 'openai_api_key', SecretStr('test-key'))
+    monkeypatch.setattr(settings, 'openai_extraction_model', 'extraction-only')
+    monkeypatch.setattr(settings, 'openai_guide_model', 'guide-only')
+    monkeypatch.setattr(settings, 'openai_model', 'scout-only')
+    responses = iter([reply([call('get_ranked_matches', {})]), reply(selection=final(role))])
+    seen = []
+    def fake(*args, **kwargs):
+        seen.append(kwargs['model'])
+        return next(responses)
+    monkeypatch.setattr(orchestrator, 'provider', fake)
+    rid = start(client, role).json()['id']
+    assert client.get(BASE+'/'+rid).json()['status'] == 'completed'
+    assert seen == ['guide-only', 'guide-only']
+    with Session(engine) as db:
+        assert db.get(AgentExecution, rid).model == 'guide-only'
