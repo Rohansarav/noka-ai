@@ -10,7 +10,6 @@ TOOLS = {
     "get_role_evidence": RoleArgs,
     "get_reviewed_sdg_connections": RoleArgs,
     "get_future_context": RoleArgs,
-    "get_forecast_context": RoleArgs,
     "get_scout_findings": RoleArgs,
 }
 AGENTS = {

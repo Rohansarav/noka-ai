@@ -15,6 +15,7 @@ beforeEach(()=>{
   state={profile_id:'fixture-profile',profile_revision:'fixture-revision',scenario:'collaboration',role_id:'fixture-role',weekly_hours:6,version:'fixture',scenarios,matches:[{role_id:'fixture-role',title:'Fixture role'}],pathway:[task,{...task,skill_id:'skill-2',name:'Monitoring',status:'planned'}],future_self:'Collaboration fixture',conversation:[],comparisons:{acceleration:[],governed:[],collaboration:[]},worlds:{acceleration:{pathway:[task],future_self:'Acceleration fixture'},governed:{pathway:[task],future_self:'Governed fixture'},collaboration:{pathway:[task],future_self:'Collaboration fixture'}}};
   vi.stubGlobal('fetch',vi.fn(async (input,init)=>{
     const path=String(input);
+    if(path.startsWith('/api/pathway-research'))return {ok:true,json:async()=>({runs:[]})} as Response;
     if(init?.method==='PUT'){
       const body=JSON.parse(String(init.body));writes.push({path,body});
       if(failSave)return {ok:false,status:503} as Response;

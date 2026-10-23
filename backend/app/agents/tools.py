@@ -29,13 +29,6 @@ def invoke(name, arguments, profile, db, allowed_roles):
         value=snapshot(profile,workspace,db)
         value.pop("conversation",None)
         return value
-    if name == "get_forecast_context":
-        from backend.app.future import forecasts
-        report=forecasts()
-        role=db.get(Role,role_id)
-        return {"status":report["status"],"sector":role.sector,"market":"US",
-                "limitation":"Sector proxy, not a Malaysian role forecast.",
-                "forecasts":[{k:v for k,v in r.items() if k!="backtests"} for r in report.get("sectors",[]) if r["sector"]==role.sector]}
     if name == "get_scout_findings":
         from backend.app.models import IntelligenceRecord
         findings=[r.payload for r in db.scalars(select(IntelligenceRecord).where(IntelligenceRecord.kind.in_(["finding","context"])))]

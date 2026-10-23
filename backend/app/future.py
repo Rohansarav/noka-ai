@@ -15,6 +15,7 @@ from backend.app.profile_security import active_session, same_origin
 from backend.app.models import FutureWorkspace, Profile, ProfileSkill, Role, RoleSkill, Skill, SDGLink, SDGTarget, Source, IntelligenceRecord
 from backend.app.matching import match_profile, prioritize_gaps, select_directions, confirmed_context
 from backend.app.occupation_catalogue import occupation_evidence
+from backend.app.pathway_exercises import exercise
 
 router = APIRouter(prefix="/api", tags=["Future workspace"])
 SCENARIOS = {
@@ -93,7 +94,8 @@ def ranked(profile, db, scenario, base=None, requirements=None, selected_role=No
     ordered = sorted(matches, key=lambda m: (-m.get('technical',{}).get('matched_count',0),-m['planning_index'], m['title']))
     visible = select_directions(ordered)
     if selected_role and selected_role not in {m['role_id'] for m in visible}:
-        visible.extend(m for m in ordered if m['role_id'] == selected_role)
+        # Preserve a user's explored career without presenting it as a recommendation.
+        visible.extend({**m, 'is_explored': True} for m in ordered if m['role_id'] == selected_role)
     return visible
 
 
@@ -124,12 +126,13 @@ def pathway(profile, workspace, db, matches):
         tasks.append({**gap, "planning_priority":round(gap['priority']*(1.25 if gap['name'] in priority else 1),4), "status": status, "effort_hours": effort, "start_week": start,
                       "end_week": max(start, math.ceil(hours/workspace.weekly_hours)), "scenario_priority": gap["name"] in priority,
                       "objective": f"{'Check your current ability in' if unassessed else 'Strengthen'} {gap['name'].lower()} within your {match['title']} case study.",
-                      "activity": ('Begin with a short independent attempt. If you already demonstrate this skill, update your profile rather than treating it as a deficit. ' if unassessed else '') + activity,
+                      "activity": activity,
                       "project": project + ' Add this evidence to the same career portfolio.',
                       "note": workspace.progress.get("note:"+key,""),
                       "dependencies": [previous['skill_id']] if previous else [],
                       "handoff": handoff, "assessment_needed":unassessed,
                       "acceptance_criteria":[f"Include a concrete {gap['name'].lower()} work sample relevant to {match['title']}.", 'Check the result against your case study success criteria and record feedback or a test.', 'Save an evidence link or reflection describing what worked, limitations and the next improvement.'],
+                      **exercise(gap["name"], match["title"], activity, project),
                       "why": f"Published importance {gap['importance']}/5. " + ('No self-rating recorded: validate before committing to more study.' if unassessed else f"Self-rated proficiency leaves a {gap['gap']:.0%} development gap.") + (" Scenario focus applies a 1.25× planning weight." if gap['name'] in priority else " Standard 1× planning weight."),
                       "estimate_method": "Timebox: 4 hours for an unassessed skill check; otherwise 16 × self-rated gap, minimum 4 hours. Sequential portfolio handoffs are a suggested workflow, not occupational prerequisites or a promise of mastery."})
     return tasks
@@ -157,7 +160,7 @@ def snapshot(profile, workspace, db):
             "comparisons": comparisons,
             "analysis_context": confirmed_context(profile),
             "pathway_scope": {"total_development_areas":len(selected['gaps']) if selected else 0,"focus_limit":5,"project_title":f"{selected['title']} career portfolio" if selected else None},
-            "method": "Rank all supported occupations by distinct matched software examples, then planning index. Software adds no coverage points. Planning index = documented coverage + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus five discoveries. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap × 1.25 for scenario focus skills, otherwise × 1. A focused pathway selects five areas and retains started work. Unrecorded skills begin with a validation task, not an assumption of inability."}
+            "method": "Discover related occupations using shared occupation families and requirements or multiple confirmed occupational skills/software connections; rank relevance separately from coverage. Software adds no coverage points. Planning index = documented coverage + 5 × lexical context alignment + scenario emphasis. Retain all confirmed targets plus up to five supported discoveries. Scenario emphasis is sum(max(0, importance − 3)) for named scenario skills, not a forecast. Graph and pathway share importance × gap × 1.25 for scenario focus skills, otherwise × 1. A focused pathway selects five areas and retains started work. Unrecorded skills begin with a validation task, not an assumption of inability."}
 
 
 @router.get("/profiles/current/future")
@@ -206,7 +209,8 @@ def save_progress(body: Progress, request: Request, response: Response, db: Sess
 def impact(role_id: str, db: Session=Depends(get_session)):
     role=db.get(Role,role_id)
     if not role: raise HTTPException(404)
-    skills=dict(db.execute(select(Skill.id,Skill.canonical_name).join(RoleSkill).where(RoleSkill.role_id==role_id,RoleSkill.required_importance>=3)).all())
+    # Match the Career Universe's context threshold; readiness still uses 3/5.
+    skills=dict(db.execute(select(Skill.id,Skill.canonical_name).join(RoleSkill).where(RoleSkill.role_id==role_id,RoleSkill.required_importance>=2)).all())
     links=db.scalars(select(SDGLink).where(or_(SDGLink.role_id==role_id,SDGLink.skill_id.in_(skills)))).all()
     results=[]
     for link in links:
@@ -217,7 +221,7 @@ def impact(role_id: str, db: Session=Depends(get_session)):
                         "responsibility":role.description if link.role_id else None,
                         "target_id":target.id,"goal_id":target.goal_id,"target":target.description,
                         "explanation":link.rationale,"status":"Curated SDG relationship" if approved else "Pending review",
-                        "url":source.canonical_url,"relationship_type":"role responsibility" if link.role_id else "required skill"})
+                        "url":source.canonical_url,"relationship_type":"role responsibility" if link.role_id else "published skill context"})
     return {"role":role.title,"relationships":results,"limitation":"Potential contribution, not measured impact. Skill relevance does not establish every role's contribution."}
 
 

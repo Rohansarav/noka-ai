@@ -160,6 +160,10 @@ class ReadinessAssessment(Contract):
 
 
 class Match(Contract):
+    discovery_relevance: float = 0
+    discovery_reasons: list[str] = Field(default_factory=list)
+    limited_requirements: bool = False
+    is_explored: bool = False
     role_id: str
     title: str
     score: float

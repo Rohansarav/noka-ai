@@ -187,6 +187,7 @@ def role_outlook(role_id, market, evidence, today=None):
         conflicting = dim == 'demand' and any(len(values)>1 for values in contexts.values())
         geographies = sorted({c['market'] for c in candidates})
         dimensions[dim] = {'labels': labels, 'status': 'conflicting' if conflicting else 'supported' if labels else UNKNOWN,
+                           'reason': None if labels else ('Evidence awaiting human review' if any(c['dimension'] == dim and c['state'] == 'pending_review' for c in items) else 'Evidence review overdue' if any(c['dimension'] == dim and c['state'] == 'stale' for c in items) else 'No applicable reviewed evidence yet'),
                            'market': geographies[0] if len(geographies)==1 else 'Multiple geographies' if geographies else None}
     return {'role_id': role_id, 'market': market, 'dimensions': dimensions, 'evidence': items,
             'mappings': mappings, 'published_count': sum(c['current'] for c in items),

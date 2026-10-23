@@ -30,6 +30,10 @@ export function ErrorState({ message }: { message: string }) {
 export function LoadingSkeleton({ label = 'Loading API status' }: { label?: string }) {
   return <div role="status" aria-label={label} aria-busy="true" className="noka-wait"><span className="noka-wait-compass" aria-hidden="true"><Compass size={27}/></span><span>{label}<span className="noka-wait-line" aria-hidden="true"/></span></div>;
 }
+// Use only during an active operation; completion and errors have separate states.
+export function ActivityStatus({ children }: { children: ReactNode }) {
+  return <div className="activity-status" role="status" aria-live="polite" aria-busy="true"><span className="activity-spinner" aria-hidden="true"/><span>{children}</span></div>;
+}
 // A named native progress element exposes its value to assistive technology.
 export function ProgressBar({ label, value }: { label: string; value: number }) {
   return <label className="progress-field"><span>{label}<strong>{value}%</strong></span><progress max={100} value={value}>{value}%</progress></label>;

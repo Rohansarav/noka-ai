@@ -65,7 +65,7 @@ describe('Career Universe page', () => {
     expect(within(directions).getByRole('button',{name:/5.*100.*documented coverage/})).toBeInTheDocument();
     expect(within(directions).getByText('Your confirmed target · interest adds no points')).toBeInTheDocument();
     expect(within(directions).getByText('My unmapped specialty')).toBeInTheDocument();
-    expect(within(directions).getByRole('heading',{name:'Other directions to explore'})).toBeInTheDocument();
+    expect(within(directions).getByRole('heading',{name:'Related careers to explore'})).toBeInTheDocument();
     fireEvent.click(within(directions).getByRole('button',{name:new RegExp(targetNode.label)}));
     await waitFor(()=>expect(vi.mocked(fetch).mock.calls.some(([path,init])=>String(path).endsWith('/future')&&init?.method==='PUT'&&JSON.parse(String(init.body)).role_id===targetNode.entity_id)).toBe(true));
   });

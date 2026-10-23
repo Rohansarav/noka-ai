@@ -10,3 +10,34 @@
 .opportunity-proof small,.opportunity-proof a{overflow-wrap:anywhere}
 
 .universe-expanded > .career-opportunity{display:none}
+
+/* Signals keep readable text and icons; colour never implies human approval. */
+.signal-badge{display:inline-flex;align-items:center;gap:6px;align-self:flex-start;padding:6px 10px;border-radius:10px;font-size:13px!important;font-weight:650;line-height:1.5!important;background:#eef1f5;color:#34475d!important;text-transform:capitalize}
+.signal-growing,.signal-emerging{background:#e3f5e9;color:#17623d!important}
+.signal-reported_shortage{background:#fff1c7;color:#775100!important}
+.signal-declining{background:#fde5e5;color:#a12532!important}
+.signal-transforming{background:#e6efff;color:#254e9a!important}
+.signal-insufficient_evidence{background:#fff0ef;color:#963d36!important}
+.signal-conflicting{background:#fff1d9;color:#775100!important}
+.opportunity-claim{margin:12px 0;border:1px solid #d9e1ec;border-radius:16px;background:#fff;overflow:hidden}
+.opportunity-claim>summary{padding:16px;font-size:13px;flex-wrap:wrap;list-style:none;min-height:70px}
+.opportunity-claim>summary::-webkit-details-marker{display:none}
+.opportunity-claim>summary:hover{background:#f1f6fd}
+.claim-heading{display:flex;flex-direction:column;gap:7px;flex:1;min-width:160px}
+.claim-heading small{font-size:12px;color:#55647b}
+.claim-toggle{display:flex;align-items:center;gap:8px;font-weight:600;color:#2852a0}
+.opportunity-claim[open]>summary{border-bottom:1px solid #d9e1ec;background:#f3f7ff}
+.opportunity-claim[open]>summary .claim-toggle svg{transform:rotate(180deg)}
+.opportunity-proof{padding:20px}.opportunity-proof h4{margin:0 0 8px}
+.claim-technical{margin-top:18px;border-top:1px solid #e0e6ef}.claim-technical summary{font-size:13px}
+.work-change-card{margin:16px 0;padding:16px;border:1px solid #dcd8ed;border-radius:16px;background:#faf8ff;font-size:13px;line-height:1.65}
+.work-change-card>summary{cursor:pointer;font-weight:650;font-size:14px}.work-change-card>summary span{display:block;color:#5d5274;font-weight:400;margin-left:18px;font-size:12px}
+.work-change-action{border:1px solid #536aa6;border-radius:10px;background:white;color:#294e9a;padding:10px 14px;cursor:pointer;font:inherit;font-weight:600}
+.work-change-action:disabled{opacity:.6;cursor:wait}.work-change-action:focus-visible{outline:3px solid #5476d1;outline-offset:3px}
+.suggestion-notice,.evidence-caution{background:#fff2d6;color:#704d11;padding:10px 12px;border-radius:10px}
+.app .outlook-row>summary{grid-template-columns:24px minmax(100px,1fr) auto 20px;gap:12px;padding:16px 12px;min-height:64px}
+.app .outlook-row{border:1px solid #d9e1ec;border-radius:12px;background:white;margin:10px 0;overflow:hidden}
+.app .outlook-row[open] .outlook-more{transform:rotate(180deg)}
+.app .outlook-row>summary:focus-visible{outline:3px solid #5476d1;outline-offset:-3px}
+@media(max-width:600px){.app .outlook-row>summary{grid-template-columns:24px 1fr 20px}.app .outlook-row .signal-badge{grid-column:2;grid-row:2}.app .outlook-row .outlook-more{grid-column:3;grid-row:1}}
+@media(max-width:600px){.claim-toggle{width:100%;justify-content:space-between}.opportunity-proof{padding:14px}.opportunity-claim summary>span:nth-child(2){text-align:left;margin-left:0}}

@@ -37,7 +37,8 @@ def test_low_readiness_target_retained_without_bonus(clients):
     result=a.get(f'/api/profiles/{pid}/matches').json()['matches']
     chosen=next(m for m in result if m['role_id']==target)
     assert chosen['is_target'] and chosen['score']==all_before[-1]['score'] and chosen['interest_adjustment']==0
-    assert len(result)==6
+    assert 1 <= len(result) <= 6
+    assert all(m['is_target'] or m['discovery_relevance'] > 0 for m in result)
     for scenario in SCENARIOS:
         changed=a.put('/api/profiles/current/future',json={'scenario':scenario,'role_id':target},headers=HEADERS)
         assert changed.status_code==200

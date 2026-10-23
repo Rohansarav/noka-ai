@@ -61,7 +61,7 @@ def payload(database):
 
 def docx_bytes():
     doc = Document()
-    doc.add_heading("Demo profile — illustrative experience", 0)
+    doc.add_heading("Demo profile â€” illustrative experience", 0)
     doc.add_paragraph("Python programming, critical thinking, active listening, writing and mathematics.")
     out = io.BytesIO(); doc.save(out)
     return out.getvalue()
@@ -110,9 +110,17 @@ def test_manual_only_deterministic_matches_and_deletion(client, database):
     assert response.status_code == 200
     first = client.get(f'/api/profiles/{profile_id}/matches').json()
     assert first == client.get(f'/api/profiles/{profile_id}/matches').json()
-    assert len(first['matches']) == 5
+    # This fixture contains only general basic skills; do not force five recommendations.
+    assert first['matches'] == []
+    # An explicit target remains available even without a discovery connection.
+    data=payload(database)
+    data['interests']=['15-1252.00']
+    assert client.put(f'/api/profiles/{profile_id}/skills', json=data, headers=HEADERS).status_code == 200
+    first=client.get(f'/api/profiles/{profile_id}/matches').json()
+    assert any(m['role_id']=='15-1252.00' and m['is_target'] for m in first['matches'])
+    assert first == client.get(f'/api/profiles/{profile_id}/matches').json()
     assert all(0 <= m['score'] <= 100 and m['gaps'] and m['source_ids'] for m in first['matches'])
-    assert [m['score'] for m in first['matches']] == sorted([m['score'] for m in first['matches']], reverse=True)
+    assert all(m['is_target'] or m['discovery_relevance'] > 0 for m in first['matches'])
     assert 'not a probability' in first['methodology']
     assert client.delete(f'/api/profiles/{profile_id}', headers=HEADERS).status_code == 204
     assert client.get('/api/profiles/current').json() == {'profile': None}

@@ -1,5 +1,19 @@
 /* Presentation only. Keep tokens, the graph/dock and destination sidebar intact.
    Selectors deliberately name eligible surfaces rather than all cards or text. */
+/* Primary actions retain readable text through page-specific theme overrides. */
+.app .button.button:not(.button-secondary),
+.app :is(.private-card,.onboarding,.match-card,.roadmap,.pathway-commitment) .button:not(.button-secondary) {
+  color:#fff; font-weight:700; background:#285fc4;
+}
+.app .button.button:not(.button-secondary):hover { background:#204fa7; color:#fff; }
+.app .button.button:not(.button-secondary):disabled {
+  background:#526b94; color:#fff; opacity:1; box-shadow:none; transform:none;
+}
+.app .button:not(.button-secondary) :is(span,strong,svg) { color:inherit; }
+.activity-status { display:flex; align-items:center; gap:12px; padding:14px 18px; margin:14px 0; border:1px solid #c9d9f2; border-radius:14px; background:#edf3ff; color:#244c89; font-size:14px; font-weight:600; line-height:1.6; }
+.activity-spinner { flex:0 0 auto; width:22px; height:22px; border:3px solid #c3d4ef; border-top-color:#285fc4; border-radius:50%; animation:activity-turn .85s linear infinite; }
+@keyframes activity-turn { to { transform:rotate(360deg); } }
+@media(prefers-reduced-motion:reduce) { .activity-spinner { animation:none; border-style:dotted; } }
 .app .sidebar { background:#fff; border-right-color:#e2e7f0; }
 .app .sidebar nav a { color:#58677f; }
 .app .sidebar nav a.active { background:#edf3ff; color:#245bc1; box-shadow:inset 3px 0 #477ce5; }

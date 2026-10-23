@@ -224,3 +224,16 @@ class IntelligenceRecord(Base):
     kind: Mapped[str] = mapped_column(String(24), index=True)
     payload: Mapped[dict] = mapped_column(JSON)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime)
+
+
+class PathwayResearch(Base):
+    """Private research revisions; refreshing never replaces an earlier project's evidence."""
+    __tablename__ = 'pathway_research'
+    id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    profile_id: Mapped[str] = mapped_column(ForeignKey('profiles.id', ondelete='CASCADE'), index=True)
+    role_id: Mapped[str] = mapped_column(ForeignKey('roles.id'))
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    updated_at: Mapped[datetime] = mapped_column(UTCDateTime)
+    deadline: Mapped[datetime] = mapped_column(UTCDateTime)
+    status: Mapped[str] = mapped_column(String(24))
+    payload: Mapped[dict] = mapped_column(JSON)

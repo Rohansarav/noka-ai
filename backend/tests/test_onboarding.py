@@ -7,7 +7,8 @@ from backend.tests.test_profiles import database, client, create, payload, HEADE
 def test_draft_resume_completion_and_scenario_facts(client, database):
     pid=create(client)
     data=payload(database)
-    draft={"step":2,"status":"student","current_field":"Demo computer science","country":"SG","market":"MY","goal":"Build useful tools","weekly_hours":12,"skills":data["skills"]}
+    data['interests']=['15-1252.00']
+    draft={"step":2,"status":"student","current_field":"Demo computer science","country":"SG","market":"MY","goal":"Build useful tools","weekly_hours":12,"skills":data["skills"],"interests":data["interests"]}
     response=client.put(f"/api/profiles/{pid}/onboarding",json=draft,headers=HEADERS)
     assert response.status_code==200
     profile=client.get('/api/profiles/current').json()['profile']

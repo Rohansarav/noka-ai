@@ -22,7 +22,7 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         "US O*NET requirements describe occupations; your preferred location does not establish local demand.",
         "Showing up to five targets, five discoveries and an explored role; three priority gaps per role and six reviewed SDG links.",
         "Gap fractions reflect self-reported proficiency relative to a particular role. SDG relevance is not measured impact or endorsement.",
-        "Guide reads authoritative evidence; US sector forecasts and public research are separate from skill fit.",
+        "Guide reads occupational evidence and public research; suggestions remain separate from reviewed facts.",
         "Skill-level SDG context can include published role-skill links of importance at least 2/5. These context links do not enter readiness (threshold 3/5) or assert direct career impact.",
     ]
     if profile is None:
@@ -123,6 +123,6 @@ def build_career_graph(profile: Profile | None, db: Session) -> CareerGraph:
         edges[edge.id] = edge
     used_sources = {sid for node in nodes.values() for sid in node.source_ids} | {sid for edge in edges.values() for sid in edge.source_ids}
     sources = db.scalars(select(Source).where(Source.id.in_(used_sources)).order_by(Source.id)).all() if used_sources else []
-    return CareerGraph(status='ready' if matches else 'insufficient_profile_information', profile_revision=profile.updated_at.isoformat(), generated_at=datetime.now(timezone.utc),
+    return CareerGraph(status='ready' if matches or (profile.confirmed and len(owned) >= 3) else 'insufficient_profile_information', profile_revision=profile.updated_at.isoformat(), generated_at=datetime.now(timezone.utc),
         nodes=sorted(nodes.values(), key=lambda n: n.id), edges=sorted(edges.values(), key=lambda e: e.id),
         sources=sources, methodology=METHOD, limitations=limitations,impact=impact)

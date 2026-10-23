@@ -7,7 +7,7 @@ from backend.app.occupation_catalogue import occupation_evidence, skill_evidence
 LEVELS = {'learning': .25, 'working': .65, 'strong': 1.0}
 METHOD = ('Documented coverage = sum(O*NET importance × self-rated level) / sum(importance) × 100, using importance ≥3/5. '
           'Levels: learning .25, working .65, strong 1. Interests do not increase readiness. '
-          'Software alignment counts distinct published occupation associations separately; tools add no broad readiness credit. Discovery orders by matched software count, then readiness plus context. All supported occupations are ranked before display; up to five explicit targets are retained alongside five discoveries. '
+          'Software alignment counts distinct published occupation associations separately; tools add no broad readiness credit. Discovery requires multiple occupational connections and ranks relevance separately from coverage. Sparse requirement records cannot qualify through coverage alone. All supported occupations are ranked before display; up to five explicit targets are retained alongside five discoveries. '
           'Context alignment is a separate lexical relevance signal, not skill evidence or a probability. '
           'A missing self-rating is unknown, not proof of inability. The score is documented weighted coverage; evidence completeness and proficiency among recorded requirements are reported separately. '
           'Development priority = importance × remaining proficiency gap × 1.25 for scenario focus skills, otherwise × 1. This explicit planning assumption changes learning order, never factual coverage. '
@@ -40,8 +40,39 @@ def prioritize_gaps(gaps, scenario_skills=()):
 
 def select_directions(matches, limit=5):
     targets = [m for m in matches if m['is_target']]
-    discoveries = [m for m in matches if not m['is_target'] and (m['score']>0 or m['context_alignment']>0 or m.get('technical',{}).get('matched_count',0)>0)][:limit]
+    discoveries = sorted((m for m in matches if not m['is_target'] and m.get('discovery_relevance', 0) > 0),
+                         key=lambda m: (-m['discovery_relevance'], -m.get('context_alignment', 0), m['title'], m['role_id']))[:limit]
     return targets + discoveries
+
+
+def discovery_relevance(role, requirements, targets, levels, technical):
+    """Gate discovery on multiple occupational connections, never coverage percentages.
+
+    O*NET detailed occupation families plus shared requirements support adjacency.
+    Software or non-transferable skills support discovery without a chosen target.
+    These conservative rules are planning heuristics, not validated suitability scores.
+    """
+    ids = {skill.id for _, skill in requirements}
+    reasons, strength = [], 0
+    if len(ids) < 3:
+        return 0, []
+    for target, target_ids in targets:
+        shared = ids & target_ids
+        family = role.occupation_code[:4] == target.occupation_code[:4]
+        if family and len(shared) >= 3:
+            strength = max(strength, 3 + len(shared) / max(len(ids | target_ids), 1))
+            reasons.append(f"Related to your {target.title} target: same O*NET occupation family and {len(shared)} shared important requirements.")
+    # Import categories call basic skills "essential" and technical skills
+    # "transferable". Use O*NET technical/system element IDs, not those categories.
+    specific = [s.canonical_name for _, s in requirements if s.id in levels and
+                (s.id.startswith('2.B.3.') or s.id in {'2.B.4.g', '2.B.4.h'})]
+    if len(specific) >= 2 or (specific and len(ids & levels.keys()) >= 3):
+        strength = max(strength, 2 + min(len(specific), 5) / 10)
+        reasons.append('Confirmed occupational skills: ' + ', '.join(sorted(specific)[:4]) + '.')
+    if technical['matched_count'] >= 2:
+        strength = max(strength, 2 + min(technical['matched_count'], 5) / 10)
+        reasons.append('Published software connections: ' + ', '.join(s['name'] for s in technical['matched'][:4]) + '.')
+    return round(strength, 3), reasons
 
 
 def match_profile(profile, db, limit=5):
@@ -60,6 +91,7 @@ def match_profile(profile, db, limit=5):
         if link.required_importance >= 3:
             grouped.setdefault(link.role_id, []).append((link,skill))
     matches = []
+    targets = [(r, {s.id for _, s in grouped.get(r.id, [])}) for r in roles if r.id in profile.interests]
     for role in roles:
         requirements = grouped.get(role.id, [])
         total = sum(link.required_importance for link,_ in requirements)
@@ -93,11 +125,14 @@ def match_profile(profile, db, limit=5):
                      'priority':round(link.required_importance*(1-levels.get(skill.id,0)),4),
                      'development':'developing' if skill.id in levels else 'missing'}
                     for link,skill in requirements if levels.get(skill.id,0) < 1])
+        relevance, discovery_reasons = discovery_relevance(role, requirements, targets, levels, technical)
         matches.append({'role_id':role.id,'title':role.title,'score':round(coverage*100,1),'coverage':round(coverage*100,1),
+                        'discovery_relevance': relevance, 'discovery_reasons': discovery_reasons,
+                        'limited_requirements': len(requirements) < 3,
                         'transferable_coverage':round(transfer*100,1),'interest_adjustment':0,'gaps':gaps,
                         'is_target':target,'context_alignment':alignment,'context_reasons':reasons,
                         'technical':technical,'assessment':assessment,'readiness_status':'self_reported' if recorded else 'not_assessed',
-                        'selection_reason':'Your confirmed target; retained regardless of readiness.' if target else 'Discovered from all supported occupations using readiness and separate context relevance.',
+                        'selection_reason':'Your confirmed target; retained regardless of readiness.' if target else ' '.join(discovery_reasons) or 'No supported relevance connection yet.',
                         'explanation':f"Documented weighted coverage {coverage:.1%}: {len(recorded)} of {len(requirements)} important requirements recorded; {len(requirements)-len(recorded)} are unassessed, not proven weaknesses. Learning/working/strong self-ratings receive 25/65/100% credit, weighted by published importance. Interest and software add no coverage points. This is not an employability assessment.",
                         'source_ids':sorted({link.source_id for link,_ in requirements}|{link.source_id for link in software})})
     matches.sort(key=lambda m:(-m['technical']['matched_count'],-(m['score']+5*m['context_alignment']),-m['score'],m['title'],m['role_id']))

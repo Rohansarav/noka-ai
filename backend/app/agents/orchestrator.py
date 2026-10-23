@@ -19,7 +19,7 @@ Scores describe documented weighted coverage, not employability. Unrecorded requ
 The final strict JSON selects evidence sections; Python renders their authoritative facts.
 Use tools for every selected section: fit=get_ranked_matches, requirements=get_role_requirements,
 gaps=get_skill_gaps, evidence=get_role_evidence, sdgs=get_reviewed_sdg_connections,
-scenario/pathway=get_future_context, forecast=get_forecast_context, signals=get_scout_findings.
+scenario/pathway=get_future_context, signals=get_scout_findings. Sector forecasts are retired from user guidance.
 focus_role must be the selected graph role ID; highlight_skills uses only provided graph skill node IDs.
 open_evidence is null or an actually retrieved graph source ID. Do not output prose or numbers."""
 
@@ -53,7 +53,7 @@ def provider(client, **kwargs):
 
 SECTION_TOOLS = {"fit":"get_ranked_matches","requirements":"get_role_requirements","gaps":"get_skill_gaps",
                  "evidence":"get_role_evidence","sdgs":"get_reviewed_sdg_connections","scenario":"get_future_context",
-                 "pathway":"get_future_context","forecast":"get_forecast_context","signals":"get_scout_findings"}
+                 "pathway":"get_future_context","signals":"get_scout_findings"}
 
 
 def execute(bind, execution_id, question, role_id, node_id=None):

@@ -118,8 +118,9 @@ def test_market_api_pagination_and_validation(evidence):
     app.dependency_overrides[get_session]=session
     try:
         with TestClient(app) as client:
-            first=client.get('/api/opportunities?limit=1').json()
-            second=client.get('/api/opportunities?limit=1&offset=1').json()
+            # Pagination uses pending fixture claims; the public default is reviewed only.
+            first=client.get('/api/opportunities?review=all&limit=1').json()
+            second=client.get('/api/opportunities?review=all&limit=1&offset=1').json()
             assert first['total']>1
             assert first['counts']==second['counts']
             assert first['items'][0]['role_id']!=second['items'][0]['role_id']

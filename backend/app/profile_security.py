@@ -44,10 +44,11 @@ class ProfileBodyLimit:
         self.app = app
 
     async def __call__(self, scope, receive, send):
-        if scope["type"] != "http" or not scope["path"].startswith(("/api/profiles", "/api/agent-executions")) or scope["method"] not in {"POST", "PUT"}:
+        if scope["type"] != "http" or not scope["path"].startswith(("/api/profiles", "/api/agent-executions", "/api/pathway-research")) or scope["method"] not in {"POST", "PUT"}:
             return await self.app(scope, receive, send)
         from starlette.responses import JSONResponse
         limit = 8192 if scope["path"].startswith("/api/agent-executions") else 5 * 1024 * 1024 + 65536
+        if scope['path'].startswith('/api/pathway-research'): limit = 100000
         chunks, size = [], 0
         while True:
             message = await receive()
@@ -56,7 +57,8 @@ class ProfileBodyLimit:
             size += len(message.get("body", b""))
             if size > limit:
                 agent = scope["path"].startswith("/api/agent-executions")
-                return await JSONResponse({"error": {"code": "request_too_large" if agent else "upload_too_large", "message": "Agent request exceeds 8 KB." if agent else "Maximum upload size is 5 MB."}}, status_code=413)(scope, receive, send)
+                message = 'Research request exceeds 100 KB.' if scope['path'].startswith('/api/pathway-research') else 'Agent request exceeds 8 KB.' if agent else 'Maximum upload size is 5 MB.'
+                return await JSONResponse({"error": {"code": "request_too_large" if agent else "upload_too_large", "message": message}}, status_code=413)(scope, receive, send)
             chunks.append(message)
             if not message.get("more_body", False):
                 break

@@ -23,14 +23,14 @@ class RoleArgs(Contract):
 
 class Selection(Contract):
     # The model selects evidence, never authors numerical scores or unsupported prose.
-    sections: list[Literal["fit", "requirements", "gaps", "evidence", "sdgs", "scenario", "pathway", "forecast", "signals"]] = Field(min_length=1, max_length=9)
+    sections: list[Literal["fit", "requirements", "gaps", "evidence", "sdgs", "scenario", "pathway", "signals"]] = Field(min_length=1, max_length=9)
     focus_role: str
     highlight_skills: list[str] = Field(max_length=12)
     open_evidence: str | None
 
 
 class EventPayload(Contract):
-    tool: Literal["get_current_profile", "get_confirmed_skills", "get_ranked_matches", "get_role_requirements", "get_skill_gaps", "get_role_evidence", "get_reviewed_sdg_connections", "get_future_context", "get_forecast_context", "get_scout_findings"] | None = None
+    tool: Literal["get_current_profile", "get_confirmed_skills", "get_ranked_matches", "get_role_requirements", "get_skill_gaps", "get_role_evidence", "get_reviewed_sdg_connections", "get_future_context", "get_scout_findings"] | None = None
     related_entity: str | None = Field(default=None, max_length=64)
     stage: Literal["preparing", "provider_request", "provider_response", "tool_execution", "result_validation"] | None = None
     http_status: int | None = Field(default=None, ge=100, le=599)

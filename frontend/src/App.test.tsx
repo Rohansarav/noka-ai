@@ -8,8 +8,8 @@ vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('offline')));
 function visit(path: string) { return render(<QueryClientProvider client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}><MemoryRouter initialEntries={[path]}><App/></MemoryRouter></QueryClientProvider>); }
 afterEach(() => { vi.useRealTimers(); vi.mocked(fetch).mockReset().mockRejectedValue(new Error('offline')); });
 describe('Noka navigation', () => {
-  it('shows an honest private-session error without bypassing entry checks', async () => { visit('/'); expect(await screen.findByText('Your private workspace could not be checked. Refresh to retry.')).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(6); });
-  it.each([['/forecast', 'Look ahead, with perspective.'], ['/roadmap', 'Your next chapter, step by step.'], ['/model-lab', 'Look ahead, with perspective.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.queryByText(/illustrative forecast/)).not.toBeInTheDocument(); });
+  it('shows an honest private-session error without bypassing entry checks', async () => { visit('/'); expect(await screen.findByText('Your private workspace could not be checked. Refresh to retry.')).toBeInTheDocument(); expect(screen.getByRole('navigation').querySelectorAll('a')).toHaveLength(5); });
+  it.each([['/forecast', 'See the shift. Find your opening.'], ['/roadmap', 'Your next chapter, step by step.'], ['/model-lab', 'See the shift. Find your opening.']])('opens %s with an honest empty state', (path, title) => { visit(path); expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(title); expect(screen.queryByText(/illustrative forecast/)).not.toBeInTheDocument(); });
   it('handles missing routes', () => { visit('/missing'); expect(screen.getByText('This path doesn’t exist yet.')).toBeInTheDocument(); });
   it('shows API failure honestly', async () => { visit('/'); expect(await screen.findByText('API unavailable · refresh to retry')).toBeInTheDocument(); });
   it('does not equate API connectivity with source ingestion', async () => {
@@ -44,7 +44,7 @@ describe('Noka navigation', () => {
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(toggle).toHaveFocus();
     fireEvent.click(toggle);
-    fireEvent.click(within(screen.getByRole('navigation')).getByRole('link', { name: 'Model Lab' }));
+    fireEvent.click(within(screen.getByRole('navigation')).getByRole('link', { name: 'Intelligence Radar' }));
     expect(toggle).toHaveAttribute('aria-expanded', 'false');
     expect(screen.getByRole('main')).toHaveFocus();
   });
@@ -85,3 +85,5 @@ describe('Noka navigation', () => {
     expect(screen.queryByRole('button', { name: 'Dismiss Preview notification' })).not.toBeInTheDocument();
   });
 });
+
+it('retires forecast navigation and redirects old links without loading forecasts',async()=>{visit('/model-lab'); expect(await screen.findByRole('heading',{name:'See the shift. Find your opening.'})).toBeInTheDocument(); expect(screen.queryByRole('link',{name:'Model Lab'})).not.toBeInTheDocument(); expect(vi.mocked(fetch).mock.calls.some(c=>String(c[0]).includes('/api/forecasts'))).toBe(false);});
