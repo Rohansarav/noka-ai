@@ -1,13 +1,13 @@
 modules = ["nodejs-22", "python-3.11"]
-run = "corepack pnpm install --frozen-lockfile && corepack pnpm build && uv sync --frozen && uv run alembic upgrade head && uv run python scripts/start.py"
+run = "sh scripts/replit.sh dev"
 
 [env]
 ENVIRONMENT = "production"
 PORT = "8000"
 
 [deployment]
-build = ["sh", "-c", "corepack pnpm install --frozen-lockfile && corepack pnpm build && uv sync --frozen --no-dev"]
-run = ["sh", "-c", "uv run --no-dev alembic upgrade head && uv run --no-dev python scripts/start.py"]
+build = ["sh", "scripts/replit.sh", "build"]
+run = ["sh", "scripts/replit.sh", "start"]
 deploymentTarget = "cloudrun"
 
 [[ports]]

@@ -2,3 +2,4 @@
 data/fixtures/* -text whitespace=cr-at-eol
 # Preserve upstream licence text, including its original trailing whitespace.
 data/fixtures/onet-license.html -whitespace
+*.sh text eol=lf
