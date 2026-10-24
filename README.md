@@ -224,8 +224,8 @@ Build before running integration tests. `/api/health` checks liveness; `/api/rea
 
 ## Challenges & Learnings
 
-- **Challenges:** _Add the main challenges you faced and how you overcame them._
-- **Learnings:** _Add what you learned._
+- **Challenges:** _Turning scattered career and AI information into useful guidance, connecting a person’s existing skills to real job requirements, and keeping recommendations trustworthy when evidence is incomplete or changing._
+- **Learnings:** _Users need a concrete next project, not just a list of skills. Sources, dates and limitations make career guidance easier to trust, and people should review and control changes to their learning pathway._
 
 ## Future Improvements
 
